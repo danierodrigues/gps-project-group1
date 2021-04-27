@@ -1,5 +1,5 @@
 import './App.css';
-import SelectionProcess from './SelectionProcess';
+import SelectionProcess from './components/SelectionProcess';
 
 function App() {
   return (
