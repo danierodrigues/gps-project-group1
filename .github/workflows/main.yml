@@ -1,0 +1,18 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{HEROKU_API_KEY_DAN}}
+          heroku_app_name: "gps-project-group1" #Must be unique in Heroku
+          heroku_email: "daniel.rodrigues.cavadas@gmail.com"
+          appdir: "frontend" # <- This will point to the api folder in your project
