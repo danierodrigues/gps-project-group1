@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm run build
+      - run: npm install
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
