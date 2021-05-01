@@ -1,0 +1,93 @@
+nav {
+     background: transparent;
+     height: 4rem;
+     position: absolute;
+     top: 0;
+     width: 100%;
+}
+
+nav ul li {
+     display: inline-block;
+     line-height: 4rem;
+     margin-right: 0.6rem;
+}
+
+.logo-wrapper {
+     float: left;
+     line-height: 4.7rem;
+     margin-left: 4%;
+}
+
+nav ul {
+     display: inline;
+     margin-left: 2%;
+}
+li > a {
+     text-decoration: none;
+     color: white;
+     padding: 0.5rem 0.9rem;
+}
+
+.check-btn {
+     font-size: 1.5rem;
+     color: var(--primary-color-dark);
+     float: left;
+     line-height: 4rem;
+     cursor: pointer;
+     display: none;
+     margin-right: 2rem;
+}
+
+#toogle{
+     display: none;
+}
+
+.bg-wrapper {
+     overflow: hidden;
+}
+
+.bg {
+     background-size: cover;
+     height: 100vh;
+}
+
+.bg-test {
+     height: 100vh;
+     background-image: url('../../images/background.jpg');
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
+@media (max-width: 1300px) {
+
+     .check-btn{
+          display: block;
+          padding-left: 2rem;
+     }
+
+     ul {
+          position: fixed;
+          width: 100%;
+          height: 100vh;
+          background: var(--lightest-grey);
+          top: 4.5rem;
+          left: -100%;
+          text-align: center;
+          transition: all .5s;
+     }
+
+     nav ul li{
+          display: block;
+          margin: 3rem 0;
+          line-height: 2rem;
+     }
+          
+     nav ul li a{
+          font-size: 1.2rem;
+     }
+
+     #toogle:checked ~ ul{
+          left: 0;
+     }
+}

@@ -15,9 +15,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: var(--size-s);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 /* Fonts size */
@@ -59,23 +61,51 @@
   padding: var(--size-xl);
 }
 
-.padding-s-xxl {
-  padding: var(--size-xs) var(--size-xxl);
-}
-
 .padding-xxl {
   padding: var(--size-xxl);
 }
 
+.padding-s-xxl {
+  padding: var(--size-xs) var(--size-xxl);
+}
+
+.padding-xxl-xl {
+  padding: var(--size-xxl) var(--size-xl);
+}
+
+/* Margin */
+.margin-auto {
+  margin: auto;
+}
+
+.margin-s-xxl {
+  margin: var(--size-xs) var(--size-xxl);
+}
+
+.margin-top-s {
+  margin-top: var(--size-s);
+}
+
+.margin-top-xl {
+  margin-top: var(--size-xl);
+}
+
+/* Width */
+.width-45 {
+  width: 45%;
+}
+
+/* Flexbox */
 .display-flex-center {
   display: flex;
   justify-content: center;
 }
 
-.bg-primary {
-  background-color: var(--primary-color);
+.flex-direction-column {
+  flex-direction: column;
 }
 
+/* Text */
 .text-white {
   color: white;
 }
@@ -84,7 +114,11 @@
   text-align: center;
 }
 
-/* Useful */
+/* Others */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
 .debug {
   border: 1px solid red;
 }

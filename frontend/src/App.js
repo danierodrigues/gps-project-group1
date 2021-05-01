@@ -1,9 +1,13 @@
-import './App.css';
-import SelectionProcess from './components/SelectionProcess';
+import Menu from './components/Menu/Menu';
+import SelectionProcess from './components/SelectionProcess/SelectionProcess';
 
 function App() {
   return (
-    <SelectionProcess />
+    <main>
+      <Menu />
+      <SelectionProcess />
+    </main>
+    
   );
 }
 
