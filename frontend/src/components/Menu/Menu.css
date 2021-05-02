@@ -1,6 +1,12 @@
+.bg div {
+     height: 6rem;
+     margin: auto;
+     width: 90%;
+}
+
 nav {
      background: transparent;
-     height: 4rem;
+     height: 6rem;
      position: absolute;
      top: 0;
      width: 100%;
@@ -8,20 +14,16 @@ nav {
 
 nav ul li {
      display: inline-block;
-     line-height: 4rem;
+     line-height: 6rem;
      margin-right: 0.6rem;
 }
 
-.logo-wrapper {
+nav > span {
      float: left;
-     line-height: 4.7rem;
-     margin-left: 4%;
+     line-height: 6.5rem;
+     margin-right: 5%;
 }
 
-nav ul {
-     display: inline;
-     margin-left: 2%;
-}
 li > a {
      text-decoration: none;
      color: white;
@@ -29,10 +31,9 @@ li > a {
 }
 
 .check-btn {
-     font-size: 1.5rem;
-     color: var(--primary-color-dark);
+     color: white;
      float: left;
-     line-height: 4rem;
+     line-height: 6rem;
      cursor: pointer;
      display: none;
      margin-right: 2rem;
@@ -42,16 +43,7 @@ li > a {
      display: none;
 }
 
-.bg-wrapper {
-     overflow: hidden;
-}
-
 .bg {
-     background-size: cover;
-     height: 100vh;
-}
-
-.bg-test {
      height: 100vh;
      background-image: url('../../images/background.jpg');
      background-position: center;
@@ -63,14 +55,11 @@ li > a {
 
      .check-btn{
           display: block;
-          padding-left: 2rem;
      }
 
      ul {
           position: fixed;
           width: 100%;
-          height: 100vh;
-          background: var(--lightest-grey);
           top: 4.5rem;
           left: -100%;
           text-align: center;
