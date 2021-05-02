@@ -29,6 +29,7 @@ jobs:
         working-directory: ./frontend
         run: |
           heroku git:remote --app gps-project-group1
+          git fetch --all --unshallow
           pwd
           dir
           git push heroku HEAD:master
