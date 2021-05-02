@@ -11,15 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - name:
+      - name: Setup frontend
+        working-directory: ./frontend
         run: |
-        dir
-        pwd
-        cd frontend
-        dir
-        pwd
         npm install
         npm run build
+        npm run test
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
