@@ -32,4 +32,7 @@ jobs:
           HEROKU_APP_NAME: gps-project-group1
       - name: Push to Heroku
         working-directory: ./frontend
-        run: git push heroku main
+        run: |
+          git add .
+          git commit -am "make it better"
+          git push heroku main
