@@ -28,7 +28,7 @@ jobs:
       - name: Add Heroku remote
         working-directory: ./frontend
         run: |
-          git remote add origin https://github.com/d-figueiredo/gps-project-group1
+          git remote add origin https://git.heroku.com/gps-project-group1.git
           git fetch --all --unshallow
           heroku git:remote --app gps-project-group1
           pwd
