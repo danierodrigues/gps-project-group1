@@ -26,8 +26,10 @@ jobs:
           justlogin: true
       - run: heroku auth:whoami
       - name: Add Heroku remote
+        working-directory: ./frontend
         run: heroku git:remote --app $HEROKU_APP_NAME
         env:
           HEROKU_APP_NAME: gps-project-group1
       - name: Push to Heroku
-        run: git push heroku master
+        working-directory: ./frontend
+        run: git push heroku main
