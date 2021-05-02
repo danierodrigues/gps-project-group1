@@ -17,7 +17,7 @@ jobs:
       - run: dir
       - run: pwd
       - run: npm install
-      - run: npm run build
+      #- run: npm run build
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
