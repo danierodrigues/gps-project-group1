@@ -22,4 +22,6 @@ jobs:
           heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
-          appdir: "./frontend" # <- This will point to the api folder in your project
+          appdir: "./" # <- This will point to the api folder in your project
+      - name: Setup front
+        run: dir
