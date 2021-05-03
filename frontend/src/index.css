@@ -39,6 +39,11 @@ button:hover {
   transform: scale(1.1);
 }
 
+/* Video */
+video {
+  width: 100%;
+}
+
 /* Fonts size */
 .font-size-xs {
   font-size: var(--size-xs);
@@ -71,6 +76,10 @@ button:hover {
 /* Font weight */
 .font-semi-bold {
   font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
 }
 
 /* Padding */
@@ -107,15 +116,57 @@ button:hover {
   margin-top: var(--size-xl);
 }
 
+.margin-top-xxl {
+  margin-top: var(--size-xxl);
+}
+
 /* Width */
+.width-30 {
+  width: 30%;
+}
+
+.width-35 {
+  width: 30%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
 .width-45 {
   width: 45%;
 }
 
+.width-50 {
+  width: 50%;
+}
+
+.width-70 {
+  width: 70%;
+}
+
+.width-90 {
+  width: 90%;
+}
+
 /* Flexbox */
+.display-flex {
+  display: flex;
+}
+
 .display-flex-center {
   display: flex;
   justify-content: center;
+}
+
+.display-flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.display-flex-around {
+  display: flex;
+  justify-content: space-around;
 }
 
 /* Display */
@@ -127,6 +178,16 @@ button:hover {
   flex-direction: column;
 }
 
+.vertical-middle {
+  display: flex;
+  vertical-align: middle;
+}
+
+/* Border */
+.border-radius-s {
+  border-radius: var(--size-xs);
+}
+
 /* Text */
 .text-white {
   color: white;
@@ -134,6 +195,10 @@ button:hover {
 
 .text-center {
   text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 /* Overflow */

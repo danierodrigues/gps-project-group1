@@ -1,0 +1,19 @@
+@media (max-width: 900px) {
+
+     .display-flex-around {
+          flex-direction: column;
+     }
+
+     .about-section {
+          width: 100%;
+     }
+
+     .section-text {
+          width: 100%;
+     }
+
+     .video-wrapper {
+          width: 100%;
+          margin-top: var(--size-m);
+     }
+}

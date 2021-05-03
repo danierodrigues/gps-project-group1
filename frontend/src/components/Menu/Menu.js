@@ -25,8 +25,8 @@ function Menu() {
             </nav>
          </div>
          <div>
-            <p className='font-size-xxxl font-semi-bold margin-top-xl'>BrightStart</p>
-            <p className='font-size-l font-semi-bold'>O futuro pode ser brilhante</p>
+            <p className='font-size-xxxl font-semi-bold margin-top-xl main-title'>BrightStart</p>
+            <p className='font-size-l font-semi-bold subtitle'>O futuro pode ser brilhante</p>
             <button className='margin-top-xl'>Candidata-te</button>
          </div>
       </div>
