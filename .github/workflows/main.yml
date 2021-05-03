@@ -21,24 +21,5 @@ jobs:
           heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
-          #appdir: "./frontend" # <- This will point to the api folder in your project
-          #buildpack: "https://github.com/heroku/heroku-buildpack-nodejs.git"
-          justlogin: true
-      - run: heroku auth:whoami
-      - name: Unshallow
-        working-directory: ./
-        run: |
-          git fetch --all --unshallow
-      - name: Add Heroku remote
-        working-directory: ./frontend
-        run: |
-          heroku git:remote -a gps-project-group1
-          pwd
-          dir
-          ls -a
-          git filter-branch -- --all
-      - name: Push to Heroku
-        working-directory: ./frontend/
-        run: |
-          dir
-          git push heroku HEAD:master
+          appdir: "./frontend" # <- This will point to the api folder in your project
+          
