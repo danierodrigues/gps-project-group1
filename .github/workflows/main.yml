@@ -25,6 +25,10 @@ jobs:
           #buildpack: "https://github.com/heroku/heroku-buildpack-nodejs.git"
           justlogin: true
       - run: heroku auth:whoami
+      - name: Unshallow
+        working-directory: ./
+        run: |
+          git fetch --all --unshallow
       - name: Add Heroku remote
         working-directory: ./frontend
         run: |
