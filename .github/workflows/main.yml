@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - development
+      - feature/GPG1-16
 
 jobs:
   build-frontend:
