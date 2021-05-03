@@ -30,7 +30,7 @@ jobs:
         run: |
           git fetch --all --unshallow
       - name: Add Heroku remote
-        working-directory: ./
+        working-directory: ./frontend
         run: |
           heroku git:remote -a gps-project-group1
           pwd
@@ -38,6 +38,7 @@ jobs:
           ls -a
           git filter-branch -- --all
       - name: Push to Heroku
-        working-directory: ./frontend
+        working-directory: ./frontend/
         run: |
+          dir
           git push heroku HEAD:master
