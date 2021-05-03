@@ -6,7 +6,7 @@ on:
       - feature/GPG1-16
 
 jobs:
-  build:
+  build-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,4 +22,19 @@ jobs:
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./frontend" # <- This will point to the api folder in your project
-          
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      #- uses: actions/setup-node@v1
+      #- name: Setup frontend
+        #working-directory: ./frontend
+        #run: |
+          #npm install
+          #npm run build
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: "787e1d20-a3f4-4dcd-92ba-8303587d5aa4"
+          heroku_app_name: "gps-project-group1-backend" #Must be unique in Heroku
+          heroku_email: "daniel.rodrigues.cavadas@gmail.com"
+          appdir: "./backend" # <- This will point to the api folder in your project
