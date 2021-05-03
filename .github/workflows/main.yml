@@ -36,6 +36,7 @@ jobs:
           pwd
           dir
           ls -a
+          git filter-branch -- --all
           git push heroku HEAD:master
       - name: Push to Heroku
         working-directory: ./frontend
