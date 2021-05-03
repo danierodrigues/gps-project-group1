@@ -1,15 +1,14 @@
-import './App.css';
-import Footer from './footer';
+import Menu from './components/Menu/Menu';
+import SelectionProcess from './components/SelectionProcess/SelectionProcess';
+import Footer from './components/Footer/footer';
 
 function App() {
   return (
-    <div className="App">
-      Cenas.
-      Cenas.
-      Cenas.
-      Cenas.
-      <Footer></Footer>
-    </div>
+    <main>
+      <Menu />
+      <SelectionProcess />
+      <Footer/>
+    </main>
   );
 }
 

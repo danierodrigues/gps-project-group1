@@ -1,8 +1,7 @@
-import './App.css';
 import React from "react";
 import './footer.css';
-import logoFacebook from './logoFacebook.png';
-import logoLinkedin from './logoLinkedin.png';
+import logoFacebook from '../../images/logoFacebook.png';
+import logoLinkedin from '../../images/logoLinkedin.png';
 
 function Footer() {
 return (
@@ -40,11 +39,13 @@ return (
           <div class = 'button'>
             <button class = 'button1'>Desejo Candidatar-me</button>
           </div>
-          <div class = 'legaltext'>
+      </div>
+    </div> 
+    <div class = 'legaltext'>
+          <div class = 'div2'>
             “Deloitte” refere-se a Deloitte Touche Tohmatsu Limited, uma sociedade privada de responsabilidade limitada do Reino Unido (DTTL), ou a uma ou mais entidades da sua rede de firmas membro e respetivas entidades relacionadas. A DTTL e cada uma das firmas membro da sua rede são entidades legais separadas e independentes. A DTTL (também referida como "Deloitte Global") não presta serviços a clientes. Aceda a www.deloitte.com/pt/about para saber mais sobre a nossa rede global de firmas membro.
           </div>
-      </div>
-    </div>
+      </div>    
   </footer>
 );
 }
