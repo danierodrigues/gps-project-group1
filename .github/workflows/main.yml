@@ -34,7 +34,7 @@ jobs:
           #npm run build
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${HEROKU_API_KEY_DAN}
+          heroku_api_key: ${{HEROKU_API_KEY_DAN}}
           heroku_app_name: "gps-project-group1-backend" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./backend" # <- This will point to the api folder in your project
