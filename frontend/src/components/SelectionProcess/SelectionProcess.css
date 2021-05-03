@@ -1,0 +1,10 @@
+@media (max-width: 900px) {
+
+     .display-flex-center{
+          flex-direction: column;
+     }
+
+     .process-card:not(:first-child){
+          margin-top: var(--size-xxl);
+     }
+}

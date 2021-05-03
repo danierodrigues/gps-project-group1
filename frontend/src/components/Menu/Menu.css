@@ -1,0 +1,82 @@
+.bg div {
+     height: 6rem;
+     margin: auto;
+     width: 90%;
+}
+
+nav {
+     background: transparent;
+     height: 6rem;
+     position: absolute;
+     top: 0;
+     width: 100%;
+}
+
+nav ul li {
+     display: inline-block;
+     line-height: 6rem;
+     margin-right: 0.6rem;
+}
+
+nav > span {
+     float: left;
+     line-height: 6.5rem;
+     margin-right: 5%;
+}
+
+li > a {
+     text-decoration: none;
+     color: white;
+     padding: 0.5rem 0.9rem;
+}
+
+.check-btn {
+     color: white;
+     float: left;
+     line-height: 6rem;
+     cursor: pointer;
+     display: none;
+     margin-right: 2rem;
+}
+
+#toogle{
+     display: none;
+}
+
+.bg {
+     height: 100vh;
+     background-image: url('../../images/background.jpg');
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
+@media (max-width: 1300px) {
+
+     .check-btn{
+          display: block;
+     }
+
+     ul {
+          position: fixed;
+          width: 100%;
+          top: 4.5rem;
+          left: -100%;
+          text-align: center;
+          transition: all .5s;
+     }
+
+     nav ul li{
+          display: block;
+          margin: 3rem 0;
+          line-height: 2rem;
+     }
+          
+     nav ul li a{
+          font-size: 1.2rem;
+     }
+
+     #toogle:checked ~ ul{
+          left: 0;
+     }
+}
