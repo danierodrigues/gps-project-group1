@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+  }
+
+.main {
+    background-color: #FAFAFA;
+    font-size: 1.3vw;
+    height: 27vw;
+}
+
+.div1 {
+ text-align: left;
+ margin-left: 10vw;
+ margin-right: 10vw;
+ padding-top: 1vw;
+ margin-bottom: 2.6vw;
+}
+
+.images {
+  margin-top: 1vw;
+  margin-left: -1vw;
+}
+
+img:hover{
+    box-shadow: 0 0 2px 2px black;
+    border-radius:50%;
+}
+
+img.facebookImg {
+    height: 100%;
+    width: 4vw;
+    margin-left: 5%; 
+}
+img.linkedinImg {
+    height: 100%;
+    width: 4vw;
+    margin-left: 5%; 
+}
+
+.locationText {
+    margin-top: 5%;
+    font-size: 1vw;
+}
+
+.telephone {
+    margin-top: 5%;
+}
+
+.whereToFindUs {
+    width: 33%;
+    height: 10%;
+    float: left;
+}
+
+.aboutTheProgram {
+    float: left;
+    width: 20%;
+    height: 10%;
+    text-align: left;
+    margin-left: 50%;
+}
+
+.menu {
+    margin-top: 1vw;
+    font-size: 1vw;;
+    color: #8c8c8c;
+}
+
+.menuItems {
+    margin-top: 1vw;
+    font-size: 1vw;
+}
+
+.menuItems:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.button {
+    float: left;
+    width: 33%;
+    height: 10%;
+    text-align: right;
+}
+
+.button1 {
+    margin-top: 6vw;
+    background-color: #7bc1ea;
+    border: none;
+    color: white;
+    padding: 0.78vw 1.6vw;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1vw;
+    cursor: pointer;
+}
+
+.button1:hover {
+    background-color: black;
+}
+
+.legaltext {
+    font-size: 1vw;
+    margin-top: 18vw;
+}
