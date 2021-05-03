@@ -112,6 +112,10 @@ button:hover {
   width: 45%;
 }
 
+.totalWidht{
+  width: 100vw;
+}
+
 /* Flexbox */
 .display-flex-center {
   display: flex;
@@ -149,3 +153,4 @@ button:hover {
 .debug {
   border: 1px solid red;
 }
+

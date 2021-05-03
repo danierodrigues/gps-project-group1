@@ -1,0 +1,27 @@
+.imgAdvantages{
+    width: 100px;
+}
+
+.flexboxAlign{
+    width: 80%;
+}
+
+.titleContainer{
+    margin-top: 30px;
+}
+
+.containerFlexBox{
+    margin-top: 30px;
+}
+
+@media (max-width: 900px) {
+    .flexboxAlign{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .itemDiv{
+        margin-top: 30px;
+    }
+    
+}
