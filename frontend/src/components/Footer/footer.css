@@ -1,0 +1,103 @@
+.main {
+    background-color: #FAFAFA;
+    font-size: var(--size-xs);
+    height: 320px;
+}
+
+.div1 {
+ text-align: left;
+ margin-left: 160px;
+ width: 100%;
+}
+
+.images {
+  margin-top: 1vw;
+  margin-left: -20px;
+}
+
+img:hover{
+    box-shadow: 0 0 2px 2px black;
+    border-radius:50%;
+}
+
+img.facebookImg {
+    height: 100%;
+    width: 2.5vw;
+    margin-left: 5%; 
+}
+img.linkedinImg {
+    height: 100%;
+    width: 2.5vw;
+    margin-left: 5%; 
+}
+
+.locationText {
+    margin-top: 5%;
+}
+
+.telephone {
+    margin-top: 5%;
+}
+
+.whereToFindUs {
+    width: 33%;
+    height: 10%;
+    float: left;
+    margin-top: 50px;
+}
+
+.aboutTheProgram {
+    float: left;
+    width: 20%;
+    height: 10%;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.menu {
+    margin-top: 1vw;
+    color: #8c8c8c;
+}
+
+.menuItems {
+    margin-top: 1vw;
+    font-size: 15px;
+}
+
+.menuItems:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.button {
+    float: left;
+    width: 33%;
+    height: 10%;
+    text-align: right;
+}
+
+.button1 {
+    margin-top: 6vw;
+    background-color: #7bc1ea;
+    border: none;
+    color: white;
+    padding: 0.78vw 1.6vw;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1vw;
+    cursor: pointer;
+    margin-right: 120px;
+}
+
+.button1:hover {
+    background-color: black;
+}
+
+.legaltext {
+    background-color: #FAFAFA;
+}
+
+.div2 {
+    margin-left: 160px;
+    margin-right: 160px;
+}

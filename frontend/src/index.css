@@ -1,7 +1,7 @@
 :root {
   --primary-color: #37CCEB;
 
-  --size-xs: 13px; /* Footer */
+  --size-xs: 15px; /* Footer */
   --size-s: 20px; /* Base text size */
   --size-m: 26px; /* Sections subtitle */
   --size-l: 36px; /* Secondary heading - sections heading */
@@ -15,7 +15,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: var(--size-s);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
