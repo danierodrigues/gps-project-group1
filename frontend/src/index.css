@@ -1,5 +1,6 @@
 :root {
   --primary-color: #37CCEB;
+  --grey-light: #f1f1f1;
 
   --size-xs: 15px; /* Footer */
   --size-s: 20px; /* Base text size */
@@ -21,21 +22,31 @@
   scroll-behavior: smooth;
 }
 
+footer {
+  background-color: var(--grey-light);
+}
+
 /* Button */
 button {
   background-color: var(--primary-color);
   color: white;
-  padding: 0.8rem;
+  padding: 1.1rem;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
   border-radius: .2rem;
   font-weight: 600;
+  font-size: var(--size-s);
   transition: .3s;
 }
 
 button:hover {
   transform: scale(1.1);
+}
+
+/* Video */
+video {
+  width: 100%;
 }
 
 /* Fonts size */
@@ -72,6 +83,10 @@ button:hover {
   font-weight: 600;
 }
 
+.bold {
+  font-weight: 700;
+}
+
 /* Padding */
 .padding-xl {
   padding: var(--size-xl);
@@ -89,6 +104,10 @@ button:hover {
   padding: var(--size-xxl) var(--size-xl);
 }
 
+.padding-top-xxl {
+  padding-top: var(--size-xxl);
+}
+
 /* Margin */
 .margin-auto {
   margin: auto;
@@ -98,23 +117,73 @@ button:hover {
   margin: var(--size-xs) var(--size-xxl);
 }
 
+.margin-top-xs {
+  margin-top: var(--size-xs);
+}
+
 .margin-top-s {
   margin-top: var(--size-s);
+}
+
+.margin-top-m {
+  margin-top: var(--size-m);
 }
 
 .margin-top-xl {
   margin-top: var(--size-xl);
 }
 
+.margin-top-xxl {
+  margin-top: var(--size-xxl);
+}
+
 /* Width */
+.width-30 {
+  width: 30%;
+}
+
+.width-35 {
+  width: 30%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
 .width-45 {
   width: 45%;
 }
 
+.width-50 {
+  width: 50%;
+}
+
+.width-70 {
+  width: 70%;
+}
+
+.width-90 {
+  width: 90%;
+}
+
 /* Flexbox */
+.display-flex {
+  display: flex;
+}
+
 .display-flex-center {
   display: flex;
   justify-content: center;
+}
+
+.display-flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.display-flex-around {
+  display: flex;
+  justify-content: space-around;
 }
 
 /* Display */
@@ -126,6 +195,16 @@ button:hover {
   flex-direction: column;
 }
 
+.vertical-middle {
+  display: flex;
+  vertical-align: middle;
+}
+
+/* Border */
+.border-radius-s {
+  border-radius: var(--size-xs);
+}
+
 /* Text */
 .text-white {
   color: white;
@@ -133,6 +212,10 @@ button:hover {
 
 .text-center {
   text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 /* Overflow */
@@ -143,6 +226,10 @@ button:hover {
 /* Others */
 .bg-primary {
   background-color: var(--primary-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .debug {
