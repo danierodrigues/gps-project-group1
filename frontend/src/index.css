@@ -1,7 +1,8 @@
 :root {
   --primary-color: #37CCEB;
+  --grey-light: #f1f1f1;
 
-  --size-xs: 13px; /* Footer */
+  --size-xs: 15px; /* Footer */
   --size-s: 20px; /* Base text size */
   --size-m: 26px; /* Sections subtitle */
   --size-l: 36px; /* Secondary heading - sections heading */
@@ -15,23 +16,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: var(--size-s);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
+footer {
+  background-color: var(--grey-light);
+}
+
 /* Button */
 button {
   background-color: var(--primary-color);
   color: white;
-  padding: 0.8rem;
+  padding: 1.1rem;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
   border-radius: .2rem;
   font-weight: 600;
+  font-size: var(--size-s);
   transition: .3s;
 }
 
@@ -99,6 +104,10 @@ video {
   padding: var(--size-xxl) var(--size-xl);
 }
 
+.padding-top-xxl {
+  padding-top: var(--size-xxl);
+}
+
 /* Margin */
 .margin-auto {
   margin: auto;
@@ -108,8 +117,16 @@ video {
   margin: var(--size-xs) var(--size-xxl);
 }
 
+.margin-top-xs {
+  margin-top: var(--size-xs);
+}
+
 .margin-top-s {
   margin-top: var(--size-s);
+}
+
+.margin-top-m {
+  margin-top: var(--size-m);
 }
 
 .margin-top-xl {
@@ -209,6 +226,10 @@ video {
 /* Others */
 .bg-primary {
   background-color: var(--primary-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .debug {

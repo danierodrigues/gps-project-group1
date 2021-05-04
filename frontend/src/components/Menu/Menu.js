@@ -15,7 +15,7 @@ function Menu() {
                <span>
                   <img alt='Deloitte logo' src={logo} width='170'/>
                </span>
-               <ul className='font-semi-bold display-inline'>
+               <ul className='font-semi-bold display-inline font-size-s'>
                      {menuItems.map((item) =>  (
                            <li key={item.id}>
                               <a href={item.url}>{item.label}</a>
