@@ -13,7 +13,6 @@ function App() {
       <SelectionProcess />
       <Footer />
     </main>
-    
   );
 }
 

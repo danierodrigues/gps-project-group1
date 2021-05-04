@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import logoFacebook from '../../images/logo-facebook.png';
-import logoLinkedin from '../../images/logo-linkedin.png';
+import logoLinkedIn from '../../images/logo-linkedin.png';
 import menuItems from '../Menu/MenuItems';
 
 function Footer() {
@@ -15,7 +15,7 @@ function Footer() {
                                    <img alt='Facebook logo'src={logoFacebook} className='social-img'/>
                               </a>
                               <a href='https://pt.linkedin.com/company/deloitte?trk=public_profile_topcard-current-company' target='_blank' rel='noreferrer'>
-                                   <img alt='LinkedIn logo' src={logoLinkedin} className='social-img'/>
+                                   <img alt='LinkedIn logo' src={logoLinkedIn} className='social-img'/>
                               </a>
                          </div>
                          <div className = 'margin-top-s font-size-xs'>
