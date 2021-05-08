@@ -1,0 +1,34 @@
+.footer-links {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.footer-links:hover {
+    color: var(--primary-color);
+}
+ 
+ .social-img {
+     height: 100%;
+     transition: .3s;
+     width: 2.5vw;
+     margin-left: 5%; 
+ }
+
+ .social-img:hover{
+    transform: scale(1.1);
+}
+
+ 
+ .locationText {
+     margin-top: 5%;
+ }
+ 
+ .telephone {
+     margin-top: 5%;
+ }
+ 
+ 
+ 
+ 
+ 
