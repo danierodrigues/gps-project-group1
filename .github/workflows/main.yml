@@ -19,18 +19,27 @@ jobs:
           appdir: "./frontend" # <- This will point to the api folder in your project
   build-backend:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Add remote origin
+        run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY_DAN }}@git.heroku.com/gps-project-group1-backend.git
+
+      - name: Deploy backend to heroku
+        run: git push --force heroku `git subtree split --prefix server HEAD`:master
+    #steps:
+      #- uses: actions/checkout@v2
       #- uses: actions/setup-node@v1
       #- name: Setup frontend
         #working-directory: ./frontend
         #run: |
           #npm install
           #npm run build
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
-          heroku_app_name: "gps-project-group1-backend" #Must be unique in Heroku
-          heroku_email: "daniel.rodrigues.cavadas@gmail.com"
-          appdir: "./backend" # <- This will point to the api folder in your project
-          procfile: "web: node index.js"
+      #- uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        #with:
+          #heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
+          #heroku_app_name: "gps-project-group1-backend" #Must be unique in Heroku
+          #heroku_email: "daniel.rodrigues.cavadas@gmail.com"
+          #appdir: "./backend" # <- This will point to the api folder in your project
+          #procfile: "web: node index.js"
