@@ -35,7 +35,7 @@ db.connect(() => {
      app.use(routes);
      /* Routes */
      app.get("/", (req, res) => {
-          res.send('Root element');
+          res.send('Root element. New Verion.');
      });
  }); 
 
