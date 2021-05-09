@@ -1,0 +1,6 @@
+.bg-candidature {
+     background-image: url('../../images/background-candidature.jpg');
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}

@@ -7,7 +7,7 @@ import menuItems from '../Menu/MenuItems';
 function Footer() {
      return (
           <footer className='padding-xxl-xl'>
-               <div className='display-flex-between'>
+               <div className='display-flex-between width-90 margin-auto'>
                     <div>
                          <p className='font-size-s font-semi-bold'>Onde nos encontrar</p>
                          <div className='margin-top-s'>
@@ -43,7 +43,7 @@ function Footer() {
                          </a>
                     </div>
                </div>
-               <div className = 'font-size-xs margin-top-xl'>
+               <div className = 'font-size-xs margin-top-xl width-90 margin-auto'>
                     “Deloitte” refere-se a Deloitte Touche Tohmatsu Limited,
                     uma sociedade privada de responsabilidade limitada do Reino Unido (DTTL), 
                     ou a uma ou mais entidades da sua rede de firmas membro e respetivas 
