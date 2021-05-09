@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
-        working-directory: ./backend
         uses: actions/checkout@v1
 
       - name: Add remote origin
