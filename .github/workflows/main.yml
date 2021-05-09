@@ -21,12 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
+        working-directory: ./backend
         uses: actions/checkout@v1
 
       - name: Add remote origin
+        working-directory: ./backend
         run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY_DAN }}@git.heroku.com/gps-project-group1-backend.git
 
       - name: Deploy backend to heroku
+        working-directory: ./backend
         run: git push --force heroku `git subtree add --prefix server HEAD`:master
     #steps:
       #- uses: actions/checkout@v2
