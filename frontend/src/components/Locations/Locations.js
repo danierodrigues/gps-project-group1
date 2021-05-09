@@ -1,4 +1,4 @@
-import universities from '../../universities';
+import universities from '../../Universities';
 
 function Locations() {
   return (

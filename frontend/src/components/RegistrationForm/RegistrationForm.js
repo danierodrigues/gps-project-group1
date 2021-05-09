@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import universities from '../../universities';
+import universities from '../../Universities';
 import Select from 'react-select';
 import './RegistrationForm.css';
 
