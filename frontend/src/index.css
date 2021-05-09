@@ -1,6 +1,7 @@
 :root {
   --primary-color: #37CCEB;
-  --grey-light: #f1f1f1;
+  --light-grey: #f1f1f1;
+  --grey: #d1d1d1;
 
   --size-xs: 15px; /* Footer */
   --size-s: 20px; /* Base text size */
@@ -20,10 +21,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  outline: none;
 }
 
 footer {
-  background-color: var(--grey-light);
+  background-color: var(--light-grey);
 }
 
 /* Button */
@@ -38,6 +40,31 @@ button {
   font-weight: 600;
   font-size: var(--size-s);
   transition: .3s;
+}
+
+/* Input */
+input {
+  padding: var(--size-s);
+  font-size: var(--size-xs);
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 2px solid var(--primary-color);
+}
+
+/* react-select Select */
+.css-yk16xz-control {
+  border-color: var(--light-grey) !important;
+  box-shadow: 0px 0px 0px var(--light-grey) !important;
+  padding: var(--size-xs);
+}
+
+.css-1pahdxg-control {
+  border: 2px solid var(--primary-color) !important;
+  box-shadow: 0px 0px 0px var(--grey) !important;
+  padding: var(--size-xs);
 }
 
 button:hover {
@@ -127,6 +154,10 @@ video {
 
 .margin-top-m {
   margin-top: var(--size-m);
+}
+
+.margin-top-l {
+  margin-top: var(--size-l);
 }
 
 .margin-top-xl {

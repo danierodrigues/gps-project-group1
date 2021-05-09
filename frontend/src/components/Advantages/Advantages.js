@@ -1,7 +1,7 @@
 import './Advantages.css';
 import advantagesItems from './AdvantagesItems';
 
-function AdvantagesSection() {
+function Advantages() {
    return(
       <div className='text-center padding-xxl-xl'>
             <div>
@@ -10,7 +10,7 @@ function AdvantagesSection() {
             <div className='margin-top-xxl'>
                 <div className='display-flex-center'>
                     {advantagesItems.map((item) =>  (
-                           <div className="itemDiv">
+                           <div key={item.id} className="itemDiv">
                               <img alt='Advantage item' className="imgAdvantages" src={item.image}/>
                               <h3 className='font-size-m font-semi-bold margin-top-s'>{item.title}</h3>
                               <p className='font-size-s width-50 margin-auto margin-top-s'>{item.description}</p>
@@ -22,4 +22,4 @@ function AdvantagesSection() {
    );
 }
 
-export default AdvantagesSection;
+export default Advantages;
