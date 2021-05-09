@@ -17,7 +17,7 @@ jobs:
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./frontend" # <- This will point to the api folder in your project
-          branch: "master"
+          #branch: "master"
   build-backend:
     runs-on: ubuntu-latest
     #steps: 
