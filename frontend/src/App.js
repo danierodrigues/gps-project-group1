@@ -8,10 +8,10 @@ import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  const { REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_URL, REACT_APP_ENV } = process.env;
   return (
     <main>
-      <h1>{process.env.REACT_APP_API_URL}</h1>
+      <h1>{REACT_APP_ENV}</h1>
       { console.log("aqui") }
       { console.log(process.env) }
       { console.log(REACT_APP_API_URL) }
