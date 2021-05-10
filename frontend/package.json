@@ -19,8 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "(REACT_APP_ENV=dev || set \"REACT_APP_ENV=dev\") &&  react-scripts start",
-    "prod": "REACT_APP_ENV=prod react-scripts start"
+    "dev": "REACT_APP_ENV=dev react-scripts start || set \"REACT_APP_ENV=dev\" && react-scripts start",
+    "prod": "REACT_APP_ENV=prod react-scripts start || set \"REACT_APP_ENV=prod\" && react-scripts start"
   },
   "eslintConfig": {
     "extends": [
