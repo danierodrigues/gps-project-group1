@@ -9,10 +9,10 @@
 }
  
  .social-img {
-     height: 100%;
+     height: 50px;
      transition: .3s;
-     width: 2.5vw;
-     margin-left: 5%; 
+     width: 50px;
+     margin: 10px;
  }
 
  .social-img:hover{
@@ -27,3 +27,17 @@
  .telephone {
      margin-top: 5%;
  }
+
+ @media (max-width: 900px) {
+    .footer-wrapper{
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin-top: var(--size-xl);
+    }
+
+    
+}

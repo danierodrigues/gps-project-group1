@@ -7,7 +7,7 @@ import menuItems from '../Menu/MenuItems';
 function Footer() {
      return (
           <footer className='padding-xxl-xl'>
-               <div className='display-flex-between width-90 margin-auto'>
+               <div className='display-flex-between width-90 margin-auto footer-wrapper'>
                     <div>
                          <p className='font-size-s font-semi-bold'>Onde nos encontrar</p>
                          <div className='margin-top-s'>
@@ -27,7 +27,7 @@ function Footer() {
                          </div>
                     </div>
                     <div>
-                         <p className='font-semi-bold font-size-s'>Sobre o programa</p>
+                         <p className='font-semi-bold font-size-s footer-section'>Sobre o programa</p>
                          <div className='font-size-xs'>
 
                               {menuItems.map((item) =>  (

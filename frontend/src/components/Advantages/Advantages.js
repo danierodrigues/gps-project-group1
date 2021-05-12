@@ -5,7 +5,7 @@ function Advantages() {
    return(
       <div className='text-center padding-xxl-xl'>
             <div>
-                <h3 className='font-size-l'>Porquê o BrightStart?</h3>
+                <p className='font-size-l bold'>Porquê o BrightStart?</p>
             </div>
             <div className='margin-top-xxl'>
                 <div className='display-flex-center'>

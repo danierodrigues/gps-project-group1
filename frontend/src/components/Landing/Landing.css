@@ -1,53 +1,6 @@
-nav {
-     background: #ffffff;
-     height: 6rem;
-     position: fixed;
-     top: 0;
-     z-index: 999;
-     width: 100%;
-     box-shadow: 0px 1px 4px var(--grey);
-}
-
-nav ul li {
-     display: inline-block;
-     line-height: 6rem;
-     margin-right: 0.6rem;
-}
-
-nav > span {
-     float: left;
-     line-height: 5.5rem;
-     margin-right: 5%;
-     margin-left: 5.5%;
-}
-
-li > a {
-     text-decoration: none;
-     color: var(--dark-grey);
-     padding: 0.5rem 0.9rem;
-}
-
-li > a:hover {
-     text-decoration: none;
-     color: var(--primary-color);
-     padding: 0.5rem 0.9rem;
-}
-
-.check-btn {
-     color: white;
-     float: left;
-     line-height: 6rem;
-     cursor: pointer;
-     display: none;
-     margin-right: 2rem;
-}
-
-#toogle{
-     display: none;
-}
-
 .bg {
      height: 100vh;
+     padding-top: 30vh;
      background-image: url('../../images/background.jpg');
      background-position: center;
      background-repeat: no-repeat;

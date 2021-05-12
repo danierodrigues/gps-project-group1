@@ -71,8 +71,8 @@ function RegistrationForm() {
 
   return (
     <div className='padding-xxl-xl bg-candidature' id='candidate'>
-         <div className='display-flex-center'>
-               <div className='width-45 text-white'>
+         <div className='display-flex-center candidature-wrapper'>
+               <div className='width-45 text-white candidature-section'>
                     <p className='font-size-xl font-semi-bold'>Candidata-te</p>
                     <p className='text-justify margin-top-s width-70 section-text font-size-s'>
                          Não esperes mais e junta-te a nós. Se quiseres fazer
@@ -80,13 +80,13 @@ function RegistrationForm() {
                          candidatura. 
                     </p>
                </div>
-               <div className='width-45'>
+               <div className='width-45 candidature-section'>
                     <form autoComplete='false'>
-                         <div className='display-flex-between'>
+                         <div className='display-flex-between input-wrapper'>
                               <input maxLength={35} onChange={(e) => handleInputChange(e, 'firstName')} className='width-45' placeholder='Nome' />
                               <input maxLength={35} onChange={(e) => handleInputChange(e, 'lastName')} className='width-45' placeholder='Apelido' />
                          </div>
-                         <div className='display-flex-between margin-top-l'>
+                         <div className='display-flex-between input-wrapper'>
                               <input onChange={(e) => handleInputChange(e, 'phoneNumber')} className='width-45' type='number' placeholder='Contacto móvel' />
                               <input onChange={(e) => handleInputChange(e, 'email')} className='width-45' type='email' placeholder='Email' />
                          </div>

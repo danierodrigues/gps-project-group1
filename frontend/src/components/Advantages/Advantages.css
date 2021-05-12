@@ -12,8 +12,8 @@
          flex-direction: column;
      }
  
-     .itemDiv{
-         margin-top: 30px;
+     .itemDiv:not(:first-child){
+         margin-top: var(--size-xxl);
      }
      
  }
