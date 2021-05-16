@@ -34,12 +34,14 @@ li > a:hover {
 }
 
 .check-btn {
-     color: white;
+     color:  black;
      float: left;
-     line-height: 6rem;
+     line-height: 5.5rem;
      cursor: pointer;
      display: none;
-     margin-right: 2rem;
+     font-size: var(--size-l);
+     margin-right: 1rem;
+     margin-left: 1.5rem;
 }
 
 #toogle{
@@ -62,11 +64,13 @@ li > a:hover {
 
      ul {
           position: fixed;
-          width: 100%;
-          top: 4.5rem;
+          width: 30%;
+          height: 100vh;
+          top: 6rem;
           left: -100%;
-          text-align: center;
           transition: all .5s;
+          background: #ffffff;
+          box-shadow: 1px 2px 4px var(--grey);
      }
 
      nav ul li{
@@ -91,6 +95,10 @@ li > a:hover {
           font-size: var(--size-xxl);
      }
 
+     ul {
+          width: 40%;
+     }
+
      .subtitle {
           font-size: var(--size-m);
      }
@@ -102,6 +110,10 @@ li > a:hover {
           font-size: var(--size-xl);
      }
 
+     ul {
+          width: 60%;
+     }
+
      .subtitle {
           font-size: var(--size-s);
      }
@@ -111,5 +123,8 @@ li > a:hover {
 
      .main-title {
           font-size: var(--size-l);
+     }
+     ul {
+          width: 80%;
      }
 }

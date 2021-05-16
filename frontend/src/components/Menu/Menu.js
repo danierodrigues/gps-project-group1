@@ -16,7 +16,7 @@ function Menu() {
          <ul className='font-semi-bold display-inline font-size-s'>
                {menuItems.map((item) =>  (
                      <li key={item.id}>
-                        <a href={item.url}>{item.label}</a>
+                        <a href={item.url} onClick={() => document.getElementById('toogle').click()}>{item.label}</a>
                      </li>
                ))}
          </ul>

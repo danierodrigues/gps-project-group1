@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.0",
+    "dotenv": "^9.0.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
@@ -21,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "REACT_APP_ENV=dev react-scripts start || set \"REACT_APP_ENV=dev\" && react-scripts start",
+    "prod": "REACT_APP_ENV=prod react-scripts start || set \"REACT_APP_ENV=prod\" && react-scripts start"
   },
   "eslintConfig": {
     "extends": [

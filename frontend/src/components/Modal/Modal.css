@@ -1,0 +1,28 @@
+.modal-icon {
+     width: 20%;
+     margin: auto;
+     display: block;
+     margin-bottom: var(--size-l);
+}
+
+.modal-footer {
+     justify-content: center;
+}
+
+.modal-footer button {
+     background-color: var(--dark-grey);
+}
+
+.close .sr-only {
+     display: none;
+}
+
+.close {
+     all: initial;
+     font-size: var(--size-l);
+     margin-right: var(--size-s);
+}
+
+.modal-header {
+     justify-content: flex-end;
+}

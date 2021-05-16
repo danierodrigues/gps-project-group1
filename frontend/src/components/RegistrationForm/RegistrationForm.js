@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import universities from '../../Universities';
 import Select from 'react-select';
+import CenteredModal from '../Modal/Modal';
 import './RegistrationForm.css';
+import { createCandidature } from '../../services/api';
 
 function RegistrationForm() {
 
@@ -12,6 +14,10 @@ function RegistrationForm() {
      const [lastName, setLastName] = useState('');
      const [phoneNumber, setPhoneNumber] = useState('');
      const [email, setEmail] = useState('');
+     const [showModal, setShowModal] = useState(false);
+     const [modalTitle, setModalTitle] = useState('');
+     const [modalDescription, setModalDescription] = useState('');
+     const [isSuccessModal, setIsSuccessModal] = useState();
      
      /* Populate select with universities */
      for(var i = 0; i < universities.length; i++) {
@@ -58,16 +64,49 @@ function RegistrationForm() {
      /* Handle form submit */
      const submitForm = e => {
           e.preventDefault();
-          
-          const candidature = {
-               'name': firstName,
-               'surname': lastName,
-               'mobile': phoneNumber,
-               'email': email,
-               'institution': selectedUniversity
+
+          if(firstName.trim() === '' || lastName.trim() === '' || phoneNumber.trim() === '' || email.trim() === '' || selectedUniversity === null) {
+               setModalTitle('Erro na submissão da candidatura');
+               setModalDescription('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
+               setIsSuccessModal(false);
           }
-          console.log(candidature);
+          else {
+
+               const candidature = {
+                    "name": firstName,
+                    "surname": lastName,
+                    "mobile": phoneNumber,
+                    "email": email,
+                    "institution": selectedUniversity
+               }
+
+               createCandidature(candidature).then((res) => {
+
+                    if(res.ok === true) {
+                         setModalTitle('Candidatura submetida com sucesso');
+                         setModalDescription('A candidatura foi submetida com sucesso. Entraremos em contacto contigo por email para seguires a evolução da tua candidatura.');
+                         resetCandidature();
+                         setIsSuccessModal(true);
+                    }
+                    else{
+                         console.log(res);
+                         setModalTitle('Erro na submissão da candidatura');
+                         setModalDescription('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
+                         setIsSuccessModal(false);
+                    }
+                    
+               });
+          }
+          setShowModal(true);
      } 
+
+     /* Reset candidature form fields */
+     const resetCandidature = () => {
+          setFirstName('');
+          setLastName('');
+          setPhoneNumber('');
+          setEmail('');
+     }
 
   return (
     <div className='padding-xxl-xl bg-candidature' id='candidate'>
@@ -81,25 +120,21 @@ function RegistrationForm() {
                     </p>
                </div>
                <div className='width-45 candidature-section'>
-                    <form autoComplete='false'>
+                    <form id='candidature-form' autoComplete='false'>
                          <div className='display-flex-between input-wrapper'>
-                              <input maxLength={35} onChange={(e) => handleInputChange(e, 'firstName')} className='width-45' placeholder='Nome' />
-                              <input maxLength={35} onChange={(e) => handleInputChange(e, 'lastName')} className='width-45' placeholder='Apelido' />
+                              <input maxLength={35} value={firstName} onChange={(e) => handleInputChange(e, 'firstName')} className='width-45' placeholder='Nome' />
+                              <input maxLength={35} value={lastName} onChange={(e) => handleInputChange(e, 'lastName')} className='width-45' placeholder='Apelido' />
                          </div>
                          <div className='display-flex-between input-wrapper'>
-                              <input onChange={(e) => handleInputChange(e, 'phoneNumber')} className='width-45' type='number' placeholder='Contacto móvel' />
-                              <input onChange={(e) => handleInputChange(e, 'email')} className='width-45' type='email' placeholder='Email' />
+                              <input value={phoneNumber} onChange={(e) => handleInputChange(e, 'phoneNumber')} className='width-45' type='number' placeholder='Contacto móvel' />
+                              <input value={email} onChange={(e) => handleInputChange(e, 'email')} className='width-45' type='email' placeholder='Email' />
                          </div>
                          <Select options={options} onChange={handleSelectChange} isSearchable={false} isClearable={true} className='margin-top-l'/>
                          <button onClick={submitForm} className='margin-top-l'>Submeter candidatura</button>
                     </form>
                </div>
          </div>
-         
-         
-          <form>
-
-          </form>
+         <CenteredModal  show={showModal} onHide={() => setShowModal(false)} title={modalTitle} description={modalDescription} isSuccess={isSuccessModal}/>
     </div>
     
   );

@@ -14,7 +14,7 @@ function FAQ() {
                               {
                                    return(
 
-                                        <Card className='cursor-pointer margin-bottom-s margin-auto faq-card'>
+                                        <Card key={question.id} className='cursor-pointer margin-bottom-s margin-auto faq-card'>
                                              <Accordion.Toggle className='padding-s' as={Card.Header} eventKey={question.id}>
                                                   {question.question}
                                              </Accordion.Toggle>
