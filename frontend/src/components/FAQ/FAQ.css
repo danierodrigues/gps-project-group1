@@ -1,0 +1,10 @@
+.faq-card {
+     width: 50%;
+}
+
+@media (max-width: 900px) {
+     .faq-card{
+         width: 100%;
+     }
+     
+ }

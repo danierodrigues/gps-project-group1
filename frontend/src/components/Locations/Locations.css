@@ -1,0 +1,40 @@
+.university-number {
+     width: 20%;
+}
+
+.buttons-wrapper {
+     margin-bottom: var(--size-xxl);
+}
+
+.university-info {
+     width: 30%;
+}
+
+.icon-wrapper {
+     margin-right: 3%;
+}
+
+@media (max-width: 900px) {
+
+     .university-number {
+          width: 100%;
+          margin-bottom: var(--size-l);
+     }
+
+     .university-info {
+          width: 100%;
+          text-align: center;
+          margin-top: var(--size-xl);
+     }
+
+     .buttons-wrapper {
+          margin-bottom: var(--size-m);
+     }
+}
+
+@media (max-width: 500px) {
+
+     .icon-wrapper {
+          display: none;
+     }
+}
