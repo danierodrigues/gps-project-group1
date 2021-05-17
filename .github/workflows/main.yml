@@ -17,16 +17,24 @@ jobs:
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./frontend" # <- This will point to the api folder in your project
+          #branch: "master"
+          procfile: "web: npm run prod"
   build-backend:
     runs-on: ubuntu-latest
+    #steps: 
+      #- name: Checkout
+        #uses: actions/checkout@v1
+
+      #- name: Add remote origin
+        #working-directory: ./backend
+        #run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY_DAN }}@git.heroku.com/gps-project-group1-backend.git
+
+      #- name: Deploy backend to heroku
+        #working-directory: ./backend
+        #run: git push --git-dir=/backend --force heroku `git subtree split --prefix backend HEAD`:master
     steps:
       - uses: actions/checkout@v2
-      #- uses: actions/setup-node@v1
-      #- name: Setup frontend
-        #working-directory: ./frontend
-        #run: |
-          #npm install
-          #npm run build
+      - uses: actions/setup-node@v1
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
@@ -34,3 +42,4 @@ jobs:
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./backend" # <- This will point to the api folder in your project
           procfile: "web: node index.js"
+          

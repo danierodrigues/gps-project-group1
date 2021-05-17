@@ -1,4 +1,4 @@
-import universities from '../../Universities';
+import universities from '../../universities';
 import { useState } from 'react';
 import aboutVideo from '../../videos/about-brightstart.mp4';
 import { MdEmail } from 'react-icons/md';
