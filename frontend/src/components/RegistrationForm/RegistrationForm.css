@@ -4,3 +4,31 @@
      background-repeat: no-repeat;
      background-size: cover;
 }
+
+.input-wrapper {
+     margin-top: var(--size-l);
+}
+@media (max-width: 900px) {
+
+     .candidature-section {
+          width: 100%;
+     }
+
+     .input-wrapper {
+          flex-direction: column;
+     }
+
+     .input-wrapper input {
+          width: 100%;
+     }
+     .input-wrapper input:not(:first-child) {
+          margin-top: var(--size-l);
+     }
+}
+
+@media (max-width: 600px) {
+
+     .candidature-section p:first-child{
+          font-size: var(--size-l);
+     }
+}

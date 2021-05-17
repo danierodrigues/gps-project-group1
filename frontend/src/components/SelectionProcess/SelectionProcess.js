@@ -3,7 +3,7 @@ import './SelectionProcess.css';
 function SelectionProcess() {
   return (
      <div className='bg-primary text-white text-center padding-xxl-xl' id='selection'>
-        <h3 className='font-size-l'>Processo de Seleção</h3>
+        <p className='font-size-l bold'>Processo de Seleção</p>
         <div className='display-flex-center margin-top-xl'>
           <div className='process-card'>
             <p className='font-size-xxxl font-semi-bold'>01</p>
