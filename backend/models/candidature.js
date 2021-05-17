@@ -25,7 +25,6 @@ const Candidature = new mongoose.Schema(
         required: [true,'Email obrigatório.'], 
         unique: [true, 'Já existe uma candidatura registada com o email inserido.'],
         match: [/.+\@.+\..+/,'Estrutura de email inválida.'],
-      //  match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email inválido'],
     },
     institution: {
         type: String,

@@ -27,8 +27,6 @@ mongoose.connect(uri, {
 /* Connect to the database */
 db.connect(() => {
 
-  
-
      /* Listening in a port */
      app.listen(port, () => console.log("[index] server started on port " + port));
 

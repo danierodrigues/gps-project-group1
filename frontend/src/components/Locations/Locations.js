@@ -4,6 +4,7 @@ import aboutVideo from '../../videos/about-brightstart.mp4';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 import './Locations.css';
+import { getUniversities } from '../../services/api';
 
 function Locations() {
 
@@ -48,9 +49,9 @@ function Locations() {
           </div>
           <div className='text-left university-info'>
               <h3 className='font-size-xl font-semi-bold'>{selectedUniversity.location}</h3>
-              <p className='font-size-s margin-top-s'><span className='icon-wrapper'><MdEmail /></span>{selectedUniversity.email}</p>
-              <p className='font-size-s margin-top-xs'><span className='icon-wrapper'><FaPhoneAlt /></span>{selectedUniversity.phone}</p>
-              <p className='font-size-s margin-top-xs'>Conversa com os alunos no <a href=''>Discord</a></p>
+              <p className='font-size-s margin-top-s text-dark-grey'><span className='icon-wrapper'><MdEmail /></span>{selectedUniversity.email}</p>
+              <p className='font-size-s margin-top-xs text-dark-grey'><span className='icon-wrapper'><FaPhoneAlt /></span>{selectedUniversity.phone}</p>
+              <p className='font-size-s margin-top-xs text-dark-grey'>Conversa com os alunos no <a href=''>Discord</a></p>
           </div>
         </div>
      </div>
