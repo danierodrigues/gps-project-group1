@@ -30,3 +30,21 @@ export function createCandidature(body) {
          return response.json();
      });
 }
+
+/* Retrieve all universities */
+export function getUniversities() {
+
+    return fetch(BASE_URL + "/a-definir", {
+
+        method: 'GET',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
