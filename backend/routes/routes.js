@@ -3,36 +3,12 @@ const routes = express.Router();
 const multer  = require('multer');
 
 
-
-/*var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/uploads/videos')
-    },
-    filename: function (req, file, cb) {
-      cb(null, uuidv4() + '-' + Date.now() + '.mp4')
-    },
-    
-  })
-
-
-var upload = multer({
-    storage: storage, 
-    fileFilter: (req, file, cb) => {
-    if (file.mimetype == "video/mp4") {
-        console.log("nice");
-      cb(null, true);
-    } else {
-        console.log("error");
-      cb(null, false);
-      return res.status(500).json({'ok':false, 'errorMessage':'Only .png, .jpg and .jpeg format allowed!'});
-    }
-  } }); */
-
 const multerMiddlewares = require('../middlewares/multerFunctions');
 const CandidatureController = require("../controllers/candidatures");
 const UsersController = require("../controllers/users");
 const AuthMiddlewares = require("../middlewares/auth");
 const InstitutionsController = require("../controllers/institutions");
+const FaqsController = require("../controllers/faqs");
 
 /* Candidatures */
 routes.get("/candidatures",AuthMiddlewares.verifyToken,CandidatureController.index);
@@ -57,6 +33,12 @@ routes.get("/institutions",InstitutionsController.index);
 routes.post("/institutions",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, multerMiddlewares.uploadVideoFunction, InstitutionsController.create);
 routes.put("/institutions",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.update);
 routes.delete("/institutions/:id",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.delete);
+
+/* Faqs */
+routes.get("/faqs",FaqsController.index);
+routes.post("/faqs",AuthMiddlewares.verifyToken, FaqsController.create);
+routes.put("/faqs",AuthMiddlewares.verifyToken, FaqsController.update);
+routes.delete("/faqs/:id",AuthMiddlewares.verifyToken, FaqsController.delete);
 
 
 module.exports = routes;

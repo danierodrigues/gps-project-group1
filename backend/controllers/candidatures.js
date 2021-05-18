@@ -34,7 +34,7 @@ module.exports = {
         let newData = req.body;
         
         try{
-        CandidatureModel.findOneAndUpdate({'_id':newData._id}, newData, {upsert: true}, function(error, data) {
+        CandidatureModel.findOneAndUpdate({'_id':newData._id}, newData, {new: true}, function(error, data) {
             if(error){
                 return res.status(500).json({'ok': false, 'error':error});
             }else if(data){
