@@ -4,6 +4,7 @@ const multer  = require('multer');
 
 
 const multerMiddlewares = require('../middlewares/multerFunctions');
+const generalMiddlewares = require('../middlewares/general');
 const CandidatureController = require("../controllers/candidatures");
 const UsersController = require("../controllers/users");
 const AuthMiddlewares = require("../middlewares/auth");
@@ -25,7 +26,8 @@ routes.put("/users",AuthMiddlewares.verifyToken, AuthMiddlewares.verifyRole, Use
 routes.delete("/users",AuthMiddlewares.verifyToken, AuthMiddlewares.verifyRole,UsersController.delete);
 
 /* Auth */
-routes.post("/auth",UsersController.login);
+routes.post("/auth",generalMiddlewares.verifyBody,UsersController.login);
+routes.get("/verifyToken",AuthMiddlewares.verifyToken,UsersController.verifyToken);
 
 
 /* Institutions */
