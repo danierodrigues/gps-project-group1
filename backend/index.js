@@ -4,9 +4,8 @@ const port = process.env.PORT || 5000; // The port value can change according to
 const db = require('./config/database');
 const routes = require('./routes/routes');
 const mongoose = require('mongoose');
-
-const dbName = 'gps-project-database';
-const uri = `mongodb+srv://admin:admin@cluster0.ebqtm.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+var path = require('path');
+const backendVar = require('./config/backend');
 
 /* Initialize middlewares */
 const logger = require('./middlewares/logger');
@@ -17,16 +16,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 app.use(cors()); // Add an 'Allow Origins' header for every response
 
-mongoose.connect(uri, {
+mongoose.connect(db.urlDatabase, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
 });
 
+
+app.use(backendVar.videosURI, express.static('./public/uploads/videos/'))
+
 /* Connect to the database */
 db.connect(() => {
-
      /* Listening in a port */
      app.listen(port, () => console.log("[index] server started on port " + port));
 

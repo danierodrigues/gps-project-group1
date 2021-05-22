@@ -1,33 +1,29 @@
 const CandidatureModel = require("../models/candidature");
-const mongoose = require('mongoose');
+const InstitutionModel = require('../models/institution');
 
 module.exports = {
     async index(req,res,next){
         const all = await CandidatureModel.find();
-        res.status(200).json({ok:true,candidatures:all});
+        res.status(200).json({ok:true,data:all});
     },
 
     async create(req,res,next){
 
         try{
-           // const res = await CandidatureModel.create(req.body)
-           const doc = new CandidatureModel(req.body);
-            await doc.save((error, data) =>{
-                if(error){
-                    /*if (error.name === 'MongoError' && error.code === 11000) {
-                        if(error.keyPattern.mobile){
-                            return res.status(500).json({'ok': false, 'errorMessage':'Já existe candidatura com esse Nº de telemóvel.'});
-                        }else if(error.keyPattern.email){
-                            return res.status(500).json({'ok': false, 'errorMessage':'Já existe candidatura com esse email.'});
-                        }
-                    }else{
+
+            InstitutionModel.findOne({'_id':req.body.institution,'isActive':true}, function(error, institution) {
+                if(error)
+                    return res.status(500).json({'ok':false, 'errorMessage':"Instituição que selecionou não existe"});
+                
+                const doc = new CandidatureModel(req.body);
+                doc.save((error, data) =>{
+                    if(error){
                         return res.status(500).json({'ok': false, 'error':error});
-                    }*/
-                    return res.status(500).json({'ok': false, 'error':error});
-                }else if(data){
-                    return res.status(200).json({'ok': true, 'data':data});
-                }
-            })
+                    }else if(data){
+                        return res.status(200).json({'ok': true, 'data':data});
+                    }
+                })
+            });
         }catch(error){
             return res.status(500).json({'ok':false, 'error':error});
         }
@@ -40,15 +36,6 @@ module.exports = {
         try{
         CandidatureModel.findOneAndUpdate({'_id':newData._id}, newData, {upsert: true}, function(error, data) {
             if(error){
-                /*if (error.name === 'MongoError' && error.code === 11000) {
-                    if(error.keyPattern.mobile){
-                        return res.status(500).json({'ok': false, 'errorMessage':'Já existe candidatura com esse Nº de telemóvel.'});
-                    }else if(error.keyPattern.email){
-                        return res.status(500).json({'ok': false, 'errorMessage':'Já existe candidatura com esse email.'});
-                    }
-                }else{
-                    return res.status(500).json({'ok': false, 'error':error});
-                }*/
                 return res.status(500).json({'ok': false, 'error':error});
             }else if(data){
                 return res.status(200).json({'ok': true, 'data':data});

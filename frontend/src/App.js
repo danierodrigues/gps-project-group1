@@ -10,6 +10,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import "animate.css/animate.min.css";
 
 function App() {
+
   return (
       <main>
         <ScrollAnimation animateIn='animate__fadeIn' duration={1.5} animateOnce={true}>
