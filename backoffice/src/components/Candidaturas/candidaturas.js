@@ -24,14 +24,14 @@ class Candidaturas extends Component {
                 {candidatura.map(person => (
                     
                         <tr>
-                            <td class = 'primeiroNome'>{person.name} </td>
+                            <td className = 'primeiroNome'>{person.name} </td>
                             <td>{person.surname}</td> 
                             <td>{person.date}</td> 
                             <td>{person.mobile}</td>   
                             <td>{person.email}</td>  
                             <td>{person.institution}</td>  
                             <td>{person.status}</td>
-                            <td><img class = 'trash' src={trash} alt={"trash"}/></td>  
+                            <td><img className = 'trash' src={trash} alt={"trash"}/></td>  
                         </tr>
                ))}
             </table>

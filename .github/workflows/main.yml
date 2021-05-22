@@ -13,7 +13,7 @@ jobs:
       #- uses: actions/setup-node@v1
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_DF}}
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
           heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./frontend" # <- This will point to the api folder in your project
