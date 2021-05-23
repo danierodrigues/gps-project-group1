@@ -10,13 +10,23 @@ module.exports = {
         res.status(200).json({ok:true,data:all});
     },
 
-    async login(req,res,next){
+    async verifyToken(req,res,next){
+        console.log(req.isAuth);
+        if(req.isAuth){
+            return res.status(200).json({'ok': true});
+        }else{
+            return res.status(500).json({'ok': false,'errorMessage': "Erro."});
+        }
+    },
 
+    async login(req,res,next){
+        console.log(req.body);
 
 
         try{
             await UserModel.findOne({'email':req.body.email}, function(error, user) {
-                if(error){
+                console.log(user);
+                if(error || !user){
                     return res.status(500).json({ok:false, errorMessage:"Email ou Password incorreto."});
                 }
                 console.log(user);

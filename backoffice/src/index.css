@@ -1,0 +1,173 @@
+:root {
+  --primary-color: #37CCEB;
+  --light-grey: #f5f5f5;
+  --grey: #d1d1d1;
+  --dark-grey: #313131;
+
+  --size-xs: 15px; /* Footer */
+  --size-s: 20px; /* Base text size */
+  --size-m: 26px; /* Sections subtitle */
+  --size-l: 36px; /* Secondary heading - sections heading */
+  --size-xl: 64px; /* Main heading */
+  --size-xxl: 100px; /* Numbers - SelectionProcess */
+  --size-xxxl: 130px; /* Main title - BS */
+}
+
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Button */
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8rem;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: .2rem;
+  font-weight: 600;
+  transition: .3s;
+}
+
+/* Input */
+input {
+  padding: var(--size-s);
+  font-size: var(--size-xs);
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 2px solid var(--primary-color);
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:disabled{
+  background-color: var(--light-grey);
+}
+
+/* Fonts size */
+.font-size-xs {
+  font-size: var(--size-xs);
+}
+
+.font-size-s {
+  font-size: var(--size-s);
+}
+
+.font-size-m {
+  font-size: var(--size-m);
+}
+
+.font-size-l {
+  font-size: var(--size-l);
+}
+
+.font-size-xl {
+  font-size: var(--size-xl);
+}
+
+.font-size-xxl {
+  font-size: var(--size-xxl);
+}
+
+.font-size-xxxl {
+  font-size: var(--size-xxxl);
+}
+
+/* Font weight */
+.font-semi-bold {
+  font-weight: 600;
+}
+
+/* Padding */
+.padding-xl {
+  padding: var(--size-xl);
+}
+
+.padding-xxl {
+  padding: var(--size-xxl);
+}
+
+.padding-s-xxl {
+  padding: var(--size-xs) var(--size-xxl);
+}
+
+.padding-xxl-xl {
+  padding: var(--size-xxl) var(--size-xl);
+}
+
+/* Margin */
+.margin-auto {
+  margin: auto;
+}
+
+.margin-s-xxl {
+  margin: var(--size-xs) var(--size-xxl);
+}
+
+.margin-top-s {
+  margin-top: var(--size-s);
+}
+
+.margin-top-xl {
+  margin-top: var(--size-xl);
+}
+
+/* Width */
+.width-45 {
+  width: 45%;
+}
+
+/* Flexbox */
+.display-flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Display */
+.display-inline {
+  display: inline;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+/* Text */
+.text-white {
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Overflow */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Others */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+#root{
+  height: 100vh;
+}
