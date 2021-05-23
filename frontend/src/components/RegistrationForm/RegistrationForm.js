@@ -1,14 +1,13 @@
-import { useState } from 'react';
-import universities from '../../universities';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import CenteredModal from '../Modal/Modal';
 import './RegistrationForm.css';
-import { createCandidature } from '../../services/api';
+import { createCandidature, getUniversities } from '../../services/api';
 
 function RegistrationForm() {
 
      /* Defaults */
-     const options = [];
+     const [options, setOptions] = useState([{}]);
      const [selectedUniversity, setSelectedUniversity] = useState(null);
      const [firstName, setFirstName] = useState('');
      const [lastName, setLastName] = useState('');
@@ -18,16 +17,28 @@ function RegistrationForm() {
      const [modalTitle, setModalTitle] = useState('');
      const [modalDescription, setModalDescription] = useState('');
      const [isSuccessModal, setIsSuccessModal] = useState();
-     
-     /* Populate select with universities */
-     for(var i = 0; i < universities.length; i++) {
-          const university = {
-               value: universities[i].id,
-               label: universities[i].isOpen ? universities[i].name : universities[i].name + ' (candidaturas fechadas)',
-               isDisabled: !universities[i].isOpen,
-          }
-          options.push(university);
-     }
+
+
+     useEffect(() => {
+          
+          getUniversities().then(result => { // Fetch only once, on render
+          
+               /* Populate select with universities */
+               const options = [];
+
+               for(var i = 0; i < result.data.length; i++) {
+
+                    const option = {
+                         value: result.data[i]._id,
+                         label: result.data[i].candidatureState === 'open' ? result.data[i].name : result.data[i].name + ' (candidaturas fechadas)',
+                         isDisabled: result.data[i].candidatureState === 'open' ? false : true,
+                    }
+                    options.push(option);
+               }
+               setOptions([...options]);
+          })
+          
+     }, [])
 
      /* Handle universities select change */
      const handleSelectChange = e => {
