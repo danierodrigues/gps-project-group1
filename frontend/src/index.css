@@ -47,6 +47,15 @@ button {
   transition: .3s;
 }
 
+button:disabled {
+  background-color: var(--grey);
+}
+
+button:disabled:hover {
+  transform: none;
+  cursor: not-allowed;
+}
+
 .not-selected {
   background-color: var(--grey);
 }
@@ -275,7 +284,7 @@ video {
 }
 
 .text-dark-grey {
-  color: var(--dark-grey);
+  color: #777777;
 }
 
 .text-center {

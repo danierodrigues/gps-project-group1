@@ -47,3 +47,21 @@ export function getUniversities() {
         return response.json();
     });
 }
+
+/* Retrieve all questions for FAQ */
+export function getQuestions() {
+
+    return fetch(BASE_URL + "/faqs", {
+
+        method: 'GET',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
