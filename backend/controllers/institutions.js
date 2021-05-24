@@ -16,12 +16,13 @@ if(process.env.NODE_ENV.trim() == "dev"){
 module.exports = {
     async index(req,res,next){
         const all = await InstitutionModel.find();
-        res.status(200).json({ok:true,data:all});
+        res.status(200).json({ok:true,data:all, backendURL:backendURL});
     },
 
     async create(req,res,next){
         console.log(req.file);
         req.body.presentationVideoPath = backendVar.videosURI + req.file.filename; 
+        console.log(req.body.presentationVideoPath);
 
         try{
             // const res = await CandidatureModel.create(req.body)
