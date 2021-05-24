@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      #- uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY_DF}}
@@ -18,7 +18,7 @@ jobs:
           heroku_email: "diogofilipe@hotmail.fr"
           appdir: "./frontend" # <- This will point to the api folder in your project
           #branch: "master"
-          procfile: "web: npm run prod"
+          procfile: "web: npm run prod --optimize_for_size --max_old_space_size=460"
   build-backend:
     runs-on: ubuntu-latest
     #steps: 
