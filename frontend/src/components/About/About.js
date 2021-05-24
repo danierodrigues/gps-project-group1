@@ -7,7 +7,7 @@ function About() {
           <div className='display-flex-around width-90 margin-auto'>
                <div className='width-45 about-section'>
                     <p className='font-size-xl font-semi-bold'>Sobre o curso</p>
-                    <p className='text-justify margin-top-s width-70 section-text font-size-s'>
+                    <p className='text-justify margin-top-s width-70 section-text font-size-s text-dark-grey'>
                          O BrightStart é a oportunidade perfeita se pretendes 
                          realizar uma licenciatura em Engenharia Informática, 
                          ao mesmo tempo que ganhas experiência profissional em 
@@ -21,9 +21,7 @@ function About() {
                     </video>
                </div>
           </div>
-          
-    </div>
-    
+     </div>
   );
 }
 

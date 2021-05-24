@@ -24,18 +24,18 @@ class Candidaturas extends Component {
                 {candidatura.map(person => (
                     
                         <tr>
-                            <td class = 'tdCandidaturas'>{person.name} </td>
-                            <td class = 'tdCandidaturas'>{person.surname}</td> 
-                            <td class = 'tdCandidaturas'>{person.date}</td> 
-                            <td class = 'tdCandidaturas'>{person.mobile}</td>   
-                            <td class = 'tdCandidaturas'>{person.email}</td>  
-                            <td class = 'tdCandidaturas'>{person.institution}</td>  
-                            <td class = 'tdCandidaturas'><select name="estados" id="estados">
+                            <td className = 'tdCandidaturas'>{person.name} </td>
+                            <td className = 'tdCandidaturas'>{person.surname}</td> 
+                            <td className = 'tdCandidaturas'>{person.date}</td> 
+                            <td className = 'tdCandidaturas'>{person.mobile}</td>   
+                            <td className = 'tdCandidaturas'>{person.email}</td>  
+                            <td className = 'tdCandidaturas'>{person.institution}</td>  
+                            <td className = 'tdCandidaturas'><select name="estados" id="estados">
                               <option value="Em análise">Em análise</option>
                               <option value="Aceite">Aceite</option>
                               <option value="Negado">Negado</option>
                               </select></td>
-                            <td class = 'tdCandidaturas'><img class = 'trash' src={trash} alt={"trash"}/></td>  
+                            <td className = 'tdCandidaturas'><img class = 'trash' src={trash} alt={"trash"}/></td>  
                         </tr>
                ))}
             </table>

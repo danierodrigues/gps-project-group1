@@ -1,20 +1,19 @@
-
 const { REACT_APP_API_URL, REACT_APP_API_URL_PROD, REACT_APP_ENV } = process.env;
 var BASE_URL;
 
-if(process.env.REACT_APP_ENV === 'dev')
+if(REACT_APP_ENV === 'dev')
     BASE_URL = REACT_APP_API_URL;
 
-else if(process.env.REACT_APP_ENV === 'prod')
+else if(REACT_APP_ENV === 'prod')
     BASE_URL = REACT_APP_API_URL_PROD;
-
-/* For now, overwrite the BASE_URL */
-BASE_URL = 'http://localhost:5000';
 
 /* Create a candidature */
 export function createCandidature(body) {
 
+    console.log(REACT_APP_API_URL + " " + REACT_APP_API_URL_PROD);
+
      return fetch(BASE_URL + "/candidatures", {
+
 
          method: 'POST',
 
@@ -34,7 +33,7 @@ export function createCandidature(body) {
 /* Retrieve all universities */
 export function getUniversities() {
 
-    return fetch(BASE_URL + "/a-definir", {
+    return fetch(BASE_URL + "/institutions", {
 
         method: 'GET',
 
