@@ -6,11 +6,13 @@ import { getUniversities } from '../../services/api';
 
 function Locations() {
 
+  const [backendURL, setBackendURL] = useState();
   const [universities, setUniversities] = useState([{}]);
   const [selectedUniversity, setSelectedUniversity] = useState({});
 
   useEffect(() => {
     getUniversities().then(result => { // Fetch only once, on render
+      setBackendURL(result.backendURL);
       setUniversities([...result.data]);
       setSelectedUniversity({...result.data[0]});
     })
@@ -28,7 +30,7 @@ function Locations() {
         </div>
         <div className='display-flex-around width-70 margin-auto margin-top-xxl buttons-wrapper'>
           {
-            universities[0]._id !== undefined ?
+            universities.length !== 0 ?
 
               universities.map((university) => 
                 {
@@ -55,19 +57,19 @@ function Locations() {
         </div>
 
           {
-            universities[0]._id !== undefined ?
+            universities.length !== 0 ?
 
               <div className='display-flex-around width-90 margin-auto'>
-                <div className='width-35 display-flex video-wrapper'>
-                  <video className='vertical-align' controls>
-                    <source src={selectedUniversity.presentationVideoPath} type='video/mp4' />
-                  </video>
+                <div className='width-50 display-flex video-wrapper'>
+                  <video src={backendURL + selectedUniversity.presentationVideoPath} controls type='video/mp4'/>
                 </div>
                 <div className='text-left university-info'>
                     <h3 className='font-size-xl font-semi-bold'>{selectedUniversity.location}</h3>
                     <p className='font-size-s margin-top-s text-dark-grey'><span className='icon-wrapper'><MdEmail /></span>{selectedUniversity.email}</p>
                     <p className='font-size-s margin-top-xs text-dark-grey'><span className='icon-wrapper'><FaPhoneAlt /></span>{selectedUniversity.phone}</p>
-                    <p className='font-size-s margin-top-xs text-dark-grey'>Conversa com os alunos no <a href=''>Discord</a></p>
+                    <p className='font-size-s margin-top-xs text-dark-grey'>Conversa com os alunos no <span> </span>
+                      <a href='https://discord.gg/RhZ94De5Uc' target='_blank' rel='noreferrer'>Discord</a>
+                    </p>
                 </div>
               </div>
             :

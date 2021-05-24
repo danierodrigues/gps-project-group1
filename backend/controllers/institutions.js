@@ -16,7 +16,7 @@ if(process.env.NODE_ENV.trim() == "dev"){
 module.exports = {
     async index(req,res,next){
         const all = await InstitutionModel.find();
-        res.status(200).json({ok:true,data:all});
+        res.status(200).json({ok:true,data:all, backendURL:backendURL});
     },
 
     async create(req,res,next){

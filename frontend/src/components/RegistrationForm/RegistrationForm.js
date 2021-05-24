@@ -7,7 +7,7 @@ import { createCandidature, getUniversities } from '../../services/api';
 function RegistrationForm() {
 
      /* Defaults */
-     const [options, setOptions] = useState([{}]);
+     const [options, setOptions] = useState([]);
      const [selectedUniversity, setSelectedUniversity] = useState(null);
      const [firstName, setFirstName] = useState('');
      const [lastName, setLastName] = useState('');
@@ -27,7 +27,6 @@ function RegistrationForm() {
                const options = [];
 
                for(var i = 0; i < result.data.length; i++) {
-
                     const option = {
                          value: result.data[i]._id,
                          label: result.data[i].candidatureState === 'open' ? result.data[i].name : result.data[i].name + ' (candidaturas fechadas)',
@@ -124,7 +123,7 @@ function RegistrationForm() {
          <div className='display-flex-center candidature-wrapper'>
                <div className='width-45 text-white candidature-section'>
                     <p className='font-size-xl font-semi-bold'>Candidata-te</p>
-                    <p className='text-justify margin-top-s width-70 section-text font-size-s'>
+                    <p className='margin-top-s width-70 section-text font-size-s'>
                          Não esperes mais e junta-te a nós. Se quiseres fazer
                          parte da próxima edição do BrightStart, submete a tua
                          candidatura. 
@@ -141,7 +140,7 @@ function RegistrationForm() {
                               <input value={email} onChange={(e) => handleInputChange(e, 'email')} className='width-45' type='email' placeholder='Email' />
                          </div>
                          <Select options={options} onChange={handleSelectChange} isSearchable={false} isClearable={true} className='margin-top-l'/>
-                         <button onClick={submitForm} className='margin-top-l'>Submeter candidatura</button>
+                         <button onClick={submitForm} disabled={options.length === 0} className='margin-top-l'>Submeter candidatura</button>
                     </form>
                </div>
          </div>
