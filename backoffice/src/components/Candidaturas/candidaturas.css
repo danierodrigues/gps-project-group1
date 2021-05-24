@@ -1,4 +1,4 @@
-table, th, td {
+.tabelaCandidatura, .headerCandidatura, .tdCandidaturas {
     border-collapse: collapse;
     text-align: left;
     border-bottom: 1px solid grey;
@@ -27,15 +27,15 @@ table, th, td {
 }
 
 @media screen and (max-width: 815px) {
-  div {
+  .divCandidatura {
     overflow-x: scroll;
     width: 100%;
   }
 
-  table, th, td {
+  .tabelaCandidatura, .headerCandidatura, .tdCandidaturas {
     margin-top: 10px;
   }
-  table {
+  .tabelaCandidatura {
     width: 100%;
   }
 }

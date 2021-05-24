@@ -1,0 +1,41 @@
+.tabelaUniversidades, .headerUniversidades, .tdUniversidades {
+    border-collapse: collapse;
+    text-align: left;
+    border-bottom: 1px solid grey;
+    padding: 1vw;
+    background-color: white;
+  }
+
+  .tabelaUniversidades {
+    width: 100%;
+  }
+
+  .trash {
+      width: 20px;
+      height: 20px;
+      margin-left: 13px;
+  }
+
+  .correct:hover {
+      background-color: green;
+      border-radius: 50%;
+  }
+
+  .wrong:hover {
+    background-color: red;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 815px) {
+  .divUniversidades {
+    overflow-x: scroll;
+    width: 100%;
+  }
+
+  .tabelaUniversidades, .headerUniversidades, .tdUniversidades {
+    margin-top: 10px;
+  }
+  .tabelaUniversidades {
+    width: 100%;
+  }
+}

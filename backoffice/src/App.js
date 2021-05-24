@@ -55,8 +55,7 @@ function App()  {
 
 
     return (
-    <Router>
-        
+    <Router>        
           {isLogged && (
           <div className="header">
             <a className="logo">BrightStart</a>

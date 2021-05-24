@@ -9,29 +9,33 @@ class Candidaturas extends Component {
         { name: 'João', surname: 'Manel', date: '10-05-2021', mobile: '923812061', email: 'email1@email.com', institution: 'Lisboa', status: 'Em análise'}
       ];
     return ( 
-        <div>
-                <table>
-                        <tr>
-                            <th>Primeiro Nome</th>
-                            <th>Ultimo Nome</th>
-                            <th>Data de submissão</th>
-                            <th>Contacto</th>
-                            <th>Email</th>
-                            <th>Universidade</th>
-                            <th>Estado</th>
-                            <th>Ações</th>
+        <div class = 'divCandidatura'>
+                <table class = 'tabelaCandidatura'>
+                        <tr class = 'rowCandidatura'>
+                            <th class = 'headerCandidatura'>Primeiro Nome</th>
+                            <th class = 'headerCandidatura'>Ultimo Nome</th>
+                            <th class = 'headerCandidatura'>Data de submissão</th>
+                            <th class = 'headerCandidatura'>Contacto</th>
+                            <th class = 'headerCandidatura'>Email</th>
+                            <th class = 'headerCandidatura'>Universidade</th>
+                            <th class = 'headerCandidatura'>Estado</th>
+                            <th class = 'headerCandidatura'>Ações</th>
                         </tr>
                 {candidatura.map(person => (
                     
                         <tr>
-                            <td className = 'primeiroNome'>{person.name} </td>
-                            <td>{person.surname}</td> 
-                            <td>{person.date}</td> 
-                            <td>{person.mobile}</td>   
-                            <td>{person.email}</td>  
-                            <td>{person.institution}</td>  
-                            <td>{person.status}</td>
-                            <td><img className = 'trash' src={trash} alt={"trash"}/></td>  
+                            <td className = 'tdCandidaturas'>{person.name} </td>
+                            <td className = 'tdCandidaturas'>{person.surname}</td> 
+                            <td className = 'tdCandidaturas'>{person.date}</td> 
+                            <td className = 'tdCandidaturas'>{person.mobile}</td>   
+                            <td className = 'tdCandidaturas'>{person.email}</td>  
+                            <td className = 'tdCandidaturas'>{person.institution}</td>  
+                            <td className = 'tdCandidaturas'><select name="estados" id="estados">
+                              <option value="Em análise">Em análise</option>
+                              <option value="Aceite">Aceite</option>
+                              <option value="Negado">Negado</option>
+                              </select></td>
+                            <td className = 'tdCandidaturas'><img class = 'trash' src={trash} alt={"trash"}/></td>  
                         </tr>
                ))}
             </table>
