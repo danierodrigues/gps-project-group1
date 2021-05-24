@@ -68,6 +68,7 @@ function Auth({setisLogged,...props}) {
   return (
     <div className="MainContainerAuth">
         <div className="ContainerCenter">
+        <h2>Login</h2><br></br>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
         <div className="ContainerAuth">
             <br />

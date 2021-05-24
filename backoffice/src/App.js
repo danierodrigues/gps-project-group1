@@ -56,17 +56,18 @@ function App()  {
 
     return (
     <Router>
-        <div className="header">
-          <a className="logo">BrightStart</a>
+        
           {isLogged && (
-          <nav className="header-right">
-          
-            <a><Link to={'/Candidaturas'} className="nav-link">Candidaturas</Link></a>
-            <a><Link to={'/Universidades'} className="nav-link">Universidades</Link></a>
-             <a><Link   onClick={HandleLogout} className="nav-link">Log out</Link></a> 
+          <div className="header">
+            <a className="logo">BrightStart</a>
+            <nav className="header-right">
+              <a><Link to={'/Candidaturas'} className="nav-link">Candidaturas</Link></a>
+              <a><Link to={'/Universidades'} className="nav-link">Universidades</Link></a>
+              <a><Link   onClick={HandleLogout} className="nav-link">Log out</Link></a> 
             </nav>
+          </div>
           )}
-        </div>
+        
             
           
           <Switch>
