@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 import './Locations.css';
@@ -7,20 +7,46 @@ import { getUniversities } from '../../services/api';
 function Locations() {
 
   const [backendURL, setBackendURL] = useState();
-  const [universities, setUniversities] = useState([{}]);
+  const [universities, setUniversities] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState({});
+
+  const verifyVideos = () => {
+
+    var video = document.getElementById('institution-video');
+    var videoError = document.getElementById('institution-video-error');
+
+    if(video) {
+      if(isNaN(video.duration)) {
+        video.style = 'display: none';
+        videoError.style = 'display: block';
+        videoError.style = 'display: flex; flex-direction: column; justify-content: center; width: 100%';
+      }
+      else {
+        video.style = 'display: block';
+        videoError.style = 'display: none';
+      }
+    }
+  }
 
   useEffect(() => {
     getUniversities().then(result => { // Fetch only once, on render
       setBackendURL(result.backendURL);
       setUniversities([...result.data]);
       setSelectedUniversity({...result.data[0]});
+      verifyVideos();
     })
   }, [])
+
+  useLayoutEffect(() => {
+      verifyVideos();
+  }, [selectedUniversity])
+
 
   /* Handle the university change */
   const changeUniversity = (university) => {
     setSelectedUniversity(university);
+    verifyVideos();
+    ;
   }
 
   return (
@@ -60,8 +86,9 @@ function Locations() {
             universities.length !== 0 ?
 
               <div className='display-flex-around width-90 margin-auto'>
-                <div className='width-50 display-flex video-wrapper'>
-                  <video src={backendURL + selectedUniversity.presentationVideoPath} controls type='video/mp4'/>
+                <div id='video-wrapper' className='width-50 display-flex video-wrapper'>
+                  <video id='institution-video' src={backendURL + selectedUniversity.presentationVideoPath} controls type='video/mp4'/>
+                  <div id='institution-video-error'>Infelizmente, não foi possível carregar o vídeo. </div>                  
                 </div>
                 <div className='text-left university-info'>
                     <h3 className='font-size-xl font-semi-bold'>{selectedUniversity.location}</h3>

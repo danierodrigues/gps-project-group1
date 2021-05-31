@@ -11,8 +11,8 @@ module.exports = {
 
         try{
 
-            InstitutionModel.findOne({'_id':req.body.institution,'isActive':true}, function(error, institution) {
-                if(error)
+            InstitutionModel.findOne({'name':req.body.institution,'isActive':true}, function(error, institution) {
+                if(error || !institution)
                     return res.status(500).json({'ok':false, 'errorMessage':"Instituição que selecionou não existe"});
                 
                 const doc = new CandidatureModel(req.body);
