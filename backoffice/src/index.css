@@ -24,6 +24,10 @@
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: rgb(252, 252, 252);
+}
+
 /* Button */
 button {
   background-color: var(--primary-color);
@@ -125,15 +129,28 @@ button:disabled{
   margin-top: var(--size-xl);
 }
 
+.margin-bottom-m {
+  margin-bottom: var(--size-m);
+}
+
 /* Width */
 .width-45 {
   width: 45%;
+}
+
+.width-90 {
+  width: 90%;
 }
 
 /* Flexbox */
 .display-flex-center {
   display: flex;
   justify-content: center;
+}
+
+.display-flex-end {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Display */

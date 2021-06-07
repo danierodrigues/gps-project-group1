@@ -1,13 +1,39 @@
 .tabelaUniversidades, .headerUniversidades, .tdUniversidades {
     border-collapse: collapse;
     text-align: left;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(240, 240, 240);
     padding: 1vw;
-    background-color: white;
+  }
+
+  .headerUniversidades {
+    font-weight: 600;
   }
 
   .tabelaUniversidades {
-    width: 100%;
+    width: 90%;
+    background-color: white;
+    padding: var(--size-m);
+    border: 1px solid rgb(240, 240, 240);
+    margin: auto;
+  }
+
+  .icon-wrapper {
+    border: 1px solid rgb(228, 228, 228);
+    background-color: rgb(247, 247, 247);
+    display: inline-block;
+    height: 45px;
+    margin-right: 15px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: .3s;
+  }
+
+  .icon-wrapper:hover {
+    background-color: rgb(207, 207, 207);
+  }
+
+  .trash {
+    width: 22px;
   }
 
   .correct:hover {

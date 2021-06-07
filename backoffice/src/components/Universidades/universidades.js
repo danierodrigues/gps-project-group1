@@ -414,15 +414,21 @@ function Universidades(){
     
     return (
         <div className = 'divUniversidades'>
+
+          <div>
+            <div className='width-90 margin-auto display-flex-end margin-bottom-m'>
+              <button onClick={() => setCreatingMode() } >Nova universidade</button>
+            </div>
+          </div>
           <table id='tabelaUniversidades' className='tabelaUniversidades'>
                     <thead>
-                        <tr class = 'rowUniversidades'>
+                        <tr className = 'rowUniversidades'>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome</span></th>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",1)}><span className="headerToSort">Localização</span></th>
                             <th className='headerUniversidades'><span>Contacto</span></th>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",3)}><span className="headerToSort">Email</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Disponibilidade de Candidaturas</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado da Inst.</span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Candidaturas</span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado</span></th>
                             <th className='headerUniversidades videoColumn' style={{'textAlign':'center'}}>Video</th>
                             <th className='headerUniversidades'>Ações</th>
                         </tr>
@@ -450,8 +456,12 @@ function Universidades(){
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
-                                      <img className = 'trash' onClick={() => editAction(index)} src={edit} alt={"Editar"}/> 
-                                      <img className = 'trash' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
+                                      <span className='icon-wrapper'>
+                                        <img className = 'trash' onClick={() => editAction(index)} src={edit} alt={"Editar"}/>
+                                      </span> 
+                                      <span className='icon-wrapper'>
+                                        <img className = 'trash' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
+                                      </span>
                                      </td>  
                                   </tr>
                                 ))
@@ -464,14 +474,6 @@ function Universidades(){
                 </tbody>
                             
             </table>
-            <div>
-
-                  <div >
-                    <div className="display-flex-center margin-top-l"><button onClick={() => setCreatingMode() } >Criar</button></div>
-                  </div>
-                
-              
-            </div>
 
             <Modal
               isOpen={modalIsOpen}

@@ -68,19 +68,17 @@ function Auth({setisLogged,...props}) {
   return (
     <div className="MainContainerAuth">
         <div className="ContainerCenter">
-        <h2>Login</h2><br></br>
+            <div className='title-login'>
+                <p>Login</p>
+            </div>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
         <div className="ContainerAuth">
-            <br />
             <input className="inputAuth" type="text" {...username} autoComplete="new-password" placeholder="Email" />
         </div>
         <div className="ContainerAuth" style={{ marginTop: 10 }}>
-            <br />
             <input className="inputAuth" type="password" {...password} autoComplete="new-password" placeholder="Password" />
         </div>
-        <br></br>
-        <button id="LoginButton"  type="button" onClick={HandleLogin} >{loading ? 'Carregando...' : 'Login'}</button><br />
-        <br />
+        <button id="LoginButton"  type="button" onClick={HandleLogin} >{loading ? 'Carregando...' : 'Login'}</button>
         </div>
     </div>
   );
