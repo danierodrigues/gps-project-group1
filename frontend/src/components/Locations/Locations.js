@@ -13,17 +13,24 @@ function Locations() {
   const verifyVideos = () => {
 
     var video = document.getElementById('institution-video');
-    var videoError = document.getElementById('institution-video-error');
+    /*var videoError = document.getElementById('institution-video-error');*/
+    var videoWrapper = document.getElementById('video-wrapper');
+    var universityInfo = document.getElementById('university-info');
 
     if(video) {
       if(isNaN(video.duration)) {
-        video.style = 'display: none';
+        /*video.style = 'display: none';
         videoError.style = 'display: block';
-        videoError.style = 'display: flex; flex-direction: column; justify-content: center; width: 100%';
+        videoError.style = 'display: flex; flex-direction: column; justify-content: center; width: 100%';*/
+        videoWrapper.style = 'display: none';
+        universityInfo.style = 'text-align: center';
+
       }
       else {
-        video.style = 'display: block';
-        videoError.style = 'display: none';
+        /*video.style = 'display: block';
+        videoError.style = 'display: none';*/
+        videoWrapper.style = 'display: block';
+        universityInfo.style = 'text-align: left';
       }
     }
   }
@@ -78,7 +85,7 @@ function Locations() {
 
             :
 
-              <p>Infelizmente, não foi possível encontrar universidades. Por favor, tente mais tarde.</p>
+              <div>Infelizmente, não foi possível encontrar universidades. Por favor, tente mais tarde.</div>
           }
         </div>
 
@@ -87,10 +94,9 @@ function Locations() {
 
               <div className='display-flex-around width-90 margin-auto'>
                 <div id='video-wrapper' className='width-50 display-flex video-wrapper'>
-                  <video id='institution-video' src={backendURL + selectedUniversity.presentationVideoPath} controls type='video/mp4'/>
-                  <div id='institution-video-error'>Infelizmente, não foi possível carregar o vídeo. </div>                  
+                  <video id='institution-video' src={backendURL + selectedUniversity.presentationVideoPath} controls type='video/mp4'/>                 
                 </div>
-                <div className='text-left university-info'>
+                <div id='university-info' className='text-left university-info'>
                     <h3 className='font-size-xl font-semi-bold'>{selectedUniversity.location}</h3>
                     <p className='font-size-s margin-top-s text-dark-grey'><span className='icon-wrapper'><MdEmail /></span>{selectedUniversity.email}</p>
                     <p className='font-size-s margin-top-xs text-dark-grey'><span className='icon-wrapper'><FaPhoneAlt /></span>{selectedUniversity.phone}</p>

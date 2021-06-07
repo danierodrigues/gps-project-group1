@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Link, useHistory, Route, Redirect } from 'react-router-dom';
 import Candidatures from './components/Candidaturas/candidaturas';
 import Universidades from './components/Universidades/universidades';
+import Header from './components/Header/Header';
 import Auth from './components/Auth/auth.js';
 import './App.css';
 import {removeUserSession,getToken,setUserSession} from '../src/Utils/Common';
@@ -51,31 +52,18 @@ function App()  {
       return <div className="content">Checking Authentication...</div>
     }
 
-
-
-
     return (
     <Router>        
-          {isLogged && (
-          <div className="header">
-            <a className="logo">BrightStart</a>
-            <nav className="header-right">
-              <a><Link to={'/Candidaturas'} className="nav-link">Candidaturas</Link></a>
-              <a><Link to={'/Universidades'} className="nav-link">Universidades</Link></a>
-              <a><Link   onClick={HandleLogout} className="nav-link">Log out</Link></a> 
-            </nav>
-          </div>
-          )}
-        
-            
+          {isLogged && (<Header handleLogout = {HandleLogout}></Header>)}
           
-          <Switch>
-              <Route exact path="/"><Redirect to="/login"></Redirect></Route>
-              <PublicRoute exact path='/login' component={Auth} setisLogged={handleChange}/>
-              <PrivateRoute exact path='/Universidades' component={Universidades} />
-              <PrivateRoute exact path='/candidaturas' component={Candidatures} />
-          </Switch>
-        
+          <div className='margin-top-xl'>
+            <Switch>
+                <Route exact path="/"><Redirect to="/login"></Redirect></Route>
+                <PublicRoute exact path='/login' component={Auth} setisLogged={handleChange}/>
+                <PrivateRoute exact path='/universidades' component={Universidades} />
+                <PrivateRoute exact path='/candidaturas' component={Candidatures} />
+            </Switch>
+          </div>
       </Router>
     );
   
