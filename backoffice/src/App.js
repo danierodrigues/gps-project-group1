@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Link, useHistory, Route, Redirect } from 'react-router-dom';
-import Candidaturas from './components/Candidaturas/candidaturas';
+import Candidatures from './components/Candidaturas/candidaturas';
 import Universidades from './components/Universidades/universidades';
 import Auth from './components/Auth/auth.js';
 import './App.css';
@@ -55,25 +55,25 @@ function App()  {
 
 
     return (
-    <Router>
-        <div className="header">
-          <a className="logo">BrightStart</a>
+    <Router>        
           {isLogged && (
-          <nav className="header-right">
-          
-            <a><Link to={'/Candidaturas'} className="nav-link">Candidaturas</Link></a>
-            <a><Link to={'/Universidades'} className="nav-link">Universidades</Link></a>
-             <a><Link   onClick={HandleLogout} className="nav-link">Log out</Link></a> 
+          <div className="header">
+            <a className="logo">BrightStart</a>
+            <nav className="header-right">
+              <a><Link to={'/Candidaturas'} className="nav-link">Candidaturas</Link></a>
+              <a><Link to={'/Universidades'} className="nav-link">Universidades</Link></a>
+              <a><Link   onClick={HandleLogout} className="nav-link">Log out</Link></a> 
             </nav>
+          </div>
           )}
-        </div>
+        
             
           
           <Switch>
               <Route exact path="/"><Redirect to="/login"></Redirect></Route>
               <PublicRoute exact path='/login' component={Auth} setisLogged={handleChange}/>
               <PrivateRoute exact path='/Universidades' component={Universidades} />
-              <PrivateRoute exact path='/candidaturas' component={Candidaturas} />
+              <PrivateRoute exact path='/candidaturas' component={Candidatures} />
           </Switch>
         
       </Router>
