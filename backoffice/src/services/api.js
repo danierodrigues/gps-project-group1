@@ -117,8 +117,7 @@ export function deleteACandidature(token, id) {
             'Content-Type': 'application/json',
             'Authorization': token
 
-        },
-        body: JSON.stringify(body)
+        }
     })
     .then(response => {
 
