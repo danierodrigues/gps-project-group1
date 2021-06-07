@@ -44,17 +44,66 @@ module.exports = {
 
     },
 
-    update(req,res,next){
+    updateVideo(req,res,next){
+        console.log("entro no que tem update com video");
+        let newData = req.body;
 
+        console.log(req.file);
+        newData.presentationVideoPath = backendVar.videosURI + req.file.filename; 
+        console.log(newData.presentationVideoPath);
+
+        console.log(newData);
+        try{
+            
+            InstitutionModel.findOneAndUpdate({'_id':newData._id}, newData,{new:true}, function(error, data) {
+                if(error){
+                    res.status(500).json({'ok': false, 'error':error});
+                    //Delete video
+                    fs.unlinkSync(req.file.destination + '/' + req.file.filename);
+                    return;
+                }else if(data){
+                    return res.status(200).json({'ok': true, 'data':data});
+                }
+            });
+        }catch(error){
+            return res.status(500).json({'ok':false, 'error':error});
+        }
         
     },
 
+    updateWithout(req,res,next){
+        console.log("entro no que tem update withou video");
+        let newData = req.body;
+        console.log(newData);
+        try{
+            
+            InstitutionModel.findOneAndUpdate({'_id':newData._id}, newData,{new:true}, function(error, data) {
+                if(error){
+                    return res.status(500).json({'ok': false, 'error':error});
+                }else if(data){
+                    return res.status(200).json({'ok': true, 'data':data});
+                }
+            });
+        }catch(error){
+            return res.status(500).json({'ok':false, 'error':error});
+        }
+
+    },
+
     delete(req,res,next){
-        InstitutionModel.deleteOne({_id:req.params.id},(error,data)=>{
+        InstitutionModel.deleteOne({_id:req.body._id},(error,data)=>{
             if(error){
                 return res.status(500).json({'ok': false, 'error':error});
             }else if(data){
-                return res.status(200).json({'ok': true, 'data':data});
+                console.log(data);
+                res.status(200).json({'ok': true, 'data':data});
+                try{
+                    //Delete video
+                    fs.unlinkSync(backendURL + "/public/uploads" + req.body.presentationVideoPath);
+                }catch(error){
+                    console.log(error);
+                }
+                return;
             }    
         })
     }

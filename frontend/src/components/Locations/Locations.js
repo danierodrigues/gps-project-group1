@@ -5,7 +5,7 @@ import './Locations.css';
 import { getUniversities } from '../../services/api';
 
 function Locations() {
-
+  const [backendURL, setBackendURL] = useState();
   const [universities, setUniversities] = useState([{}]);
   const [selectedUniversity, setSelectedUniversity] = useState({});
 
@@ -13,6 +13,7 @@ function Locations() {
     getUniversities().then(result => { // Fetch only once, on render
       setUniversities([...result.data]);
       setSelectedUniversity({...result.data[0]});
+      setBackendURL(result.backendURL);
     })
   }, [])
 
@@ -59,8 +60,7 @@ function Locations() {
 
               <div className='display-flex-around width-90 margin-auto'>
                 <div className='width-35 display-flex video-wrapper'>
-                  <video className='vertical-align' controls>
-                    <source src={selectedUniversity.presentationVideoPath} type='video/mp4' />
+                  <video className='vertical-align' src={backendURL + selectedUniversity.presentationVideoPath} type='video/mp4' controls>
                   </video>
                 </div>
                 <div className='text-left university-info'>
