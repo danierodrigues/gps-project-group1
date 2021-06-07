@@ -8,7 +8,7 @@ function RegistrationForm() {
 
      /* Defaults */
      const [options, setOptions] = useState([]);
-     const [selectedUniversity, setSelectedUniversity] = useState(null);
+     const [selectedUniversity, setSelectedUniversity] = useState();
      const [firstName, setFirstName] = useState('');
      const [lastName, setLastName] = useState('');
      const [phoneNumber, setPhoneNumber] = useState('');
@@ -28,7 +28,7 @@ function RegistrationForm() {
 
                for(var i = 0; i < result.data.length; i++) {
                     const option = {
-                         value: result.data[i]._id,
+                         value: result.data[i].name,
                          label: result.data[i].candidatureState === 'open' ? result.data[i].name : result.data[i].name + ' (candidaturas fechadas)',
                          isDisabled: result.data[i].candidatureState === 'open' ? false : true,
                     }
@@ -79,6 +79,7 @@ function RegistrationForm() {
                setModalTitle('Erro na submissão da candidatura');
                setModalDescription('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
                setIsSuccessModal(false);
+               setShowModal(true);
           }
           else {
 
@@ -104,10 +105,9 @@ function RegistrationForm() {
                          setModalDescription('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
                          setIsSuccessModal(false);
                     }
-                    
+                    setShowModal(true);
                });
           }
-          setShowModal(true);
      } 
 
      /* Reset candidature form fields */
