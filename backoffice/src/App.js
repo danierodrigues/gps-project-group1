@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Link, useHistory, Route, Redirect } from 'react-router-dom';
-import Candidaturas from './components/Candidaturas/candidaturas';
+import Candidatures from './components/Candidaturas/candidaturas';
 import Universidades from './components/Universidades/universidades';
 import Auth from './components/Auth/auth.js';
 import './App.css';
@@ -73,7 +73,7 @@ function App()  {
               <Route exact path="/"><Redirect to="/login"></Redirect></Route>
               <PublicRoute exact path='/login' component={Auth} setisLogged={handleChange}/>
               <PrivateRoute exact path='/Universidades' component={Universidades} />
-              <PrivateRoute exact path='/candidaturas' component={Candidaturas} />
+              <PrivateRoute exact path='/candidaturas' component={Candidatures} />
           </Switch>
         
       </Router>

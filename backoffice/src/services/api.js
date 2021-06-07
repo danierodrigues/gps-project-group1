@@ -58,6 +58,63 @@ export function verifyToken(token) {
     });
 }
 
+/* Retrieve all candidatures */
+export function getAllCandidatures(token) {
+
+    return fetch(BASE_URL + "/candidatures", {
+
+        method: 'GET',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+/*Delete a candidature*/
+export function deleteACandidature(token, id) {
+
+    return fetch(BASE_URL + `/candidatures/${id}`, {
+
+        method: 'DELETE',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+/*update a candidature*/
+export function updateCandidature(token, body) {
+
+    return fetch(BASE_URL + "/candidatures", {
+
+        method: 'PUT',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
 
 /* Create a candidature */
 /*export function createCandidature(body) {
