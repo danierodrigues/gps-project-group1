@@ -15,6 +15,7 @@ function Locations() {
       setBackendURL(result.backendURL);
       setUniversities([...result.data]);
       setSelectedUniversity({...result.data[0]});
+      setBackendURL(result.backendURL);
     })
   }, [])
 

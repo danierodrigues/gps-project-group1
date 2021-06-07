@@ -33,8 +33,9 @@ routes.get("/verifyToken",AuthMiddlewares.verifyToken,UsersController.verifyToke
 /* Institutions */
 routes.get("/institutions",InstitutionsController.index);
 routes.post("/institutions",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, multerMiddlewares.uploadVideoFunction, InstitutionsController.create);
-routes.put("/institutions",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.update);
-routes.delete("/institutions/:id",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.delete);
+routes.put("/institutionswvideo",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, multerMiddlewares.uploadVideoFunction, InstitutionsController.updateVideo);
+routes.put("/institutionswithout",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.updateWithout);
+routes.post("/deleteinstitutions",AuthMiddlewares.verifyToken,AuthMiddlewares.verifyRole, InstitutionsController.delete);
 
 /* Faqs */
 routes.get("/faqs",FaqsController.index);

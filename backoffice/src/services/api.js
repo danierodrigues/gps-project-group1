@@ -11,17 +11,6 @@ else if(REACT_APP_ENV === 'prod')
 
 
 export function Login(body){
-/* setError(null);
-    setLoading(true);
-    axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
-    setLoading(false);
-    setUserSession(response.data.token, response.data.user);
-    props.history.push('/dashboard');
-    }).catch(error => {
-    setLoading(false);
-    if (error.response.status === 401) setError(error.response.data.message);
-    else setError("Something went wrong. Please try again later.");
-    }); */
 
     return fetch(BASE_URL + "/auth", {
 
@@ -58,6 +47,25 @@ export function verifyToken(token) {
     });
 }
 
+
+export function getAllUniversities(token) {
+
+    return fetch(BASE_URL + "/institutions", {
+      method: 'GET',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+      
+
 /* Retrieve all candidatures */
 export function getAllCandidatures(token) {
 
@@ -77,18 +85,18 @@ export function getAllCandidatures(token) {
     });
 }
 
-/*Delete a candidature*/
-export function deleteACandidature(token, id) {
 
-    return fetch(BASE_URL + `/candidatures/${id}`, {
+export function deleteUniversities(token, body) {
 
-        method: 'DELETE',
+    return fetch(BASE_URL + `/deleteinstitutions`, {
 
-        headers: {
+        method: 'POST',
+      headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': token
-        }
+        },
+        body: JSON.stringify(body)
     })
     .then(response => {
 
@@ -96,10 +104,89 @@ export function deleteACandidature(token, id) {
     });
 }
 
+/*Delete a candidature*/
+export function deleteACandidature(token, id) {
+
+    return fetch(BASE_URL + `/candidatures/${id}`, {
+
+        method: 'DELETE',
+
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+export function createInstitution(token, body) {
+
+    return fetch(BASE_URL + "/institutions", {
+
+        method: 'POST',
+
+        headers: {
+            'Authorization': token
+        },
+        body: body
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+
+export function updateInstitutionVideo(token, body) {
+
+    return fetch(BASE_URL + "/institutionswvideo", {
+
+        method: 'PUT',
+
+        headers: {
+            'Authorization': token
+        },
+        body: body
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+
+
+export function updateInstitutionWithoutVideo(token, body) {
+
+    return fetch(BASE_URL + "/institutionswithout", {
+       method: 'PUT',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+      
+
 /*update a candidature*/
 export function updateCandidature(token, body) {
 
     return fetch(BASE_URL + "/candidatures", {
+
 
         method: 'PUT',
 
