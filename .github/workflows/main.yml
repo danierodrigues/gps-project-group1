@@ -13,9 +13,9 @@ jobs:
       - uses: actions/setup-node@v1
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY_DF}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
           heroku_app_name: "gps-project-group1" #Must be unique in Heroku
-          heroku_email: "diogofilipe@hotmail.fr"
+          heroku_email: "daniel.rodrigues.cavadas@gmail.com"
           appdir: "./frontend" # <- This will point to the api folder in your project
           #branch: "master"
           procfile: "web: npm run prod --optimize_for_size --max_old_space_size=460"
