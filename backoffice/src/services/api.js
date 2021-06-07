@@ -47,9 +47,29 @@ export function verifyToken(token) {
     });
 }
 
+
 export function getAllUniversities(token) {
 
     return fetch(BASE_URL + "/institutions", {
+      method: 'GET',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+      
+
+/* Retrieve all candidatures */
+export function getAllCandidatures(token) {
+
+    return fetch(BASE_URL + "/candidatures", {
 
         method: 'GET',
 
@@ -65,16 +85,38 @@ export function getAllUniversities(token) {
     });
 }
 
+
 export function deleteUniversities(token, body) {
 
     return fetch(BASE_URL + `/deleteinstitutions`, {
 
         method: 'POST',
+      headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+/*Delete a candidature*/
+export function deleteACandidature(token, id) {
+
+    return fetch(BASE_URL + `/candidatures/${id}`, {
+
+        method: 'DELETE',
+
 
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': token
+
         },
         body: JSON.stringify(body)
     })
@@ -120,9 +162,31 @@ export function updateInstitutionVideo(token, body) {
 }
 
 
+
 export function updateInstitutionWithoutVideo(token, body) {
 
     return fetch(BASE_URL + "/institutionswithout", {
+       method: 'PUT',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+      
+
+/*update a candidature*/
+export function updateCandidature(token, body) {
+
+    return fetch(BASE_URL + "/candidatures", {
+
 
         method: 'PUT',
 
@@ -138,7 +202,6 @@ export function updateInstitutionWithoutVideo(token, body) {
         return response.json();
     });
 }
-
 
 /* Create a candidature */
 /*export function createCandidature(body) {
