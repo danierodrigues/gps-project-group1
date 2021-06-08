@@ -10,7 +10,7 @@ else if(REACT_APP_ENV === 'prod')
 
 
 
-export function Login(body){
+export function login(body){
 
     return fetch(BASE_URL + "/auth", {
 
