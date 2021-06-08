@@ -7,6 +7,9 @@ import {getAllUniversities, deleteUniversities, createInstitution, updateInstitu
 import Modal from 'react-modal';
 import Select from 'react-select';
 import {sortTextTables} from '../../Utils/Sort';
+import { TiArrowUnsorted } from 'react-icons/ti';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { FiTrash } from 'react-icons/fi';
 
 
 const customStyles = {
@@ -18,6 +21,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     textAlign            : 'center',
+    backgroundColor       : 'black',
     padding:'30px'
   }
 };
@@ -112,7 +116,6 @@ function Universidades(){
   }
 
   const showVideoHandler = (index) =>{
-    console.log(showVideo);
     let arrAux = showVideo;
     console.log(arrAux);
     arrAux[index] = !arrAux[index];
@@ -394,7 +397,6 @@ function Universidades(){
   }
 
 
-
   function openModalWarning(index){
     setIndexDelete(index);
     setIsOpenWarning(true);
@@ -410,25 +412,25 @@ function Universidades(){
   }
 
 
-
     
     return (
         <div className = 'divUniversidades'>
 
           <div>
-            <div className='width-90 margin-auto display-flex-end margin-bottom-m'>
-              <button onClick={() => setCreatingMode() } >Nova universidade</button>
+            <div className='width-90 margin-auto display-flex-between margin-bottom-m margin-top-xl flex-wrap'>
+              <h1 className=' font-semi-bold'>Universidades</h1>
+              <button className=' font-size-xs' onClick={() => setCreatingMode() } >Nova universidade</button>
             </div>
           </div>
           <table id='tabelaUniversidades' className='tabelaUniversidades'>
                     <thead>
                         <tr className = 'rowUniversidades'>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",1)}><span className="headerToSort">Localização</span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",1)}><span className="headerToSort">Localização <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
                             <th className='headerUniversidades'><span>Contacto</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",3)}><span className="headerToSort">Email</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Candidaturas</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado</span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",3)}><span className="headerToSort">Email <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Candidaturas <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
                             <th className='headerUniversidades videoColumn' style={{'textAlign':'center'}}>Video</th>
                             <th className='headerUniversidades'>Ações</th>
                         </tr>
@@ -452,15 +454,15 @@ function Universidades(){
                                     <td className = 'tdUniversidades'><span>{renderCandidatureState(index)}</span></td>  
                                     <td className = 'tdUniversidades'><span>{renderisActive(index)}</span></td>  
                                     <td className = 'tdUniversidades videoColumn' style={{'textAlign':'center'}}>
-                                        <button onClick={() => showVideoHandler(index)}>{showVideo[index] ? "Ocultar" : "Mostrar" }</button>
+                                        <a className='video-action' onClick={() => showVideoHandler(index)}>{showVideo[index] ? "ocultar" : "visualizar" }</a>
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
-                                      <span className='icon-wrapper'>
-                                        <img className = 'trash' onClick={() => editAction(index)} src={edit} alt={"Editar"}/>
+                                      <span className='icon-wrapper cursor-pointer'>
+                                        <AiOutlineEdit size={25} />
                                       </span> 
-                                      <span className='icon-wrapper'>
-                                        <img className = 'trash' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
+                                      <span className='icon-wrapper cursor-pointer'>
+                                        <FiTrash onClick={() => openModalWarning(index)} size={23}/>
                                       </span>
                                      </td>  
                                   </tr>
@@ -475,12 +477,13 @@ function Universidades(){
                             
             </table>
 
+            {/* Create/Edit Modal */}
             <Modal
+
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
               onRequestClose={closeModal}
-            //  style={customStyles}
-              //className="modalUniversitys"
+              style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
               contentLabel="Universidade"
               className="ModalUniv"
             >
@@ -520,11 +523,13 @@ function Universidades(){
               </div>
               </form>
             </Modal>
-
+            
+            {/* Warning Modal */}
             <Modal
               isOpen={modalIsOpenWarning}
               onAfterOpen={afterOpenModalWarning}
               onRequestClose={closeModalWarning}
+              style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
             //  style={customStyles}
               //className="modalUniversitys"
               contentLabel="Aviso"
@@ -540,7 +545,6 @@ function Universidades(){
               </div>
               </div>
             </Modal>
-
         </div>
     );
   }

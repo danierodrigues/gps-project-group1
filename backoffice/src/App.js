@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Link, useHistory, Route, Redirect } fr
 import Candidatures from './components/Candidaturas/candidaturas';
 import Universidades from './components/Universidades/universidades';
 import Header from './components/Header/Header';
-import Auth from './components/Auth/auth.js';
+import Login from './components/Login/Login.js';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
 import {removeUserSession,getToken,setUserSession} from '../src/Utils/Common';
 import PrivateRoute from '../src/Utils/PrivateRoute';
 import PublicRoute from '../src/Utils/PublicRoute';
@@ -12,38 +13,37 @@ import {verifyToken} from '../src/services/api';
 
 function App()  {
   const [authLoading, setAuthLoading] = useState(false);
-  const [isLogged, setisLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
-
-  function handleChange(newValue) {
-    setisLogged(newValue);
+  const handleChange = (newValue) => {
+    setIsLogged(newValue);
   }
 
-  const HandleLogout = () => {
+  const handleLogout = () => {
     removeUserSession();
-    setisLogged(false);
+    setIsLogged(false);
   }
 
-    useEffect(() => {  
+  useEffect(() => {  
     const token = getToken();
     if (!token) {
-      setisLogged(false);
+      setIsLogged(false);
       return;
     }
     
     verifyToken(token).then(response => {
       if(response.ok){
         setUserSession(token);
-        setisLogged(true);
+        setIsLogged(true);
       }else{
         removeUserSession();
-        setisLogged(false);
+        setIsLogged(false);
       }
       setAuthLoading(false);
       
     }).catch(error=>{
       removeUserSession();
-      setisLogged(false);
+      setIsLogged(false);
     })
     }, []);
 
@@ -53,17 +53,26 @@ function App()  {
     }
 
     return (
-    <Router>        
-          {isLogged && (<Header handleLogout = {HandleLogout}></Header>)}
-          
-          <div className='margin-top-xl'>
-            <Switch>
-                <Route exact path="/"><Redirect to="/login"></Redirect></Route>
-                <PublicRoute exact path='/login' component={Auth} setisLogged={handleChange}/>
-                <PrivateRoute exact path='/universidades' component={Universidades} />
-                <PrivateRoute exact path='/candidaturas' component={Candidatures} />
-            </Switch>
-          </div>
+      <Router>        
+        {isLogged && (<Header handleLogout = {handleLogout}></Header>)}
+        
+        <div>
+        <ToastContainer position='top-center'
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
+          <Switch>
+              <Route exact path='/'><Redirect to='/login'></Redirect></Route>
+              <PublicRoute exact path='/login' component={Login} setisLogged={handleChange}/>
+              <PrivateRoute exact path='/universidades' component={Universidades} />
+              <PrivateRoute exact path='/candidaturas' component={Candidatures} />
+          </Switch>
+        </div>
       </Router>
     );
   

@@ -1,8 +1,8 @@
 .tabelaUniversidades, .headerUniversidades, .tdUniversidades {
     border-collapse: collapse;
     text-align: left;
-    border-bottom: 1px solid rgb(240, 240, 240);
-    padding: 1vw;
+    border-bottom: 1px solid var(--light-grey);
+    padding: 1.2rem;
   }
 
   .headerUniversidades {
@@ -17,13 +17,24 @@
     margin: auto;
   }
 
+  .video-action {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  .video-action:hover{
+    cursor: pointer;
+    text-decoration: underline;
+  }
   .icon-wrapper {
     border: 1px solid rgb(228, 228, 228);
     background-color: rgb(247, 247, 247);
     display: inline-block;
-    height: 45px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
     margin-right: 15px;
-    padding: 10px;
+    padding: 11px;
     border-radius: 50%;
     transition: .3s;
   }
@@ -46,18 +57,24 @@
     border-radius: 50%;
 }
 
-.videoPromotional{
-  width:100%;
-  min-width: 300px;
-  max-width: 500px;
-}
-
-.videoColumn{
-  
-}
-
 .headerToSort{
   cursor: pointer;
+}
+
+.headerUniversidades:first-child {
+  min-width: 300px;
+}
+
+.headerUniversidades:nth-child(6) {
+  min-width: 115px !important;
+}
+
+.headerUniversidades:not(:first-child) {
+  min-width: 180px;
+}
+
+.headerToSort:hover{
+  color: var(--primary-color);
 }
 
 .divUniversidades {
@@ -84,7 +101,7 @@
 
 
 @media screen and (max-width: 815px) {
-  .divUniversidades {
+  /*.divUniversidades {
     overflow-x: scroll;
     width: 100%;
   }
@@ -92,9 +109,9 @@
   .tabelaUniversidades, .headerUniversidades, .tdUniversidades {
     margin-top: 10px;
   }
-  .tabelaUniversidades {
+  /*.tabelaUniversidades {
     width: 100%;
-  }
+  }*/
 
   .ModalUniv{
     position: relative;
@@ -128,9 +145,9 @@
 
 
 @media screen and (min-width: 1200px) {
-  .videoColumn{
+  /*.videoColumn{
     min-width:500px;
-  }
+  }*/
 
   
 }
