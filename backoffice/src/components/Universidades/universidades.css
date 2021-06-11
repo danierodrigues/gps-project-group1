@@ -17,12 +17,12 @@
     margin: auto;
   }
 
-  .video-action {
+  .action-link {
     color: var(--primary-color);
     text-decoration: none;
   }
 
-  .video-action:hover{
+  .action-link:hover{
     cursor: pointer;
     text-decoration: underline;
   }
@@ -89,9 +89,19 @@
 }
 
 .dropdownsModalUniv{
-  margin-top:10px;
+  width: 400px;
+  margin: var(--size-m) auto;
+  text-align: left;
 }
 
+
+.input-file {
+  width: 400px;
+}
+
+.label-form {
+  color: var(--dark-grey);
+}
 .divButtonsModal{
   display: flex;
   justify-content: space-evenly;
@@ -114,15 +124,15 @@
   }*/
 
   .ModalUniv{
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    text-align: center;
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      background-color: white;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      text-align: center;
   }
 
 }

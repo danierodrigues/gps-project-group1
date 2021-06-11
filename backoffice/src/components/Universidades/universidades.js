@@ -454,7 +454,7 @@ function Universidades(){
                                     <td className = 'tdUniversidades'><span>{renderCandidatureState(index)}</span></td>  
                                     <td className = 'tdUniversidades'><span>{renderisActive(index)}</span></td>  
                                     <td className = 'tdUniversidades videoColumn' style={{'textAlign':'center'}}>
-                                        <a className='video-action' onClick={() => showVideoHandler(index)}>{showVideo[index] ? "ocultar" : "visualizar" }</a>
+                                        <a className='action-link' onClick={() => showVideoHandler(index)}>{showVideo[index] ? "ocultar" : "visualizar" }</a>
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
@@ -487,39 +487,39 @@ function Universidades(){
               contentLabel="Universidade"
               className="ModalUniv"
             >
-              <h2>{creating ? "Criar Instituição" : "Editar " + universidades[indexEditing].name}</h2>
+              <p className='font-size-s margin-bottom-m'>{creating ? "Criar Instituição" : "Editar " + universidades[indexEditing].name}</p>
 
               <form>
               <div>
-                <input className="inputModalUniv" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
+                <input className="inputModalUniv inputAuth" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
               </div>
               <div>
-                <input className="inputModalUniv" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
+                <input className="inputModalUniv inputAuth" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
               </div>
               <div>
-                <input className="inputModalUniv" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
+                <input className="inputModalUniv inputAuth" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
               </div>
               <div>
-                <input className="inputModalUniv" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
+                <input className="inputModalUniv inputAuth" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
               </div>
               <div>
                 <div className="dropdownsModalUniv">
-                  <label>Candidaturas:</label>
+                  <label className='label-form'>Candidaturas</label>
                   <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={true} className='margin-top-l'/>
                 </div>
-                <div className="dropdownsModalUniv">
-                  <label>Estado da instituição:</label>
+                <div className="dropdownsModalUniv margin-top-xl">
+                  <label className='label-form'>Estado da instituição</label>
                   <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={true} className='margin-top-l'/>
                 </div>
               </div>
               <div className="dropdownsModalUniv">
-                <label>Video:</label>
-                <input type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
+                <p><label className='label-form'>Vídeo</label></p>
+                <input className='input-file' type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
               </div>
 
-              <div className="divButtonsModal" style={{'marginTop':'10px'}}>
-                <button onClick={submitForm} className='margin-top-l'>Submeter instituição</button>
-                <button onClick={closeModal}>Fechar janela</button>  
+              <div className="divButtonsModal">
+                <a onClick={submitForm} className='action-link margin-top-l'>Criar instituição</a>
+                <button onClick={closeModal}>Cancelar</button>  
               </div>
               </form>
             </Modal>
@@ -537,11 +537,11 @@ function Universidades(){
             >
               <div>
                 <div>
-                  <h2>Tem a certeza que pretende eliminar?</h2>
+                  <p className='font-size-s'>Tem a certeza que pretende eliminar?</p>
                 </div>
-                <div className="divButtonsModal" style={{'marginTop':'10px'}}>
-                <button onClick={deleteAction} className='margin-top-l'>Sim</button>
-                <button onClick={closeModalWarning}>Fechar janela</button>  
+                <div className='divButtonsModal margin-top-s'>
+                <a onClick={deleteAction} className='margin-top-l action-link'>Eliminar</a>
+                <button onClick={closeModalWarning}>Cancelar</button>  
               </div>
               </div>
             </Modal>
