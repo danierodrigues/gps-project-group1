@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './universidades.css';
-import trash from '../images/trash.svg';
-import edit from '../images/edit.svg';
 import { getToken } from '../../Utils/Common';
 import {getAllUniversities, deleteUniversities, createInstitution, updateInstitutionVideo, updateInstitutionWithoutVideo} from '../../services/api';
 import Modal from 'react-modal';
@@ -10,6 +8,7 @@ import {sortTextTables} from '../../Utils/Sort';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiTrash } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 
 const customStyles = {
@@ -126,8 +125,10 @@ function Universidades(){
   }
 
   const deleteAction = () =>{
+    console.log(1)
     let token = getToken();
     if(!token)return;
+    
 
     let index = indexDelete;
 
@@ -138,6 +139,7 @@ function Universidades(){
 
     deleteUniversities(token, body).then(response =>{
       console.log(response);
+      closeModalWarning();
       if(response.ok){
         let arrAuxUni = universidades;
         console.log(arrAuxUni);
@@ -151,8 +153,9 @@ function Universidades(){
         arrAuxShow.splice(index, 1)
         console.log(arrAuxShow);
         setShowVideo([...arrAuxShow]);
+        toast.success('Universidade eliminada');
       }else{
-        console.log("não ok");
+        toast.error('Ocorreu um erro');
       }
 
     }).catch(error =>{

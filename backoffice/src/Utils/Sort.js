@@ -8,6 +8,7 @@ export const sortTextTables = (tableName,n) =>{
     while (switching) {
       switching = false;
       rows = table.rows;
+      console.log(rows)
       for (i = 0; i < (rows.length - 1); i++) {
         shouldSwitch = false;
           x = rows[i].getElementsByTagName("TD")[n];
