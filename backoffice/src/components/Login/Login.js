@@ -2,7 +2,7 @@ import './Login.css';
 import React, { useState } from 'react';
 import { login } from '../../services/api';
 import {setUserSession} from '../../Utils/Common';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Login({ setisLogged }) {
