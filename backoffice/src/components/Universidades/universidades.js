@@ -612,41 +612,45 @@ function Universidades(){
           </div>
 
           <div className="containerFiltersPrincipalUniv">
-            <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
+
             <div className="containerFiltersUniv">
               
               <div className="SearchBarFilterContainerUniv">
-                <input className="inputModalUniv" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+                <input className="inputModalUniv inputAuth" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
               </div>
+
               <div className="checkboxFiltersContainerUniv">
                 <div className="checkboxFilterDivUniv">
                   <Checkbox checked={openCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'openCandidatures')} color="primary"></Checkbox>
-                  <label>Candidaturas Abertas</label>
+                  <label>Candidaturas abertas</label>
                 </div>
+
                 <div className="checkboxFilterDivUniv">
                   <Checkbox checked={closedCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedCandidatures')} color="primary"></Checkbox>
-                  <label>Candidaturas Fechadas</label>
+                  <label>Candidaturas fechadas</label>
                 </div>
               </div>
+
               <div className="checkboxFiltersContainerUniv">
                 <div className="checkboxFilterDivUniv">
                   <Checkbox checked={openInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'openInstitutions')} color="primary"></Checkbox>
-                  <label>Instituições Abertas</label>
+                  <label>Universidades abertas</label>
                 </div>
                 <div className="checkboxFilterDivUniv">
                   <Checkbox checked={closedInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedInstitutions')} color="primary"></Checkbox>
-                  <label>Instituições Fechadas</label>
+                  <label>Universidades fechadas</label>
+                </div>
+              </div>
+              
+              <div className="SearchCleanFiltContainer">
+                <div className="containerMiddleFilterUniv margin-top-s">
+                  <button onClick={() => searchFilters()}>Filtrar</button>
+                  <a className='action-link' onClick={() => cleanSearchFilters() }>Limpar</a>
                 </div>
               </div>
             </div>
-            <div className="SearchCleanFiltContainer">
-              <div className="containerMiddleFilterUniv">
-                <button onClick={() => searchFilters()}>Procurar</button>
-                <button onClick={() => cleanSearchFilters() }>Limpar</button>
-              </div>
-            </div>
           </div>
-          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'64px'}}>
+          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'20px'}}>
                     <thead>
                         <tr className = 'rowUniversidades'>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
@@ -770,10 +774,7 @@ function Universidades(){
             >
               <div>
                 <div className="divheadModal">
-                  <span className="closeModalIcon" onClick={() => closeModalWarning()} >&#10006;</span>
-                </div>
-                <div>
-                  <p className='font-size-s'>Tem a certeza que pretende eliminar?</p>
+                  <p className='font-size-s title-delete'>Tem a certeza que pretende eliminar?</p>
                 </div>
                 <div className='divButtonsModal margin-top-s'>
                 <a onClick={deleteAction} className='margin-top-l action-link'>Eliminar</a>

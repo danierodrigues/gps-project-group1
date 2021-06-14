@@ -83,11 +83,6 @@
   width: 100%;
 }
 
-.inputModalUniv{
-  width: 100%;
-  margin-top: 10px;
-}
-
 .dropdownsModalUniv{
   width: 400px;
   margin: var(--size-m) auto;
@@ -129,17 +124,11 @@
   justify-self: center;
 }
 
-
 .closeModalIcon{
-  top: 0;
-  right: 0;
-  position: relative;
+  top: 10px;
+  right: 20px;
+  position: absolute;
   cursor: pointer;
-  margin-right: 0;
-  margin-left: auto;
-  display: flex;
-  justify-content: flex-end;
-  align-self: center;
 }
 
 .iconsActionsUniv{
@@ -160,19 +149,29 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 20px;
+  justify-content: space-between;
 }
 
 .SearchBarFilterContainerUniv{
   display: flex;
+  width: 25%;
   align-items: center;
-  
 }
 
 .checkboxFiltersContainerUniv{
   display: flex;
+  width: 25%;
   flex-direction: column;
+}
+
+.inputModalUniv {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px !important;
+}
+
+.MuiCheckbox-colorPrimary.Mui-checked {
+  color: var(--primary-color) !important;
 }
 
 .checkboxFilterDivUniv{
@@ -191,15 +190,12 @@
 }
 
 .SearchCleanFiltContainer{
-  display: flex;
   align-content: center;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-top: 20px;
 }
 
 .containerMiddleFilterUniv{
-  width: 200px;
   display: flex;
   align-content: center;
   flex-direction: row;
@@ -209,7 +205,7 @@
 .containerFiltersPrincipalUniv{
   width: 90%;
   background-color: white;
-  padding: var(--size-m);
+  padding: 1.2rem;
   border: 1px solid rgb(240, 240, 240);
   margin: auto;
 }

@@ -6,8 +6,7 @@ import { deleteACandidature } from '../../services/api';
 import { updateCandidature } from '../../services/api';
 import { getToken } from '../../Utils/Common';
 import { TiArrowUnsorted } from 'react-icons/ti';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { FiTrash } from 'react-icons/fi';
+import { FiTrash, FiSave} from 'react-icons/fi';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import {sortTextTables} from '../../Utils/Sort';
@@ -78,7 +77,7 @@ function Candidatures() {
                             </select></span></td>
                           <td className = 'tdUniversidades'>
                             <span className='icon-wrapper cursor-pointer'>
-                              <AiOutlineEdit size={25} />
+                              <FiSave size={23} />
                               </span> 
                               <span className='icon-wrapper cursor-pointer'>
                                 <FiTrash onClick={() => openModalWarning(cSingle._id, index)} size={23}/>
