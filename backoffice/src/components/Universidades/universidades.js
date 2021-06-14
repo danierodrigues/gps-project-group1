@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './universidades.css';
-import trash from '../images/trash.svg';
-import edit from '../images/edit.svg';
 import { getToken } from '../../Utils/Common';
 import {getAllUniversities, deleteUniversities, createInstitution, updateInstitutionVideo, updateInstitutionWithoutVideo} from '../../services/api';
 import Modal from 'react-modal';
@@ -13,6 +11,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import * as QueryString from 'query-string';
 import { useHistory } from "react-router-dom";
 import { useParams, useLocation } from 'react-router-dom';
+import { TiArrowUnsorted } from 'react-icons/ti';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { FiTrash } from 'react-icons/fi';
 
 
 const customStyles = {
@@ -24,6 +25,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     textAlign            : 'center',
+    backgroundColor       : 'black',
     padding:'30px'
   }
 };
@@ -120,7 +122,6 @@ function Universidades(){
   }
 
   const showVideoHandler = (index) =>{
-    console.log(showVideo);
     let arrAux = showVideo;
     console.log(arrAux);
     arrAux[index] = !arrAux[index];
@@ -131,8 +132,10 @@ function Universidades(){
   }
 
   const deleteAction = () =>{
+    console.log(1)
     let token = getToken();
     if(!token)return;
+    
 
     let index = indexDelete;
 
@@ -143,6 +146,7 @@ function Universidades(){
 
     deleteUniversities(token, body).then(response =>{
       console.log(response);
+      closeModalWarning();
       if(response.ok){
         let arrAuxUni = universidades;
         console.log(arrAuxUni);
@@ -156,8 +160,9 @@ function Universidades(){
         arrAuxShow.splice(index, 1)
         console.log(arrAuxShow);
         setShowVideo([...arrAuxShow]);
+        toast.success('Universidade eliminada');
       }else{
-        console.log("não ok");
+        toast.error('Ocorreu um erro');
       }
 
     }).catch(error =>{
@@ -204,11 +209,13 @@ function Universidades(){
     if(!token)return;
 
     let verificationFailed = false;
+    let errorMessage = "";
 
     if(creating){
       if(video === null) {
         console.log('Obrigatório submeter video.');
-        toast.error('Obrigatório submeter video.');
+        //toast.error('Obrigatório submeter video.');
+        errorMessage += ' Obrigatório submeter video.';
         verificationFailed = true;
       }
     }
@@ -218,21 +225,24 @@ function Universidades(){
 
     //Veification name
     if(name.trim() === ''){
-      toast.error("Nome obrigatório.");
+      //toast.error("Nome obrigatório.");
+      errorMessage += " Nome obrigatório.";
       verificationFailed = true;
     }
 
 
     //Veification email
     if(email.trim() === ''){
-      toast.error("Email obrigatório.");
+      //toast.error("Email obrigatório.");
+      errorMessage += " Email obrigatório.";
       verificationFailed = true;
     }
 
     let regexEmail = RegExp(/.+\@.+\..+/);
     let resultEmail = regexEmail.test(email);
     if(!resultEmail ){
-      toast.error("Insira um email válido.");
+      //toast.error("Insira um email válido.");
+      errorMessage += " Insira um email válido.";
       console.log(resultEmail);
       verificationFailed = true;
     }
@@ -240,35 +250,41 @@ function Universidades(){
 
     //Veification phone
     if(phone.trim() === ''){
-      toast.error("Telefone obrigatório.");
+      //toast.error("Telefone obrigatório.");
+      errorMessage += " Telefone obrigatório.";
       verificationFailed = true;
     }
 
     if(phone.length !== 9){
-      toast.error("Nº Telefónico deve conter 9 caracteres");
+      //toast.error("Nº Telefónico deve conter 9 caracteres");
+      errorMessage += " Nº Telefónico deve conter 9 caracteres.";
       verificationFailed = true;
     }
 
     //Veification address
     if(adress.trim() === ''){
-      toast.error("Morada obrigatória.");
+      //toast.error("Morada obrigatória.");
+      errorMessage += " Morada obrigatória.";
       verificationFailed = true;
     }
 
     //Veification Candidature State
     if(candidatureState === null){
-      toast.error("Campo estado das candidaturas obrigatório.");
+      //toast.error("Campo estado das candidaturas obrigatório.");
+      errorMessage += " Campo estado das candidaturas obrigatório.";
       verificationFailed = true;
     }
 
     //Veification isActive
     if(isActive === null){
-      toast.error("Campo estado da instituição obrigatório.");
+      //toast.error("Campo estado da instituição obrigatório.");
+      errorMessage += " Campo estado da instituição obrigatório.";
       verificationFailed = true;
     }
 
 
     if(verificationFailed){
+      toast.error(errorMessage);
       return;
     }
     
@@ -316,9 +332,11 @@ function Universidades(){
             setUniversidades([...universidades]);
             resetForm();
             closeModal();
+            toast.success('Universidade criada com sucesso.');
           }else{
             console.log("erro criar instituição");
             console.log(response);
+            toast.error('Ocorreu um erro');
           }
         }).catch(error =>{
           console.log("erro criar instituição: ",error);
@@ -336,8 +354,10 @@ function Universidades(){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
+              toast.success('Universidade editada com sucesso.');
             }else{
               console.log("responsta mal sucedida");
+              toast.error('Ocorreu um erro');
             }
           }).catch(error=>{
             console.log("erro");
@@ -367,8 +387,10 @@ function Universidades(){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
+              toast.success('Universidade editada com sucesso.');
             }else{
               console.log("update sem sucesso");
+              toast.error('Ocorreu um erro');
             }
           }).catch(error => {
             console.log("error: ", error);
@@ -565,7 +587,6 @@ function Universidades(){
   }
 
 
-
   function openModalWarning(index){
     setIndexDelete(index);
     setIsOpenWarning(true);
@@ -581,62 +602,59 @@ function Universidades(){
   }
 
 
-
     
     return (
         <div className = 'divUniversidades'>
-          <ToastContainer 
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover/>
+          
+          <div className='width-90 margin-auto display-flex-between margin-bottom-m margin-top-xl flex-wrap'>
+              <h1 className=' font-semi-bold'>Universidades</h1>
+              <button className=' font-size-xs' onClick={() => setCreatingMode() } >Nova universidade</button>
+          </div>
 
-          <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
-          <div className="containerFiltersUniv">
-            
-            <div className="SearchBarFilterContainerUniv">
-              <input className="inputModalUniv" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+          <div className="containerFiltersPrincipalUniv">
+            <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
+            <div className="containerFiltersUniv">
+              
+              <div className="SearchBarFilterContainerUniv">
+                <input className="inputModalUniv" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+              </div>
+              <div className="checkboxFiltersContainerUniv">
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={openCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'openCandidatures')} color="primary"></Checkbox>
+                  <label>Candidaturas Abertas</label>
+                </div>
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={closedCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedCandidatures')} color="primary"></Checkbox>
+                  <label>Candidaturas Fechadas</label>
+                </div>
+              </div>
+              <div className="checkboxFiltersContainerUniv">
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={openInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'openInstitutions')} color="primary"></Checkbox>
+                  <label>Instituições Abertas</label>
+                </div>
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={closedInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedInstitutions')} color="primary"></Checkbox>
+                  <label>Instituições Fechadas</label>
+                </div>
+              </div>
             </div>
-            <div className="checkboxFiltersContainerUniv">
-              <div className="checkboxFilterDivUniv">
-                <Checkbox checked={openCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'openCandidatures')} color="primary"></Checkbox>
-                <label>Candidaturas Abertas</label>
-              </div>
-              <div className="checkboxFilterDivUniv">
-                <Checkbox checked={closedCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedCandidatures')} color="primary"></Checkbox>
-                <label>Candidaturas Fechadas</label>
-              </div>
-            </div>
-            <div className="checkboxFiltersContainerUniv">
-              <div className="checkboxFilterDivUniv">
-                <Checkbox checked={openInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'openInstitutions')} color="primary"></Checkbox>
-                <label>Instituições Abertas</label>
-              </div>
-              <div className="checkboxFilterDivUniv">
-                <Checkbox checked={closedInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedInstitutions')} color="primary"></Checkbox>
-                <label>Instituições Fechadas</label>
+            <div className="SearchCleanFiltContainer">
+              <div className="containerMiddleFilterUniv">
+                <button onClick={() => searchFilters()}>Procurar</button>
+                <button onClick={() => cleanSearchFilters() }>Limpar</button>
               </div>
             </div>
           </div>
-          <div>
-            <button onClick={() => searchFilters()}>Procurar</button>
-            <button onClick={() => setCreatingMode() }>Criar</button>
-            <button onClick={() => cleanSearchFilters() }>Limpar</button>
-          </div>
-          <table id='tabelaUniversidades' className='tabelaUniversidades'>
+          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'64px'}}>
                     <thead>
-                        <tr class = 'rowUniversidades'>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",1)}><span className="headerToSort">Localização</span></th>
+                        <tr className = 'rowUniversidades'>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",1)}><span className="headerToSort">Localização <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
                             <th className='headerUniversidades'><span>Contacto</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",3)}><span className="headerToSort">Email</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Disponibilidade de Candidaturas</span></th>
-                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado da Inst.</span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",3)}><span className="headerToSort">Email <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",4)}><span className="headerToSort">Candidaturas <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
+                            <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",5)}><span className="headerToSort">Estado <TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
                             <th className='headerUniversidades videoColumn' style={{'textAlign':'center'}}>Video</th>
                             <th className='headerUniversidades'>Ações</th>
                         </tr>
@@ -660,14 +678,20 @@ function Universidades(){
                                     <td className = 'tdUniversidades'><span>{renderCandidatureState(index)}</span></td>  
                                     <td className = 'tdUniversidades'><span>{renderisActive(index)}</span></td>  
                                     <td className = 'tdUniversidades videoColumn' style={{'textAlign':'center'}}>
-                                        <button onClick={() => showVideoHandler(index)}>{showVideo[index] ? "Ocultar" : "Mostrar" }</button>
+                                        <a className='action-link' onClick={() => showVideoHandler(index)}>{showVideo[index] ? "ocultar" : "visualizar" }</a>
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
-                                      <div className="containerActionsUniv">
-                                        <img className = 'editActionUniv iconsActionsUniv' onClick={() => editAction(index)} src={edit} alt={"Editar"}/> 
+                                    {/**   <div className="containerActionsUniv">
+                                         <img className = 'editActionUniv iconsActionsUniv' onClick={() => editAction(index)} src={edit} alt={"Editar"}/> 
                                         <img className = 'trashActionUniv iconsActionsUniv' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
-                                      </div>
+                                      </div> */}
+                                      <span className='icon-wrapper cursor-pointer'>
+                                        <AiOutlineEdit size={25} onClick={() => editAction(index)} alt={"Editar"}/>
+                                      </span> 
+                                      <span className='icon-wrapper cursor-pointer'>
+                                        <FiTrash onClick={() => openModalWarning(index)} size={23} alt={"Eliminar"}/>
+                                      </span>
                                      </td>  
                                   </tr>
                                 ))
@@ -681,47 +705,48 @@ function Universidades(){
                             
             </table>
 
+            {/* Create/Edit Modal */}
             <Modal
+
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
               onRequestClose={closeModal}
-            //  style={customStyles}
-              //className="modalUniversitys"
+              style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
               contentLabel="Universidade"
               className="ModalUniv"
               overlayClassName="ModalOverlay"
             >
               <div>
                 <div className="divheadModal">
-                  <h2 className="divTitleModalUniv">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
+                  <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
                   <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
                 </div>
                 <form>
                 <div>
-                  <input className="inputModalUniv" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
+                  <input className="inputModalUniv inputAuth" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
                 </div>
                 <div>
-                  <input className="inputModalUniv" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
+                  <input className="inputModalUniv inputAuth" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
                 </div>
                 <div>
-                  <input className="inputModalUniv" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
+                  <input className="inputModalUniv inputAuth" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
                 </div>
                 <div>
-                  <input className="inputModalUniv" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
+                  <input className="inputModalUniv inputAuth" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
                 </div>
                 <div>
                   <div className="dropdownsModalUniv">
-                    <label>Candidaturas:</label>
+                    <label className='label-form'>Candidaturas:</label>
                     <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={false} className='margin-top-l'/>
                   </div>
                   <div className="dropdownsModalUniv">
-                    <label>Estado da instituição:</label>
+                    <label className='label-form'>Estado da instituição:</label>
                     <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={false} className='margin-top-l'/>
                   </div>
                 </div>
                 <div className="dropdownsModalUniv">
                   <label>Video:</label>
-                  <input type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
+                  <input className='input-file' type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
                 </div>
 
                 <div className="divButtonsModal" style={{'marginTop':'10px'}}>
@@ -730,11 +755,13 @@ function Universidades(){
                 </form>
               </div>
             </Modal>
-
+            
+            {/* Warning Modal */}
             <Modal
               isOpen={modalIsOpenWarning}
               onAfterOpen={afterOpenModalWarning}
               onRequestClose={closeModalWarning}
+              style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
             //  style={customStyles}
               //className="modalUniversitys"
               contentLabel="Aviso"
@@ -743,17 +770,17 @@ function Universidades(){
             >
               <div>
                 <div className="divheadModal">
-                  
                   <span className="closeModalIcon" onClick={() => closeModalWarning()} >&#10006;</span>
                 </div>
-                <div><h2>Tem a certeza que pretende eliminar?</h2></div>
-                <div className="divButtonsModal" style={{'marginTop':'10px'}}>
-                <button onClick={deleteAction} className='margin-top-l'>Sim</button>
-                <button onClick={closeModalWarning}>Não</button>  
+                <div>
+                  <p className='font-size-s'>Tem a certeza que pretende eliminar?</p>
+                </div>
+                <div className='divButtonsModal margin-top-s'>
+                <a onClick={deleteAction} className='margin-top-l action-link'>Eliminar</a>
+                <button onClick={closeModalWarning}>Cancelar</button>  
               </div>
               </div>
             </Modal>
-
         </div>
     );
   }

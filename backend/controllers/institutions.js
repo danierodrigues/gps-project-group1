@@ -28,7 +28,7 @@ module.exports = {
         //Filters
         if((filters.openCand == 'false' && filters.closCand == 'true') || (filters.openCand == 'true' && filters.closCand == 'false') ){
             console.log("entrou dentro do if");
-            filtersQuery.candidatureState = filters.openCand == 'true' ? true : false;
+            filtersQuery.candidatureState = filters.openCand == 'true' ? 'open' : 'closed';
         }
 
         if((filters.opActInst == 'false' && filters.clActInst == 'true') || (filters.opActInst == 'true' && filters.clActInst == 'false') ){

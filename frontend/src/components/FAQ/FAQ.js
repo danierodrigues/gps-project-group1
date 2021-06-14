@@ -1,8 +1,32 @@
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
+import AccordionContext from "react-bootstrap/AccordionContext";
 import Card from 'react-bootstrap/Card'
 import './FAQ.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getQuestions } from '../../services/api';
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+
+function ContextAwareToggle({ children, eventKey, callback }) {
+     const currentEventKey = useContext(AccordionContext);
+   
+     const decoratedOnClick = useAccordionToggle(
+       eventKey,
+       () => callback && callback(eventKey),
+     );
+   
+     const isCurrentEventKey = currentEventKey === eventKey;
+   
+     return (
+       <span
+         type="button"
+         /*style={{ backgroundColor: isCurrentEventKey ? 'lightgrey' : 'lightgrey' }}*/
+         className= { isCurrentEventKey ? 'card-header font-semi-bold padding-s' : 'card-header padding-s'}
+         onClick={decoratedOnClick}
+       >
+         {children}
+       </span>
+     );
+   }
 
 function FAQ() {
 
@@ -26,11 +50,11 @@ function FAQ() {
                                    {
                                         return(
                                              <Card key={question._id} className='cursor-pointer margin-bottom-s margin-auto faq-card'>
-                                                  <Accordion.Toggle className='padding-s' as={Card.Header} eventKey={question._id}>
-                                                       {question.question}
-                                                  </Accordion.Toggle>
+                                                  <ContextAwareToggle className='padding-s' as={Card.Header} onClick={() => console.log(question._id)} eventKey={question._id}>
+                                                       <span className = 'font-size-s'>{question.question}</span>
+                                                  </ContextAwareToggle>
                                                   <Accordion.Collapse eventKey={question._id}>
-                                                  <Card.Body>{question.answer}</Card.Body>
+                                                       <Card.Body>{question.answer}</Card.Body>
                                                   </Accordion.Collapse>
                                              </Card>
                                         )
