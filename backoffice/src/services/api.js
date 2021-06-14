@@ -186,7 +186,6 @@ export function updateCandidature(token, body) {
 
     return fetch(BASE_URL + "/candidatures", {
 
-
         method: 'PUT',
 
         headers: {

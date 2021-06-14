@@ -500,11 +500,11 @@ function Universidades(){
               <div>
                 <div className="dropdownsModalUniv">
                   <label>Candidaturas:</label>
-                  <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={true} className='margin-top-l'/>
+                  <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} className='margin-top-l'/>
                 </div>
                 <div className="dropdownsModalUniv">
                   <label>Estado da instituição:</label>
-                  <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={true} className='margin-top-l'/>
+                  <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} className='margin-top-l'/>
                 </div>
               </div>
               <div className="dropdownsModalUniv">
