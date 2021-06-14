@@ -36,6 +36,10 @@
     border-radius: 50%;
 }
 
+.statesSelector {
+  font-size: 12px;
+}
+
 @media screen and (max-width: 815px) {
   .divCandidatura {
     overflow-x: scroll;

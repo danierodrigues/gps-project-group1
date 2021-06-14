@@ -721,6 +721,26 @@ function Universidades(){
               overlayClassName="ModalOverlay"
             >
               <div>
+                <input className="inputModalUniv" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
+              </div>
+              <div>
+                <input className="inputModalUniv" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
+              </div>
+              <div>
+                <input className="inputModalUniv" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
+              </div>
+              <div>
+                <input className="inputModalUniv" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
+              </div>
+              <div>
+                <div className="dropdownsModalUniv">
+                  <label>Candidaturas:</label>
+                  <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} className='margin-top-l'/>
+                </div>
+                <div className="dropdownsModalUniv">
+                  <label>Estado da instituição:</label>
+                  <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} className='margin-top-l'/>
+
                 <div className="divheadModal">
                   <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
                   <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
