@@ -107,6 +107,116 @@
   justify-content: space-evenly;
 }
 
+.ModalOverlay{
+ /* background-color: black;
+  opacity: 80%; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.795);
+ 
+}
+
+.divheadModal{
+  display: flex;
+}
+
+.divTitleModalUniv{
+  display: inline-block;
+  width: 100%;
+  justify-self: center;
+}
+
+
+.closeModalIcon{
+  top: 0;
+  right: 0;
+  position: relative;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.iconsActionsUniv{
+  width: 25px;
+  height: 25px;
+}
+
+.trashActionUniv{
+  margin-left: 10px;
+}
+
+.containerActionsUniv{
+  min-width: 80px;
+}
+
+
+.containerFiltersUniv{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.SearchBarFilterContainerUniv{
+  display: flex;
+  align-items: center;
+  
+}
+
+.checkboxFiltersContainerUniv{
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxFilterDivUniv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.LocationsFilterContainerUniv{
+  display: flex;
+  align-content: center;
+  min-width: 300px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.SearchCleanFiltContainer{
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.containerMiddleFilterUniv{
+  width: 200px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.containerFiltersPrincipalUniv{
+  width: 90%;
+  background-color: white;
+  padding: var(--size-m);
+  border: 1px solid rgb(240, 240, 240);
+  margin: auto;
+}
+
+.videoPromotional{
+  width: 300px;
+}
 
 
 
@@ -135,6 +245,8 @@
       text-align: center;
   }
 
+  
+
 }
 
 @media screen and (min-width: 816px) {
@@ -155,9 +267,11 @@
 
 
 @media screen and (min-width: 1200px) {
-  /*.videoColumn{
-    min-width:500px;
-  }*/
+  .videoColumn{
+    min-width:300px;
+  }
+
+
 
   
 }

@@ -5,10 +5,15 @@ import {getAllUniversities, deleteUniversities, createInstitution, updateInstitu
 import Modal from 'react-modal';
 import Select from 'react-select';
 import {sortTextTables} from '../../Utils/Sort';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Checkbox from '@material-ui/core/Checkbox';
+import * as QueryString from 'query-string';
+import { useHistory } from "react-router-dom";
+import { useParams, useLocation } from 'react-router-dom';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiTrash } from 'react-icons/fi';
-import { toast } from 'react-toastify';
 
 
 const customStyles = {
@@ -43,7 +48,7 @@ function Universidades(){
   const [phone, setphone] = useState('');
   const [video, setVideo] = useState(null);
   const [adress, setAdress] = useState('');
-  const [candidatureState, setCandidatureState] = useState('');
+  const [candidatureState, setCandidatureState] = useState('open');
   const [isActive, setIsActive] = useState(true);
   const [modalIsOpen,setIsOpen] = useState(false);
   const [modalIsOpenWarning,setIsOpenWarning] = useState(false);
@@ -51,7 +56,16 @@ function Universidades(){
   const [optionsIsActive, setOptionsIsActive] = useState(true);
   const [selectedCandidatureState, setselectedCandidatureState] = useState(null);
   const [selectedOptionsIsActive, setselectedOptionsIsActive] = useState(null);
-
+  //Filters variables
+  const [openCandidaturesFilter, setOpenCandidaturesFilter] = useState(false);
+  const [closedCandidaturesFilter, setClosedCandidaturesFilter] = useState(false);
+  const [openInstitutionsFilter, setOpenInstitutionsFilter] = useState(false);
+  const [closedInstitutionsFilter, setClosedInstitutionsFilter] = useState(false);
+  const [searchBarFilter, setSearchBarFilter] = useState('');
+  const history = useHistory();
+  const params = useParams();
+  const location = useLocation();
+  
 
   useEffect(() => {
     let token = getToken();
@@ -70,21 +84,18 @@ function Universidades(){
     setselectedCandidatureState({value:'open',label:'Abertas'});
     setselectedOptionsIsActive({value:true,label:'Aberta'});
 
-
-    getAllUniversities(token).then(response =>{
+    console.log(location.search);
+    let filters = location.search.substring(1);
+    console.log(filters);
+    getAllUniversities(token,filters).then(response =>{
       console.log(response);
       if(response.ok){
         console.log(response.data);
         setUniversidades([...response.data]);
         setBackendURL(response.backendURL);
-        console.log(universidades);
-        console.log("lenght");
-        console.log(response.data.length);
-        console.log("aqui");
         let arrAux = new Array(response.data.length);
-        console.log(arrAux);
         setShowVideo([...arrAux]);
-       
+
       }else{
         console.log("não ok");
         
@@ -102,15 +113,11 @@ function Universidades(){
 
   const renderCandidatureState = (index) =>{
     let aux = optionsCandidatureState.filter(option => option.value == universidades[index].candidatureState);
-    console.log(aux);
     return aux[0].label;
   }
 
   const renderisActive = (index) =>{
-    console.log("dentro da função do isActive");
     let aux = optionsIsActive.filter(option => option.value == universidades[index].isActive);
-    console.log("aux");
-    console.log(aux[0].label);
     return aux[0].label;
   }
 
@@ -162,6 +169,7 @@ function Universidades(){
       console.log("erro");
     });
 
+    closeModalWarning();
   }
 
   const editAction = (index) => {
@@ -200,13 +208,84 @@ function Universidades(){
     let token = getToken();
     if(!token)return;
 
+    let verificationFailed = false;
+    let errorMessage = "";
+
     if(creating){
-      if(name.trim() === '' || email.trim() === '' || phone.trim() === '' || adress.trim() === '' || candidatureState === null || isActive === null || video === null) {
-        console.log('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
-        return;
+      if(video === null) {
+        console.log('Obrigatório submeter video.');
+        //toast.error('Obrigatório submeter video.');
+        errorMessage += ' Obrigatório submeter video.';
+        verificationFailed = true;
       }
-    }else{
-      //verifications on edit
+    }
+    
+    //Verifications
+    //Verification geral
+
+    //Veification name
+    if(name.trim() === ''){
+      //toast.error("Nome obrigatório.");
+      errorMessage += " Nome obrigatório.";
+      verificationFailed = true;
+    }
+
+
+    //Veification email
+    if(email.trim() === ''){
+      //toast.error("Email obrigatório.");
+      errorMessage += " Email obrigatório.";
+      verificationFailed = true;
+    }
+
+    let regexEmail = RegExp(/.+\@.+\..+/);
+    let resultEmail = regexEmail.test(email);
+    if(!resultEmail ){
+      //toast.error("Insira um email válido.");
+      errorMessage += " Insira um email válido.";
+      console.log(resultEmail);
+      verificationFailed = true;
+    }
+    console.log(resultEmail);
+
+    //Veification phone
+    if(phone.trim() === ''){
+      //toast.error("Telefone obrigatório.");
+      errorMessage += " Telefone obrigatório.";
+      verificationFailed = true;
+    }
+
+    if(phone.length !== 9){
+      //toast.error("Nº Telefónico deve conter 9 caracteres");
+      errorMessage += " Nº Telefónico deve conter 9 caracteres.";
+      verificationFailed = true;
+    }
+
+    //Veification address
+    if(adress.trim() === ''){
+      //toast.error("Morada obrigatória.");
+      errorMessage += " Morada obrigatória.";
+      verificationFailed = true;
+    }
+
+    //Veification Candidature State
+    if(candidatureState === null){
+      //toast.error("Campo estado das candidaturas obrigatório.");
+      errorMessage += " Campo estado das candidaturas obrigatório.";
+      verificationFailed = true;
+    }
+
+    //Veification isActive
+    if(isActive === null){
+      //toast.error("Campo estado da instituição obrigatório.");
+      errorMessage += " Campo estado da instituição obrigatório.";
+      verificationFailed = true;
+    }
+
+
+    if(verificationFailed){
+      toast.error(errorMessage);
+      return;
     }
     
 
@@ -242,7 +321,7 @@ function Universidades(){
         "isActive",isActive
       );
         
-        
+      console.log(candidatureState);
 
       if(creating){
         createInstitution(token, formData).then(response => {
@@ -253,8 +332,11 @@ function Universidades(){
             setUniversidades([...universidades]);
             resetForm();
             closeModal();
+            toast.success('Universidade criada com sucesso.');
           }else{
             console.log("erro criar instituição");
+            console.log(response);
+            toast.error('Ocorreu um erro');
           }
         }).catch(error =>{
           console.log("erro criar instituição: ",error);
@@ -272,8 +354,10 @@ function Universidades(){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
+              toast.success('Universidade editada com sucesso.');
             }else{
               console.log("responsta mal sucedida");
+              toast.error('Ocorreu um erro');
             }
           }).catch(error=>{
             console.log("erro");
@@ -303,8 +387,10 @@ function Universidades(){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
+              toast.success('Universidade editada com sucesso.');
             }else{
               console.log("update sem sucesso");
+              toast.error('Ocorreu um erro');
             }
           }).catch(error => {
             console.log("error: ", error);
@@ -355,10 +441,6 @@ function Universidades(){
          case 'phone': 
               setphone(e.target.value);
               break;
-
-         case 'video': 
-              setVideo(e.target.files[0]);
-              break;
         case 'adress': 
               setAdress(e.target.value);
               break;
@@ -378,10 +460,115 @@ function Universidades(){
     setName('');
     setEmail('');
     setphone('');
-    setVideo('');
+    setVideo(null);
     setAdress('');
+    setCandidatureState('open');
+    setIsActive(true);
     setselectedCandidatureState({value:'open',label:'Abertas'});
     setselectedOptionsIsActive({value:true,label:'Aberta'});
+  }
+
+  const cutEditTitle = () => {
+    if(universidades[indexEditing] && universidades[indexEditing].name.length > 7){
+      return "Editar " + universidades[indexEditing].name.substring(0,6) + "...";
+    }
+
+    return "Editar " + universidades[indexEditing].name;
+
+
+  }
+
+  const handlerFiltersChanges = (e, inputName) =>{
+  //  console.log(e.target.checked);
+    console.log(e);
+
+    switch(inputName) {
+      case 'openCandidatures': 
+           setOpenCandidaturesFilter(e.target.checked);
+           break;
+      case 'closedCandidatures': 
+           setClosedCandidaturesFilter(e.target.checked);
+           break;
+      case 'openInstitutions': 
+           setOpenInstitutionsFilter(e.target.checked);
+           break;
+      case 'closedInstitutions': 
+           setClosedInstitutionsFilter(e.target.checked);
+           break;
+      case 'search': 
+           setSearchBarFilter(e.target.value);
+           break;
+           
+      default:
+           break;
+    }
+  }
+
+  const searchFilters = () =>{
+    const token = getToken();
+
+    if(!token)
+      return;
+
+    setLoading(true);
+    
+
+    let stringFilters = QueryString.stringify({
+      "openCand":openCandidaturesFilter,
+      "closCand":closedCandidaturesFilter,
+      "opActInst":openInstitutionsFilter,
+      "clActInst":closedInstitutionsFilter,
+      "search":searchBarFilter,
+    },{
+      skipNull: true,
+      skipEmptyString:true,
+      arrayFormat: 'separator',
+      arrayFormatSeparator: '|'
+    });
+
+    let parsed = QueryString.parse(stringFilters,{parseBooleans: true, parseNumbers: true});
+    console.log(parsed);
+    console.log(stringFilters);
+
+    getAllUniversities(token, stringFilters).then(response =>{
+      console.log(response);
+      if(response.ok){
+        if(stringFilters){
+          history.push({
+            // pathname: '/dresses',
+            search: stringFilters
+           });
+        };
+        
+
+        console.log(response.data);
+        setUniversidades([...response.data]);
+        setBackendURL(response.backendURL);
+        let arrAux = new Array(response.data.length);
+        setShowVideo([...arrAux]);
+        setIndexEditing(null);
+        setIndexDelete(null);
+
+      }else{
+        console.log("não ok");
+        
+      }
+      setLoading(false);
+
+      return;
+    }).catch(error =>{
+      console.log("Error");
+    })
+
+  }
+
+  const cleanSearchFilters = () =>{
+    setOpenCandidaturesFilter(false);
+    setClosedCandidaturesFilter(false);
+    setOpenInstitutionsFilter(false);
+    setClosedInstitutionsFilter(false);
+    setSearchBarFilter('');
+    return;
   }
 
 
@@ -418,14 +605,48 @@ function Universidades(){
     
     return (
         <div className = 'divUniversidades'>
-
-          <div>
-            <div className='width-90 margin-auto display-flex-between margin-bottom-m margin-top-xl flex-wrap'>
+          
+          <div className='width-90 margin-auto display-flex-between margin-bottom-m margin-top-xl flex-wrap'>
               <h1 className=' font-semi-bold'>Universidades</h1>
               <button className=' font-size-xs' onClick={() => setCreatingMode() } >Nova universidade</button>
+          </div>
+
+          <div className="containerFiltersPrincipalUniv">
+            <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
+            <div className="containerFiltersUniv">
+              
+              <div className="SearchBarFilterContainerUniv">
+                <input className="inputModalUniv" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+              </div>
+              <div className="checkboxFiltersContainerUniv">
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={openCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'openCandidatures')} color="primary"></Checkbox>
+                  <label>Candidaturas Abertas</label>
+                </div>
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={closedCandidaturesFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedCandidatures')} color="primary"></Checkbox>
+                  <label>Candidaturas Fechadas</label>
+                </div>
+              </div>
+              <div className="checkboxFiltersContainerUniv">
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={openInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'openInstitutions')} color="primary"></Checkbox>
+                  <label>Instituições Abertas</label>
+                </div>
+                <div className="checkboxFilterDivUniv">
+                  <Checkbox checked={closedInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedInstitutions')} color="primary"></Checkbox>
+                  <label>Instituições Fechadas</label>
+                </div>
+              </div>
+            </div>
+            <div className="SearchCleanFiltContainer">
+              <div className="containerMiddleFilterUniv">
+                <button onClick={() => searchFilters()}>Procurar</button>
+                <button onClick={() => cleanSearchFilters() }>Limpar</button>
+              </div>
             </div>
           </div>
-          <table id='tabelaUniversidades' className='tabelaUniversidades'>
+          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'64px'}}>
                     <thead>
                         <tr className = 'rowUniversidades'>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
@@ -446,7 +667,7 @@ function Universidades(){
 
                               :
 
-                                universidades[0]._id !== undefined ?
+                                universidades[0] !== undefined ?
 
                                 universidades.map((universidade,index) => (
                                   <tr>
@@ -461,11 +682,15 @@ function Universidades(){
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
+                                    {/**   <div className="containerActionsUniv">
+                                         <img className = 'editActionUniv iconsActionsUniv' onClick={() => editAction(index)} src={edit} alt={"Editar"}/> 
+                                        <img className = 'trashActionUniv iconsActionsUniv' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
+                                      </div> */}
                                       <span className='icon-wrapper cursor-pointer'>
-                                        <AiOutlineEdit size={25} />
+                                        <AiOutlineEdit size={25} onClick={() => editAction(index)} alt={"Editar"}/>
                                       </span> 
                                       <span className='icon-wrapper cursor-pointer'>
-                                        <FiTrash onClick={() => openModalWarning(index)} size={23}/>
+                                        <FiTrash onClick={() => openModalWarning(index)} size={23} alt={"Eliminar"}/>
                                       </span>
                                      </td>  
                                   </tr>
@@ -489,42 +714,46 @@ function Universidades(){
               style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
               contentLabel="Universidade"
               className="ModalUniv"
+              overlayClassName="ModalOverlay"
             >
-              <p className='font-size-s margin-bottom-m'>{creating ? "Criar Instituição" : "Editar " + universidades[indexEditing].name}</p>
-
-              <form>
               <div>
-                <input className="inputModalUniv inputAuth" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
-              </div>
-              <div>
-                <input className="inputModalUniv inputAuth" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
-              </div>
-              <div>
-                <input className="inputModalUniv inputAuth" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
-              </div>
-              <div>
-                <input className="inputModalUniv inputAuth" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
-              </div>
-              <div>
+                <div className="divheadModal">
+                  <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
+                  <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
+                </div>
+                <form>
+                <div>
+                  <input className="inputModalUniv inputAuth" maxLength={35} value={name} onChange={(e) => handleInputChange(e, 'name')} placeholder='Nome' />
+                </div>
+                <div>
+                  <input className="inputModalUniv inputAuth" maxLength={60} value={email} onChange={(e) => handleInputChange(e, 'email')}  placeholder='Email' />
+                </div>
+                <div>
+                  <input className="inputModalUniv inputAuth" maxLength={9} value={phone} onChange={(e) => handleInputChange(e, 'phone')}  placeholder='Telefone' />
+                </div>
+                <div>
+                  <input className="inputModalUniv inputAuth" maxLength={100} value={adress} onChange={(e) => handleInputChange(e, 'adress')} placeholder='Morada' />
+                </div>
+                <div>
+                  <div className="dropdownsModalUniv">
+                    <label className='label-form'>Candidaturas:</label>
+                    <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={false} className='margin-top-l'/>
+                  </div>
+                  <div className="dropdownsModalUniv">
+                    <label className='label-form'>Estado da instituição:</label>
+                    <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={false} className='margin-top-l'/>
+                  </div>
+                </div>
                 <div className="dropdownsModalUniv">
-                  <label className='label-form'>Candidaturas</label>
-                  <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={true} className='margin-top-l'/>
+                  <label>Video:</label>
+                  <input className='input-file' type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
                 </div>
-                <div className="dropdownsModalUniv margin-top-xl">
-                  <label className='label-form'>Estado da instituição</label>
-                  <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={true} className='margin-top-l'/>
-                </div>
-              </div>
-              <div className="dropdownsModalUniv">
-                <p><label className='label-form'>Vídeo</label></p>
-                <input className='input-file' type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
-              </div>
 
-              <div className="divButtonsModal">
-                <a onClick={submitForm} className='action-link margin-top-l'>Criar instituição</a>
-                <button onClick={closeModal}>Cancelar</button>  
+                <div className="divButtonsModal" style={{'marginTop':'10px'}}>
+                  <button onClick={submitForm} className='margin-top-l'>Submeter instituição</button>  
+                </div>
+                </form>
               </div>
-              </form>
             </Modal>
             
             {/* Warning Modal */}
@@ -537,8 +766,12 @@ function Universidades(){
               //className="modalUniversitys"
               contentLabel="Aviso"
               className="ModalUniv"
+              overlayClassName="ModalOverlay"
             >
               <div>
+                <div className="divheadModal">
+                  <span className="closeModalIcon" onClick={() => closeModalWarning()} >&#10006;</span>
+                </div>
                 <div>
                   <p className='font-size-s'>Tem a certeza que pretende eliminar?</p>
                 </div>

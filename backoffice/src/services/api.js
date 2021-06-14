@@ -48,9 +48,9 @@ export function verifyToken(token) {
 }
 
 
-export function getAllUniversities(token) {
+export function getAllUniversities(token, querystring = '') {
 
-    return fetch(BASE_URL + "/institutions", {
+    return fetch(BASE_URL + `/institutions?${querystring}`, {
       method: 'GET',
 
         headers: {

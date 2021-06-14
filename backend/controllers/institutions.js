@@ -1,6 +1,7 @@
 const InstitutionModel = require('../models/institution');
 const fs = require('fs');
 const backendVar = require('../config/backend');
+const queryString = require('query-string');
 
 var backendURL = "";
 if(process.env.NODE_ENV.trim() == "dev"){
@@ -15,8 +16,52 @@ if(process.env.NODE_ENV.trim() == "dev"){
 
 module.exports = {
     async index(req,res,next){
-        const all = await InstitutionModel.find();
-        res.status(200).json({ok:true,data:all, backendURL:backendURL});
+
+        console.log(req.query);
+        let filters = req.query;
+        console.log(filters);
+        let filtersQuery = {};
+        console.log(!filters.openCand);
+        console.log(!filters.openCand && filters.closCand);
+
+
+        //Filters
+        if((filters.openCand == 'false' && filters.closCand == 'true') || (filters.openCand == 'true' && filters.closCand == 'false') ){
+            console.log("entrou dentro do if");
+            filtersQuery.candidatureState = filters.openCand == 'true' ? 'open' : 'closed';
+        }
+
+        if((filters.opActInst == 'false' && filters.clActInst == 'true') || (filters.opActInst == 'true' && filters.clActInst == 'false') ){
+            console.log("entrou dentro do if");
+            filtersQuery.isActive = filters.opActInst == 'true' ? true : false;
+        }
+
+        if(filters.search){
+            filtersQuery.$or = [
+                {name: { $regex: '.*' + filters.search + '.*' }},
+                {email: { $regex: '.*' + filters.search + '.*' }},
+                {location: { $regex: '.*' + filters.search + '.*' }},
+                {phone: { $regex: '.*' + filters.search + '.*' }},
+            ]
+        }
+
+        
+        console.log(filtersQuery);
+       /* let teste = {
+            $or:[
+                {isActive: false},
+                {isActive: true},
+            ],
+            $or:[
+                {name: { $regex: '.*' + "sdfsd" + '.*' }},
+                {email: { $regex: '.*' + "gmai" + '.*' }},
+            ],
+        } */
+
+        let query = await InstitutionModel.find(filtersQuery);
+
+
+        res.status(200).json({ok:true,data:query, backendURL:backendURL});
     },
 
     async create(req,res,next){
