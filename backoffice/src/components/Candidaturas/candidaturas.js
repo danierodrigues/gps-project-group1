@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import React, { Component } from 'react';
 import './candidaturas.css';
+import Select from 'react-select';
 import { getAllCandidatures } from '../../services/api';
 import { deleteACandidature } from '../../services/api';
 import { updateCandidature } from '../../services/api';
 import { getToken } from '../../Utils/Common';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { FiTrash } from 'react-icons/fi';
+import { FiSave, FiTrash } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import {sortTextTables} from '../../Utils/Sort';
@@ -15,14 +16,41 @@ import {sortTextTables} from '../../Utils/Sort';
 function Candidatures() {
 
     const [candidatures, setCandidatures] = useState([{}]);
+    const [optionsCandidatureState, setOptionsCandidatureState] = useState(null);
+    const [selectedCandidatureState, setselectedCandidatureState] = useState(null);
+    /*const [candidatureState, setCandidatureState] = useState('');*/
+    const [allStates, setAllStates] = useState([]);
+    const [allEditedStates, setAllEditedStates] = useState([]);
     const [modalIsOpenWarning,setIsOpenWarning] = useState(false);
     const [indexDelete, setIndexDelete] = useState(null);
     const [idDelete, setIdDelete] = useState(null);
-    
+      
     useEffect(() => {
+      /* Populate select component */
+      let optionsAux = [
+        {value:'pending',label:'Em análise'},
+        {value:'denied',label:'Recusada'},
+        {value:'accepted',label:'Aceite'}
+      ]
+      setOptionsCandidatureState([...optionsAux]);
+  
+      /*setselectedCandidatureState({value:'pending',label:'Em análise'});*/
+      //setselectedCandidatureState('pending');
+
       getAllCandidatures(getToken()).then(result => { // Fetch only once, on render
         if(result.ok) {
           setCandidatures([...result.data]);
+
+          let array = [];
+          let arrayEdited = [];
+
+          /* For each candidature, specify the state */
+          result.data.forEach((element, index) => {
+            array.push(optionsAux.filter(option => option.value === element.state));
+            arrayEdited.push(false);
+          });
+          setAllStates([...array]);
+          setAllEditedStates([...arrayEdited]);
         }
       })
     }
@@ -42,6 +70,34 @@ function Candidatures() {
         }
       })
     }
+
+    const updateCandidatureState = (id, newState, index) => {
+      let body = {'_id': id, 'state': newState};
+      updateCandidature(getToken(), body).then(result => {
+          if(result.ok) {
+            allEditedStates[index] = false;
+            setAllEditedStates([...allEditedStates]);
+            toast.success('Estado atualizado');
+          }
+      })
+    }
+
+    const handleSelectChange = (e,inputName, index) => {
+      switch(inputName){
+        case 'candidatureState':
+          if(e !== null){
+          
+            allStates[index] = e;
+            allEditedStates[index] = true;
+            setAllStates([...allStates]);
+            setAllEditedStates([...allEditedStates]);
+          }else
+          setselectedCandidatureState(null);
+          
+          //console.log(candidatureState);
+          break;
+      }
+    } 
 
     return ( 
         <div class = 'divUniversidades'>
@@ -71,14 +127,13 @@ function Candidatures() {
                           <td className = 'tdUniversidades'><span>{cSingle.mobile}</span></td>   
                           <td className = 'tdUniversidades'><span>{cSingle.email}</span></td>  
                           <td className = 'tdUniversidades'><span>{cSingle.institution}</span></td>  
-                          <td className = 'tdUniversidades'><span><select name="estados" id="estados">
-                            <option value="Em análise">Em análise</option>
-                            <option value="Aceite">Aceite</option>
-                            <option value="Negado">Negado</option>
-                            </select></span></td>
-                          <td className = 'tdUniversidades'>
-                            <span className='icon-wrapper cursor-pointer'>
-                              <AiOutlineEdit size={25} />
+                          <td className = 'tdUniversidades row-table'>
+                          <Select menuPortalTarget={document.body}  menuPosition={"fixed"} value={allStates[index]} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState', index)} isSearchable={false} />
+                          </td>
+                          <td className = 'tdUniversidades actions-td'>
+                            <span>
+                              {/*<AiOutlineEdit size={25} />*/}
+                              {allEditedStates[index] ? <FiSave className='icon-wrapper cursor-pointer' size={23} onClick={() => {updateCandidatureState(cSingle._id, allStates[index].value, index)}}/> : <span></span>}
                               </span> 
                               <span className='icon-wrapper cursor-pointer'>
                                 <FiTrash onClick={() => openModalWarning(cSingle._id, index)} size={23}/>
@@ -101,6 +156,7 @@ function Candidatures() {
               >
               <div>
                 <div>
+                  <span className="closeModalIcon" onClick={() => closeModalWarning()} >&#10006;</span>
                   <p className='font-size-s'>Tem a certeza que pretende eliminar?</p>
                 </div>
                 <div className='divButtonsModal margin-top-s'>
