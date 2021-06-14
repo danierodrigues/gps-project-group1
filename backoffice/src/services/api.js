@@ -10,7 +10,7 @@ else if(REACT_APP_ENV === 'prod')
 
 
 
-export function Login(body){
+export function login(body){
 
     return fetch(BASE_URL + "/auth", {
 
@@ -48,9 +48,9 @@ export function verifyToken(token) {
 }
 
 
-export function getAllUniversities(token) {
+export function getAllUniversities(token, querystring = '') {
 
-    return fetch(BASE_URL + "/institutions", {
+    return fetch(BASE_URL + `/institutions?${querystring}`, {
       method: 'GET',
 
         headers: {
