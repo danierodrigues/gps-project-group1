@@ -4,6 +4,7 @@ import { login } from '../../services/api';
 import {setUserSession} from '../../Utils/Common';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {withRouter} from 'react-router-dom';
 
 function Login({ setisLogged }) {
 
@@ -93,4 +94,4 @@ function Login({ setisLogged }) {
   );
 }
 
-export default Login;
+export default withRouter(Login);

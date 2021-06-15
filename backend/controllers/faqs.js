@@ -4,7 +4,33 @@ const Faqsmodel = require('../models/faq');
 module.exports = {
     async index(req,res,next){
         try{
-            const all = await Faqsmodel.find();
+
+            console.log(req.query);
+            let filters = req.query;
+            console.log(filters);
+            let filtersQuery = {};
+            console.log(!filters.openCand);
+            console.log(!filters.openCand && filters.closCand);
+
+
+            //Filters
+            
+
+            if((filters.opActFaqs == 'false' && filters.clActFaqs == 'true') || (filters.opActFaqs == 'true' && filters.clActFaqs == 'false') ){
+                console.log("entrou dentro do if");
+                filtersQuery.isActive = filters.opActFaqs == 'true' ? true : false;
+            }
+
+            if(filters.search){
+                filtersQuery.$or = [
+                    {question: { $regex: '.*' + filters.search + '.*' }},
+                    {answer: { $regex: '.*' + filters.search + '.*' }},
+                ]
+            }
+
+
+
+            const all = await Faqsmodel.find(filtersQuery);
             return res.status(200).json({ok:true,data:all});
         }catch(error){
             return res.status(500).json({'ok': false, 'error':error});

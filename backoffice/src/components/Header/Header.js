@@ -17,6 +17,7 @@ function Menu(props) {
          <ul className='font-semi-bold display-inline font-size-s'>
               <li><NavLink exact to={'/candidaturas'} activeClassName='active-menu'>Candidaturas</NavLink></li>
               <li><NavLink exact to={'/universidades'} activeClassName='active-menu'>Universidades</NavLink></li>
+              <li><NavLink exact to={'/faqs'} activeClassName='active-menu'>Faqs</NavLink></li>
               <li><a className='cursor-pointer' onClick={props.handleLogout}>Sair <FiLogOut style={{verticalAlign: '-3%', marginLeft: '5px'}} /></a></li>
          </ul>
       </nav>
