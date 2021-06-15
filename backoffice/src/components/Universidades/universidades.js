@@ -356,7 +356,7 @@ function Universidades({setisLogged}){
             setUniversidades([...universidades]);
             resetForm();
             closeModal();
-            toast.success('Universidade criada com sucesso.');
+            toast.success('Universidade criada');
           }else{
             console.log("erro criar instituição");
             console.log(response);
@@ -378,7 +378,7 @@ function Universidades({setisLogged}){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
-              toast.success('Universidade editada com sucesso.');
+              toast.success('Universidade editada');
             }else{
               console.log("responsta mal sucedida");
               toast.error('Ocorreu um erro');
@@ -411,7 +411,7 @@ function Universidades({setisLogged}){
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
-              toast.success('Universidade editada com sucesso.');
+              toast.success('Universidade editada');
             }else{
               console.log("update sem sucesso");
               toast.error('Ocorreu um erro');
@@ -636,11 +636,10 @@ function Universidades({setisLogged}){
           </div>
 
           <div className="containerFiltersPrincipalUniv">
-            <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
             <div className="containerFiltersUniv">
               
               <div className="SearchBarFilterContainerUniv">
-                <input className="inputModalUniv" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+                <input className="inputModalUniv inputAuth inputSearch" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
               </div>
               <div className="checkboxFiltersContainerUniv">
                 <div className="checkboxFilterDivUniv">
@@ -662,15 +661,16 @@ function Universidades({setisLogged}){
                   <label>Instituições Fechadas</label>
                 </div>
               </div>
-            </div>
-            <div className="SearchCleanFiltContainer">
               <div className="containerMiddleFilterUniv">
                 <button onClick={() => searchFilters()}>Procurar</button>
-                <button onClick={() => cleanSearchFilters() }>Limpar</button>
+                <a className='action-link' onClick={() => cleanSearchFilters() }>Limpar</a>
               </div>
             </div>
+            <div className="SearchCleanFiltContainer">
+              
+            </div>
           </div>
-          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'64px'}}>
+          <table id='tabelaUniversidades' className='tabelaUniversidades' style={{'marginTop':'20px'}}>
                     <thead>
                         <tr className = 'rowUniversidades'>
                             <th className='headerUniversidades' onClick={() =>sortTextTables("tbodyUniversidades",0)}><span className="headerToSort">Nome <TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
@@ -713,10 +713,6 @@ function Universidades({setisLogged}){
                                         <video style={{display: showVideo[index] ? "block" : "none" }} className='vertical-align videoPromotional' src={backendURL + universidade.presentationVideoPath} type='video/mp4' controls></video>
                                     </td> 
                                     <td className = 'tdUniversidades'>
-                                    {/**   <div className="containerActionsUniv">
-                                         <img className = 'editActionUniv iconsActionsUniv' onClick={() => editAction(index)} src={edit} alt={"Editar"}/> 
-                                        <img className = 'trashActionUniv iconsActionsUniv' onClick={() => openModalWarning(index)} src={trash} alt={"Eliminar"}/> 
-                                      </div> */}
                                       <span className='icon-wrapper cursor-pointer'>
                                         <AiOutlineEdit size={25} onClick={() => editAction(index)} alt={"Editar"}/>
                                       </span> 
@@ -748,9 +744,9 @@ function Universidades({setisLogged}){
               overlayClassName="ModalOverlay"
             >
               <div>
+              <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
                 <div className="divheadModal">
                   <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
-                  <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
                 </div>
                 <form>
                 <div>
@@ -767,16 +763,16 @@ function Universidades({setisLogged}){
                 </div>
                 <div>
                   <div className="dropdownsModalUniv">
-                    <label className='label-form'>Candidaturas:</label>
+                    <label className='label-form'>Candidaturas</label>
                     <Select value={selectedCandidatureState} options={optionsCandidatureState} onChange={(e) => handleSelectChange(e, 'candidatureState')} isSearchable={false} isClearable={false} className='margin-top-l'/>
                   </div>
                   <div className="dropdownsModalUniv">
-                    <label className='label-form'>Estado da instituição:</label>
+                    <label className='label-form'>Estado da instituição</label>
                     <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={false} className='margin-top-l'/>
                   </div>
                 </div>
                 <div className="dropdownsModalUniv">
-                  <label>Video:</label>
+                  <label>Video</label>
                   <input className='input-file' type="file" onChange={(e) => handleInputChange(e, "video")}  ></input>
                 </div>
 
