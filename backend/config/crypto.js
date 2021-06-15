@@ -3,7 +3,7 @@ module.exports = {
     publicKEY : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJd39xBRbpFDwIWxkMrWk5ErDZkSyOTs\nK7rqjHE3gg22bA45xRXYXkhs1xpUGcAYN7vXuMMcTs+IAHung4RKoJUCAwEAAQ==\n-----END PUBLIC KEY-----",
     saltRounds : 10,
     signOptions : {
-        expiresIn:  "1h",
+        expiresIn:  "6h",
         algorithm:  "RS256"
     }
 }

@@ -1,29 +1,58 @@
 import { useState, useEffect } from 'react';
 import React, { Component } from 'react';
 import './candidaturas.css';
-import { getAllCandidatures } from '../../services/api';
-import { deleteACandidature } from '../../services/api';
-import { updateCandidature } from '../../services/api';
-import { getToken } from '../../Utils/Common';
+import { getAllCandidatures, deleteACandidature, updateCandidature, verifyToken  } from '../../services/api';
+import { getToken, removeUserSession, setUserSession } from '../../Utils/Common';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiTrash } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import {sortTextTables} from '../../Utils/Sort';
+import {useHistory} from 'react-router-dom';
+import loadingGif from '../images/loading.gif';
 
-function Candidatures() {
+function Candidatures({setisLogged}) {
 
     const [candidatures, setCandidatures] = useState([{}]);
     const [modalIsOpenWarning,setIsOpenWarning] = useState(false);
     const [indexDelete, setIndexDelete] = useState(null);
     const [idDelete, setIdDelete] = useState(null);
+    const history = useHistory();
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
+      let token = getToken();
+      if(!token)return;
+
+      verifyToken(token).then(response => {
+        if(response.ok){
+            setUserSession(token);
+            //setIsLogged(true);
+            //setisLogged(false);
+            //history.push('/login');
+            
+        }else{
+            removeUserSession();
+            //setIsLogged(false);
+            console.log("redirect to login - faq");
+            //setAuthLoading(false);
+            setisLogged(false);
+            history.push('/login');
+            
+        }
+        
+      }).catch(error=>{
+          removeUserSession();
+          setisLogged(false);
+          history.push('/login');
+      })
+
       getAllCandidatures(getToken()).then(result => { // Fetch only once, on render
         if(result.ok) {
           setCandidatures([...result.data]);
         }
+        setLoading(false);
       })
     }
     , [])
@@ -64,7 +93,18 @@ function Candidatures() {
                     </tr>
                   </thead>
                   <tbody id='tbodyCandidaturas'>
-                    {candidatures.map((cSingle,index) => (
+                    {
+                      loading ?
+
+                      <tr>
+                        <td colSpan={7}>
+                          <div className="containerLoadingGifCan">
+                            <img className="loadingGifCan" src={loadingGif} ></img>
+                          </div>
+                        </td>
+                      </tr>
+                      :
+                      candidatures.map((cSingle,index) => (
                       <tr>
                           <td className = 'tdUniversidades'><span>{cSingle.name} {cSingle.surname}</span></td>
                           <td className = 'tdUniversidades'><span>{String(cSingle.createdAt).split("T",1)}</span></td> 
