@@ -1,20 +1,35 @@
-.tabelaUniversidades, .headerUniversidades, .tdUniversidades {
+.loadingGifFaqs{
+    vertical-align: middle;
+    text-align: center;
+    width: 200px;
+}
+.containerLoadingGifFaqs{
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.tabelaFaqs, .headerFaqs, .tdFaqs {
     border-collapse: collapse;
     text-align: left;
     border-bottom: 1px solid var(--light-grey);
     padding: 1.2rem;
-  }
+}
 
-  .headerUniversidades {
+
+
+
+  .headerFaqs {
     font-weight: 600;
   }
 
-  .tabelaUniversidades {
+  .tabelaFaqs {
     width: 90%;
     background-color: white;
     padding: var(--size-m);
     border: 1px solid rgb(240, 240, 240);
     margin: auto;
+    margin-top: 70px;
   }
 
   .action-link {
@@ -61,15 +76,15 @@
   cursor: pointer;
 }
 
-.headerUniversidades:first-child {
+.headerFaqs:first-child {
   min-width: 300px;
 }
 
-.headerUniversidades:nth-child(6) {
+.headerFaqs:nth-child(6) {
   min-width: 115px !important;
 }
 
-.headerUniversidades:not(:first-child) {
+.headerFaqs:not(:first-child) {
   min-width: 180px;
 }
 
@@ -77,18 +92,18 @@
   color: var(--primary-color);
 }
 
-.divUniversidades {
+.divFaqs {
   overflow-x: auto;
   overflow-y: hidden;
   width: 100%;
 }
 
-.inputModalUniv{
+.inputModalFaqs{
   width: 100%;
   margin-top: 10px;
 }
 
-.dropdownsModalUniv{
+.dropdownsModalFaqs{
   width: 400px;
   margin: var(--size-m) auto;
   text-align: left;
@@ -123,14 +138,14 @@
   display: flex;
 }
 
-.divTitleModalUniv{
+.divTitleModalFaqs{
   display: inline-block;
   width: 100%;
   justify-self: center;
 }
 
 
-.closeModalIcon{
+.closeModalIconFaqs{
   top: 0;
   right: 0;
   position: relative;
@@ -156,71 +171,58 @@
 }
 
 
-.containerFiltersUniv{
+.containerFiltersFaqs{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
-.checkboxFiltersContainerUniv{
+.SearchBarFilterContainerFaqs{
+  display: flex;
+  align-items: center;
+  
+}
+
+.checkboxFiltersContainerFaqs{
   display: flex;
   flex-direction: column;
 }
 
-.checkboxFilterDivUniv{
+.checkboxFilterDivFaqs{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 }
 
-.LocationsFilterContainerUniv{
+
+
+.SearchCleanFiltContainerFaqs{
   display: flex;
   align-content: center;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }
 
-.SearchCleanFiltContainer{
+.containerMiddleFilterFaqs{
+  width: 200px;
   display: flex;
   align-content: center;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.containerMiddleFilterUniv {
-  margin-top: 20px;
-}
-
-.inputSearch {
-  margin-bottom: 0px !important;
-}
-
-.containerFiltersPrincipalUniv{
+.containerFiltersPrincipalFaqs{
   width: 90%;
   background-color: white;
-  padding: 1.2rem;
+  padding: var(--size-m);
   border: 1px solid rgb(240, 240, 240);
   margin: auto;
 }
 
-.videoPromotional{
-  width: 300px;
-}
-
-
-.loadingGifUniv{
-  vertical-align: middle;
-  text-align: center;
-  width: 200px;
-}
-
-.containerLoadingGifUniv{
-  display: flex;
-  justify-content: center;
-  vertical-align: middle;
-}
 
 
 
@@ -237,7 +239,7 @@
     width: 100%;
   }*/
 
-  .ModalUniv{
+  .ModalFaqs{
     position: absolute;
       top: 50%;
       left: 50%;
@@ -254,7 +256,7 @@
 }
 
 @media screen and (min-width: 816px) {
-  .ModalUniv{
+  .ModalFaqs{
     position: absolute;
       top: 50%;
       left: 50%;
@@ -269,13 +271,3 @@
   
 }
 
-
-@media screen and (min-width: 1200px) {
-  .videoColumn{
-    min-width:300px;
-  }
-
-
-
-  
-}

@@ -58,3 +58,16 @@
     width: 100%;
   }
 }
+
+
+.loadingGifCan{
+  vertical-align: middle;
+  text-align: center;
+  width: 200px;
+}
+
+.containerLoadingGifCan{
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}

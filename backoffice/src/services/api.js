@@ -202,40 +202,80 @@ export function updateCandidature(token, body) {
     });
 }
 
-/* Create a candidature */
-/*export function createCandidature(body) {
+export function getFaqs(token, querystring = '') {
 
-     return fetch(BASE_URL + "/candidatures", {
-
-         method: 'POST',
-
-         headers: {
-             'Accept': 'application/json',
-             'Content-Type': 'application/json'
-         },
-
-         body: JSON.stringify(body)
-     })
-     .then(response => {
-
-         return response.json();
-     });
-}*/
-
-/* Retrieve all universities */
-/*export function getUniversities() {
-
-    return fetch(BASE_URL + "/a-definir", {
-
-        method: 'GET',
+    return fetch(BASE_URL + `/faqs?${querystring}`, {
+      method: 'GET',
 
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
         }
     })
     .then(response => {
 
         return response.json();
     });
-}*/
+}
+
+
+/*Delete a faq*/
+export function deleteAFaq(token, id) {
+
+    return fetch(BASE_URL + `/faqs/${id}`, {
+
+        method: 'DELETE',
+
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+export function createFaq(token, body) {
+
+    return fetch(BASE_URL + "/faqs", {
+       method: 'POST',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}
+
+
+/*update a candidature*/
+export function updateFaq(token, body) {
+
+    return fetch(BASE_URL + "/faqs", {
+
+
+        method: 'PUT',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+
+        return response.json();
+    });
+}

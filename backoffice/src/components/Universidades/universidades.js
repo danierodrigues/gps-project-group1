@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './universidades.css';
-import { getToken } from '../../Utils/Common';
-import {getAllUniversities, deleteUniversities, createInstitution, updateInstitutionVideo, updateInstitutionWithoutVideo} from '../../services/api';
+import { getToken, removeUserSession, setUserSession } from '../../Utils/Common';
+import {getAllUniversities, deleteUniversities, createInstitution, updateInstitutionVideo, updateInstitutionWithoutVideo, verifyToken} from '../../services/api';
 import Modal from 'react-modal';
 import Select from 'react-select';
 import {sortTextTables} from '../../Utils/Sort';
@@ -14,6 +14,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { TiArrowUnsorted } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiTrash } from 'react-icons/fi';
+import loadingGif from '../images/loading.gif';
 
 
 const customStyles = {
@@ -34,7 +35,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 
-function Universidades(){
+function Universidades({setisLogged}){
   const [universidades, setUniversidades] = useState([{}]);
   const [backendURL, setBackendURL] = useState();
   const [showVideo, setShowVideo] = useState(null);
@@ -70,6 +71,29 @@ function Universidades(){
   useEffect(() => {
     let token = getToken();
     if(!token)return;
+
+    verifyToken(token).then(response => {
+      if(response.ok){
+          setUserSession(token);
+          //setIsLogged(true);
+          //setisLogged(false);
+          //history.push('/login');
+          
+      }else{
+          removeUserSession();
+          //setIsLogged(false);
+          console.log("redirect to login - faq");
+          //setAuthLoading(false);
+          setisLogged(false);
+          history.push('/login');
+          
+      }
+      
+    }).catch(error=>{
+        removeUserSession();
+        setisLogged(false);
+        history.push('/login');
+    })
 
     setOptionsCandidatureState([
       {value:'open',label:'Abertas'},
@@ -663,7 +687,14 @@ function Universidades(){
                           {
 
                               loading ?
-                                <h1>Loading...</h1>
+
+                                <tr>
+                                  <td colSpan={8}>
+                                    <div className="containerLoadingGifUniv">
+                                      <img className="loadingGifUniv" src={loadingGif} ></img>
+                                    </div>
+                                  </td>
+                              </tr>
 
                               :
 
