@@ -34,7 +34,8 @@ function FAQ() {
 
      useEffect(() => {
           getQuestions().then(result => { // Fetch only once, on render
-               setQuestions([...result.data]);
+               let aux = result.data.filter(option => option.isActive === true);
+               setQuestions([...aux]);
           })
      }, [])
 

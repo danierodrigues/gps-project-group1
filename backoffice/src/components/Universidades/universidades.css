@@ -147,6 +147,10 @@
   height: 25px;
 }
 
+.MuiCheckbox-colorPrimary.Mui-checked {
+  color: var(--primary-color) !important;
+}
+
 .trashActionUniv{
   margin-left: 10px;
 }

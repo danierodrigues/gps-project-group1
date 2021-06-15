@@ -746,7 +746,7 @@ function Universidades({setisLogged}){
               <div>
               <span className="closeModalIcon" onClick={() => closeModal()} >&#10006;</span>
                 <div className="divheadModal">
-                  <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Instituição" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
+                  <h2 className="divTitleModalUniv font-size-s margin-bottom-m">{creating ? "Criar Universidade" : universidades[indexEditing] ? cutEditTitle() : '' }</h2>
                 </div>
                 <form>
                 <div>

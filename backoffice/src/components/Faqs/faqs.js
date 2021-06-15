@@ -82,11 +82,11 @@ function Faqs({setisLogged}){
 
 
     setOptionsIsActive([
-      {value:true,label:'Aberta'},
-      {value:false,label:'Fechada'}
+      {value:true,label:'Ativa'},
+      {value:false,label:'Inativa'}
     ])
 
-    setselectedOptionsIsActive({value:true,label:'Aberta'});
+    setselectedOptionsIsActive({value:true,label:'Ativa'});
 
     console.log(location.search);
     let filters = location.search.substring(1);
@@ -119,7 +119,7 @@ function Faqs({setisLogged}){
         let aux = optionsIsActive.filter(option => option.value == faqs[index].isActive);
         return aux[0].label;
     }
-    return '';
+    return 'Inativa';
     
   }
 
@@ -143,7 +143,7 @@ function Faqs({setisLogged}){
         console.log(arrAuxUni);
         setFaqs([...arrAuxUni]);
 
-        toast.success('Faq eliminada');
+        toast.success('Pregunta eliminada');
       }else{
         toast.error('Ocorreu um erro');
       }
@@ -197,7 +197,7 @@ function Faqs({setisLogged}){
     //Veification name
     if(question.trim() === ''){
       //toast.error("Nome obrigatório.");
-      errorMessage += " Questão obrigatória.";
+      errorMessage += " Pregunta obrigatória.";
       verificationFailed = true;
     }
 
@@ -241,7 +241,7 @@ function Faqs({setisLogged}){
             setFaqs([...faqs]);
             resetForm();
             closeModal();
-            toast.success('Faq criada com sucesso.');
+            toast.success('Pregunta criada');
           }else{
             console.log("erro criar faq");
             console.log(response);
@@ -264,7 +264,7 @@ function Faqs({setisLogged}){
             setFaqs([...faqs]);
             resetForm();
             closeModal();
-            toast.success('Faq editada com sucesso.');
+            toast.success('Pregunta editada');
         }else{
             console.log("update sem sucesso");
             toast.error('Ocorreu um erro');
@@ -446,41 +446,40 @@ function Faqs({setisLogged}){
         <div className = 'divFaqs'>
           
           <div className='width-90 margin-auto display-flex-between margin-bottom-m margin-top-xl flex-wrap'>
-              <h1 className=' font-semi-bold'>Faqs</h1>
-              <button className=' font-size-xs' onClick={() => setCreatingMode() } >Nova Faq</button>
+              <h1 className=' font-semi-bold'>Perguntas frequentes</h1>
+              <button className=' font-size-xs' onClick={() => setCreatingMode() } >Nova pregunta frequente</button>
           </div>
 
-          <div className="containerFiltersPrincipalFaqs">
-            <div style={{'textAlign':'center'}}><h2>Filtrar</h2></div>
-            <div className="containerFiltersFaqs">
+          <div className="containerFiltersPrincipalUniv">
+            <div className="containerFiltersUniv">
               
-              <div className="SearchBarFilterContainerFaqs">
-                <input className="inputModalFaqs" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+              <div className="SearchBarFilterContainerUniv">
+                <input className="inputModalUniv inputAuth inputSearch" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
               </div>
+
               <div className="checkboxFiltersContainerFaqs">
                 <div className="checkboxFilterDivFaqs">
                   <Checkbox checked={openInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'openFaqs')} color="primary"></Checkbox>
-                  <label>Faqs Abertas</label>
+                  <label>Preguntas Ativas</label>
                 </div>
                 <div className="checkboxFilterDivFaqs">
                   <Checkbox checked={closedInstitutionsFilter} onClick={(e)=> handlerFiltersChanges(e, 'closedFaqs')} color="primary"></Checkbox>
-                  <label>Faqs Fechadas</label>
+                  <label>Preguntas Inativas</label>
                 </div>
               </div>
-            </div>
-            <div className="SearchCleanFiltContainerFaqs">
-              <div className="containerMiddleFilterFaqs">
+              <div className="containerMiddleFilterUniv">
                 <button onClick={() => searchFilters()}>Procurar</button>
-                <button onClick={() => cleanSearchFilters() }>Limpar</button>
+                <a className='action-link' onClick={() => cleanSearchFilters() }>Limpar</a>
               </div>
             </div>
+
           </div>
-          <table id='tabelaFaqs' className='tabelaFaqs' style={{'marginTop':'64px'},{'marginBottom':'30px'}}>
+          <table id='tabelaFaqs' className='tabelaFaqs'>
                     <thead>
                         <tr className = 'rowUniversidades'>
                             <th className='headerFaqs' onClick={() =>sortTextTables("tbodyFaqs",0)}><span className="headerToSort">Pergunta<TiArrowUnsorted style={{verticalAlign: '-10%'}} /></span></th>
                             <th className='headerFaqs' onClick={() =>sortTextTables("tbodyFaqs",1)}><span className="headerToSort">Resposta<TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
-                            <th className='headerFaqs' onClick={() =>sortTextTables("tbodyFaqs",2)}><span className="headerToSort">Ativa<TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
+                            <th className='headerFaqs' onClick={() =>sortTextTables("tbodyFaqs",2)}><span className="headerToSort">Estado<TiArrowUnsorted style={{verticalAlign: '-10%'}}/></span></th>
                             <th className='headerFaqs'>Ações</th>
                         </tr>
                     </thead>
@@ -542,9 +541,9 @@ function Faqs({setisLogged}){
               overlayClassName="ModalOverlay"
             >
               <div>
+                <span className="closeModalIconFaqs" onClick={() => closeModal()} >&#10006;</span>
                 <div className="divheadModal">
-                  <h2 className="divTitleModalFaqs font-size-s margin-bottom-m">{creating ? "Criar Faq" : faqs[indexEditing] ? cutEditTitle() : '' }</h2>
-                  <span className="closeModalIconFaqs" onClick={() => closeModal()} >&#10006;</span>
+                  <h2 className="divTitleModalFaqs font-size-s margin-bottom-m">{creating ? "Criar Pregunta Frequente" : faqs[indexEditing] ? cutEditTitle() : '' }</h2>
                 </div>
                 <form>
                 <div>
@@ -555,13 +554,13 @@ function Faqs({setisLogged}){
                 </div>
                 <div>
                   <div className="dropdownsModalFaqs">
-                    <label className='label-form'>Estado da Faq:</label>
+                    <label className='label-form'>Estado da pregunta</label>
                     <Select value={selectedOptionsIsActive} options={optionsIsActive} onChange={(e) => handleSelectChange(e, 'isActive')} isSearchable={false} isClearable={false} className='margin-top-l'/>
                   </div>
                 </div>
 
                 <div className="divButtonsModal" style={{'marginTop':'10px'}}>
-                  <button onClick={submitForm} className='margin-top-l'>Submeter Faq</button>  
+                  <button onClick={submitForm} className='margin-top-l'>Submeter pregunta</button>  
                 </div>
                 </form>
               </div>
