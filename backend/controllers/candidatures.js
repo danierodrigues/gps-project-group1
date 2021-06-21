@@ -10,8 +10,9 @@ module.exports = {
     async create(req,res,next){
 
         try{
-          
-            InstitutionModel.findOne({'name':req.body.institution,'isActive':true}, function(error, institution) {
+            
+            InstitutionModel.findOne({'name':req.body.institution}, function(error, institution) {
+                console.log(institution)
                 if(error || !institution)
                     return res.status(500).json({'ok':false, 'errorMessage':"Instituição que selecionou não existe"});
                 
