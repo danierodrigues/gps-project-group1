@@ -1,0 +1,19 @@
+.imgAdvantages{
+     height: 150px;
+ }
+ 
+ .containerFlexBox{
+     margin-top: 30px;
+ }
+ 
+ @media (max-width: 900px) {
+     .flexboxAlign{
+         width: 100%;
+         flex-direction: column;
+     }
+ 
+     .itemDiv:not(:first-child){
+         margin-top: var(--size-xxl);
+     }
+     
+ }

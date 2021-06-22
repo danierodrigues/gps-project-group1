@@ -1,0 +1,73 @@
+.tabelaCandidatura, .headerCandidatura, .tdCandidaturas {
+    border-collapse: collapse;
+    text-align: left;
+    border-bottom: 1px solid grey;
+    padding: 1vw;
+    background-color: white;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .row-table:nth-child(6) {
+    width: 12%;
+  }
+
+  .actions-td {
+    display: flex;
+    align-items: center;
+  }
+
+  .trash {
+      width: 25px;
+      height: 25px;
+  }
+
+  .save {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+  .trash:hover, .save:hover{
+    cursor: pointer;
+  }
+
+
+  .correct:hover {
+      background-color: green;
+      border-radius: 50%;
+  }
+
+  .wrong:hover {
+    background-color: red;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 815px) {
+  .divCandidatura {
+    overflow-x: scroll;
+    width: 100%;
+  }
+
+  .tabelaCandidatura, .headerCandidatura, .tdCandidaturas {
+    margin-top: 10px;
+  }
+  .tabelaCandidatura {
+    width: 100%;
+  }
+}
+
+
+.loadingGifCan{
+  vertical-align: middle;
+  text-align: center;
+  width: 200px;
+}
+
+.containerLoadingGifCan{
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}

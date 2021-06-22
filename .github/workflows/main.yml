@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_PL}}
+          heroku_app_name: "gps-project-group1" #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL_PL}}
+          appdir: "./frontend" # <- This will point to the api folder in your project
+          #branch: "master"
+          procfile: "web: npm run prod --optimize_for_size --max_old_space_size=460"
+  build-backend:
+    runs-on: ubuntu-latest
+    #steps: 
+      #- name: Checkout
+        #uses: actions/checkout@v1
+
+      #- name: Add remote origin
+        #working-directory: ./backend
+        #run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY_DAN }}@git.heroku.com/gps-project-group1-backend.git
+
+      #- name: Deploy backend to heroku
+        #working-directory: ./backend
+        #run: git push --git-dir=/backend --force heroku `git subtree split --prefix backend HEAD`:master
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_DAN}}
+          heroku_app_name: "gps-project-group1-backend" #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL_DAN}}
+          appdir: "./backend" # <- This will point to the api folder in your project
+          procfile: "web: npm run prod"
+  build-backoffice:
+    runs-on: ubuntu-latest
+    #steps: 
+      #- name: Checkout
+        #uses: actions/checkout@v1
+
+      #- name: Add remote origin
+        #working-directory: ./backend
+        #run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY_DAN }}@git.heroku.com/gps-project-group1-backend.git
+
+      #- name: Deploy backend to heroku
+        #working-directory: ./backend
+        #run: git push --git-dir=/backend --force heroku `git subtree split --prefix backend HEAD`:master
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_DF}}
+          heroku_app_name: "gps-project-group1-backoffice" #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL_DF}}
+          appdir: "./backoffice" # <- This will point to the api folder in your project
+          procfile: "web: npm run prod"

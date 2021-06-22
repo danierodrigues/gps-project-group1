@@ -1,0 +1,43 @@
+.footer-links {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.footer-links:hover {
+    color: var(--primary-color);
+}
+ 
+ .social-img {
+     height: 50px;
+     transition: .3s;
+     width: 50px;
+     margin: 10px;
+ }
+
+ .social-img:hover{
+    transform: scale(1.1);
+}
+
+ 
+ .locationText {
+     margin-top: 5%;
+ }
+ 
+ .telephone {
+     margin-top: 5%;
+ }
+
+ @media (max-width: 900px) {
+    .footer-wrapper{
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin-top: var(--size-xl);
+    }
+
+    
+}

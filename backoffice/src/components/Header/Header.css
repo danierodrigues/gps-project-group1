@@ -1,0 +1,127 @@
+nav {
+     background: #ffffff;
+     height: 6rem;
+     top: 0;
+     z-index: 999;
+     width: 100%;
+     box-shadow: 0px 1px 4px var(--grey);
+}
+
+.active-menu {
+     color: var(--primary-color);
+}
+
+nav ul li {
+     display: inline-block;
+     line-height: 6rem;
+     margin-right: 0.6rem;
+}
+
+nav > span {
+     float: left;
+     line-height: 5.5rem;
+     margin-right: 5%;
+     margin-top: .9rem;
+     margin-left: 5.5%;
+}
+
+a {
+     text-decoration: none;
+     color: var(--dark-grey);
+     padding: 0.5rem 0.9rem;
+}
+
+a:hover {
+     text-decoration: none;
+     color: var(--primary-color);
+     padding: 0.5rem 0.9rem;
+}
+
+.check-btn {
+     color:  black;
+     float: left;
+     line-height: 5.5rem;
+     cursor: pointer;
+     display: none;
+     font-size: var(--size-l);
+     margin-right: 1rem;
+     margin-left: 1.5rem;
+     margin-top: .4rem;
+}
+
+#toogle{
+     display: none;
+}
+
+@media (max-width: 1300px) {
+
+     .check-btn{
+          display: block;
+     }
+
+     ul {
+          position: fixed;
+          width: 30%;
+          height: 100vh;
+          top: 6rem;
+          left: -100%;
+          transition: all .5s;
+          background: #ffffff;
+          box-shadow: 1px 2px 4px var(--grey);
+     }
+
+     nav ul li{
+          display: block;
+          margin: 3rem 0;
+          line-height: 2rem;
+     }
+          
+     nav ul li a{
+          font-size: 1.2rem;
+     }
+
+     #toogle:checked ~ ul{
+          left: 0;
+     }
+}
+
+
+@media (max-width: 900px) {
+
+     .main-title {
+          font-size: var(--size-xxl);
+     }
+
+     ul {
+          width: 40%;
+     }
+
+     .subtitle {
+          font-size: var(--size-m);
+     }
+}
+
+@media (max-width: 700px) {
+
+     .main-title {
+          font-size: var(--size-xl);
+     }
+
+     ul {
+          width: 60%;
+     }
+
+     .subtitle {
+          font-size: var(--size-s);
+     }
+}
+
+@media (max-width: 500px) {
+
+     .main-title {
+          font-size: var(--size-l);
+     }
+     ul {
+          width: 80%;
+     }
+}

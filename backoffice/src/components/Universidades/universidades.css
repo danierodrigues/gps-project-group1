@@ -1,0 +1,285 @@
+.tabelaUniversidades, .headerUniversidades, .tdUniversidades {
+    border-collapse: collapse;
+    text-align: left;
+    border-bottom: 1px solid var(--light-grey);
+    padding: 1.2rem;
+  }
+
+  .headerUniversidades {
+    font-weight: 600;
+  }
+
+  .tabelaUniversidades {
+    width: 90%;
+    background-color: white;
+    padding: var(--size-m);
+    border: 1px solid rgb(240, 240, 240);
+    margin: auto;
+  }
+
+  .action-link {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  .action-link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .icon-wrapper {
+    border: 1px solid rgb(228, 228, 228);
+    background-color: rgb(247, 247, 247);
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    margin-right: 15px;
+    padding: 11px;
+    border-radius: 50%;
+    transition: .3s;
+  }
+
+  .icon-wrapper:hover {
+    background-color: rgb(207, 207, 207);
+  }
+
+  .trash {
+    width: 22px;
+  }
+
+  .correct:hover {
+      background-color: green;
+      border-radius: 50%;
+  }
+
+  .wrong:hover {
+    background-color: red;
+    border-radius: 50%;
+}
+
+.headerToSort{
+  cursor: pointer;
+}
+
+.headerUniversidades:first-child {
+  min-width: 300px;
+}
+
+.headerUniversidades:nth-child(6) {
+  min-width: 115px !important;
+}
+
+.headerUniversidades:not(:first-child) {
+  min-width: 180px;
+}
+
+.headerToSort:hover{
+  color: var(--primary-color);
+}
+
+.divUniversidades {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.inputModalUniv{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.dropdownsModalUniv{
+  width: 400px;
+  margin: var(--size-m) auto;
+  text-align: left;
+}
+
+
+.input-file {
+  width: 400px;
+}
+
+.label-form {
+  color: var(--dark-grey);
+}
+.divButtonsModal{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ModalOverlay{
+ /* background-color: black;
+  opacity: 80%; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.795);
+ 
+}
+
+.divheadModal{
+  display: flex;
+}
+
+.divTitleModalUniv{
+  display: inline-block;
+  width: 100%;
+  justify-self: center;
+}
+
+
+.closeModalIcon{
+  top: 0;
+  right: 0;
+  position: relative;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.iconsActionsUniv{
+  width: 25px;
+  height: 25px;
+}
+
+.MuiCheckbox-colorPrimary.Mui-checked {
+  color: var(--primary-color) !important;
+}
+
+.trashActionUniv{
+  margin-left: 10px;
+}
+
+.containerActionsUniv{
+  min-width: 80px;
+}
+
+
+.containerFiltersUniv{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.checkboxFiltersContainerUniv{
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxFilterDivUniv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.LocationsFilterContainerUniv{
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.SearchCleanFiltContainer{
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.containerMiddleFilterUniv {
+  margin-top: 20px;
+}
+
+.inputSearch {
+  margin-bottom: 0px !important;
+}
+
+.containerFiltersPrincipalUniv{
+  width: 90%;
+  background-color: white;
+  padding: 1.2rem;
+  border: 1px solid rgb(240, 240, 240);
+  margin: auto;
+}
+
+.videoPromotional{
+  width: 300px;
+}
+
+
+.loadingGifUniv{
+  vertical-align: middle;
+  text-align: center;
+  width: 200px;
+}
+
+.containerLoadingGifUniv{
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+
+
+@media screen and (max-width: 815px) {
+  /*.divUniversidades {
+    overflow-x: scroll;
+    width: 100%;
+  }
+
+  .tabelaUniversidades, .headerUniversidades, .tdUniversidades {
+    margin-top: 10px;
+  }
+  /*.tabelaUniversidades {
+    width: 100%;
+  }*/
+
+  .ModalUniv{
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      background-color: white;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      text-align: center;
+  }
+
+  
+
+}
+
+@media screen and (min-width: 816px) {
+  .ModalUniv{
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      background-color: white;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      text-align: center;
+  }
+
+  
+}
+
+
+@media screen and (min-width: 1200px) {
+  .videoColumn{
+    min-width:300px;
+  }
+
+
+
+  
+}
