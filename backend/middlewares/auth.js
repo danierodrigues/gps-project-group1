@@ -6,22 +6,16 @@ module.exports = {
     verifyToken(req,res,next){
 
         try{
-            //console.log(req.headers);
             const token = req.headers.authorization;
-            console.log(token);
             if(token){
                 let isAuth = jwt.verify(token,config.publicKEY,config.signOptions);
-                console.log("isAuth");
-                console.log(isAuth);
                 if(isAuth){
                     req.isAuth = isAuth;
                     return next();
                 }else{
-                    console.log("Token inválido");
                     return res.status(500).json({'ok': false,'errorMessage': "Token inválido."});
                 }
             }else{
-                console.log("Necessário token");
                 return res.status(500).json({'ok': false,'errorMessage': "Necessário token."});
             }
         }catch(error){

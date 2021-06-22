@@ -10,7 +10,6 @@ else if(REACT_APP_ENV === 'prod')
 /* Create a candidature */
 export function createCandidature(body) {
 
-    console.log(REACT_APP_API_URL + " " + REACT_APP_API_URL_PROD);
 
      return fetch(BASE_URL + "/candidatures", {
 

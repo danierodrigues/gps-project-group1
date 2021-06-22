@@ -11,7 +11,6 @@ module.exports = {
     },
 
     async verifyToken(req,res,next){
-        console.log(req.isAuth);
         if(req.isAuth){
             return res.status(200).json({'ok': true});
         }else{
@@ -20,27 +19,21 @@ module.exports = {
     },
 
     async login(req,res,next){
-        console.log(req.body);
 
 
         try{
             await UserModel.findOne({'email':req.body.email}, function(error, user) {
-                console.log(user);
                 if(error || !user){
                     return res.status(500).json({ok:false, errorMessage:"Email ou Password incorreto."});
                 }
-                console.log(user);
 
                 bcrypt.compare(req.body.password, user.password, function(err, result) {
                     if(err){
                         return res.status(500).json({ok:false, errorMessage:"Error."});
                     };
-                    console.log(result);
                     
                     if(result){
-                        console.log("antes do token");
                         var token = jwt.sign({'_id':user._id, 'role':user.role}, config.privateKEY, config.signOptions);
-                        console.log("Token - " + token);
 
                         if(token){
                             return res.status(200).json({'ok': true,'token': token});
@@ -61,8 +54,6 @@ module.exports = {
     async resgister(req,res,next){
 
         try{
-
-            console.log(req.body.password);
 
             bcrypt.hash(req.body.password, config.saltRounds, function(err, hashedPassword) {
                 if(err){
@@ -86,7 +77,6 @@ module.exports = {
                             return res.status(500).json({'ok': false, 'error':error});
                         }else if(data){
                             var token = jwt.sign({'_id':user._id, 'role':user.role}, config.privateKEY, config.signOptions);
-                            console.log("Token - " + token);
 
                             return res.status(200).json({'ok': true, 'data':data, 'token':token});
                         }
@@ -103,11 +93,9 @@ module.exports = {
         try{
             if(newData.password){
                 let hashedPassword = await bcrypt.hash(req.body.password, config.saltRounds);
-                console.log(hashedPassword);
                 newData.password = hashedPassword;
             }
 
-            console.log("depois do cb");
             UserModel.findOneAndUpdate({'_id':newData._id}, newData,{new:true}, function(error, data) {
                 if(error){
                     return res.status(500).json({'ok': false, 'error':error});

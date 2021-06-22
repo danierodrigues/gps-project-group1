@@ -3,7 +3,27 @@ const InstitutionModel = require('../models/institution');
 
 module.exports = {
     async index(req,res,next){
-        const all = await CandidatureModel.find();
+
+            let filters = req.query;
+
+            let filtersQuery = {};
+
+            //Filters
+            
+            if(filters.search){
+                filtersQuery.$or = [
+                    {name: { $regex: '.*' + filters.search + '.*' }},
+                    {surname: { $regex: '.*' + filters.search + '.*' }},
+                    {mobile: { $regex: '.*' + filters.search + '.*' }},
+                    {email: { $regex: '.*' + filters.search + '.*' }},
+                    {institution: { $regex: '.*' + filters.search + '.*' }},
+                ]
+            }
+
+
+
+
+        const all = await CandidatureModel.find(filtersQuery);
         res.status(200).json({ok:true,data:all});
     },
 

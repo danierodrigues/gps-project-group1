@@ -27,7 +27,6 @@ function App()  {
   }
 
   useEffect(() => {  
-    console.log("passou no useEffect");
     const token = getToken();
     if (!token) {
       setIsLogged(false);
@@ -42,7 +41,6 @@ function App()  {
       }else{
         removeUserSession();
         setIsLogged(false);
-        console.log("redirect to login");
         //setAuthLoading(false);
 
         
@@ -82,6 +80,7 @@ function App()  {
               <PrivateRoute exact path='/universidades'  component={Universidades} setisLogged={handleChange} />
               <PrivateRoute exact path='/candidaturas'  component={Candidatures} setisLogged={handleChange} />
               <PrivateRoute exact path='/faqs' component={Faqs} setisLogged={handleChange} />
+              <Route exact path='*'><Redirect to='/login'></Redirect></Route>
           </Switch>
         </div>
       </Router>

@@ -100,7 +100,6 @@ function RegistrationForm() {
                          setIsSuccessModal(true);
                     }
                     else{
-                         console.log(res);
                          setModalTitle('Erro na submissão da candidatura');
                          setModalDescription('Certifica-te que todos os campos estão preenchidos antes de submeter a tua candidatura.');
                          setIsSuccessModal(false);

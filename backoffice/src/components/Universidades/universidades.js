@@ -75,15 +75,9 @@ function Universidades({setisLogged}){
     verifyToken(token).then(response => {
       if(response.ok){
           setUserSession(token);
-          //setIsLogged(true);
-          //setisLogged(false);
-          //history.push('/login');
           
       }else{
           removeUserSession();
-          //setIsLogged(false);
-          console.log("redirect to login - faq");
-          //setAuthLoading(false);
           setisLogged(false);
           history.push('/login');
           
@@ -108,20 +102,16 @@ function Universidades({setisLogged}){
     setselectedCandidatureState({value:'open',label:'Abertas'});
     setselectedOptionsIsActive({value:true,label:'Aberta'});
 
-    console.log(location.search);
     let filters = location.search.substring(1);
-    console.log(filters);
     getAllUniversities(token,filters).then(response =>{
-      console.log(response);
       if(response.ok){
-        console.log(response.data);
         setUniversidades([...response.data]);
         setBackendURL(response.backendURL);
         let arrAux = new Array(response.data.length);
         setShowVideo([...arrAux]);
 
       }else{
-        console.log("não ok");
+        console.log("erro");
         
       }
       setLoading(false);
@@ -147,16 +137,11 @@ function Universidades({setisLogged}){
 
   const showVideoHandler = (index) =>{
     let arrAux = showVideo;
-    console.log(arrAux);
     arrAux[index] = !arrAux[index];
-    console.log(arrAux);
     setShowVideo([...arrAux]);
-    console.log(showVideo);
-    console.log(showVideo[index]);
   }
 
   const deleteAction = () =>{
-    console.log(1)
     let token = getToken();
     if(!token)return;
     
@@ -169,20 +154,14 @@ function Universidades({setisLogged}){
     }
 
     deleteUniversities(token, body).then(response =>{
-      console.log(response);
       closeModalWarning();
       if(response.ok){
         let arrAuxUni = universidades;
-        console.log(arrAuxUni);
         arrAuxUni.splice(index,1);
-        console.log(arrAuxUni);
         setUniversidades([...arrAuxUni]);
-        console.log(universidades);
 
         let arrAuxShow = showVideo;
-        console.log(arrAuxShow);
         arrAuxShow.splice(index, 1)
-        console.log(arrAuxShow);
         setShowVideo([...arrAuxShow]);
         toast.success('Universidade eliminada');
       }else{
@@ -204,10 +183,8 @@ function Universidades({setisLogged}){
     setEmail(universidades[index].email);
     setphone(universidades[index].phone);
     setAdress(universidades[index].location);
-    console.log(universidades[index].isActive);
     let opCandState = optionsCandidatureState.filter(option => option.value === universidades[index].candidatureState);
     let opActive = optionsIsActive.filter(option => option.value === universidades[index].isActive);
-    console.log(opCandState);
     setselectedCandidatureState([...opCandState]);
     setCandidatureState(opCandState[0].value);
     setselectedOptionsIsActive([...opActive]);
@@ -237,8 +214,6 @@ function Universidades({setisLogged}){
 
     if(creating){
       if(video === null) {
-        console.log('Obrigatório submeter video.');
-        //toast.error('Obrigatório submeter video.');
         errorMessage += ' Obrigatório submeter video.';
         verificationFailed = true;
       }
@@ -249,7 +224,6 @@ function Universidades({setisLogged}){
 
     //Veification name
     if(name.trim() === ''){
-      //toast.error("Nome obrigatório.");
       errorMessage += " Nome obrigatório.";
       verificationFailed = true;
     }
@@ -257,7 +231,6 @@ function Universidades({setisLogged}){
 
     //Veification email
     if(email.trim() === ''){
-      //toast.error("Email obrigatório.");
       errorMessage += " Email obrigatório.";
       verificationFailed = true;
     }
@@ -265,7 +238,6 @@ function Universidades({setisLogged}){
     let regexEmail = RegExp(/.+\@.+\..+/);
     let resultEmail = regexEmail.test(email);
     if(!resultEmail ){
-      //toast.error("Insira um email válido.");
       errorMessage += " Insira um email válido.";
       console.log(resultEmail);
       verificationFailed = true;
@@ -274,34 +246,29 @@ function Universidades({setisLogged}){
 
     //Veification phone
     if(phone.trim() === ''){
-      //toast.error("Telefone obrigatório.");
       errorMessage += " Telefone obrigatório.";
       verificationFailed = true;
     }
 
     if(phone.length !== 9){
-      //toast.error("Nº Telefónico deve conter 9 caracteres");
       errorMessage += " Nº Telefónico deve conter 9 caracteres.";
       verificationFailed = true;
     }
 
     //Veification address
     if(adress.trim() === ''){
-      //toast.error("Morada obrigatória.");
       errorMessage += " Morada obrigatória.";
       verificationFailed = true;
     }
 
     //Veification Candidature State
     if(candidatureState === null){
-      //toast.error("Campo estado das candidaturas obrigatório.");
       errorMessage += " Campo estado das candidaturas obrigatório.";
       verificationFailed = true;
     }
 
     //Veification isActive
     if(isActive === null){
-      //toast.error("Campo estado da instituição obrigatório.");
       errorMessage += " Campo estado da instituição obrigatório.";
       verificationFailed = true;
     }
@@ -345,21 +312,15 @@ function Universidades({setisLogged}){
         "isActive",isActive
       );
         
-      console.log(candidatureState);
-
       if(creating){
         createInstitution(token, formData).then(response => {
           if(response.ok){
-            console.log("sucesso criar instituição");
-            console.log(response.data);
             universidades.push(response.data);
             setUniversidades([...universidades]);
             resetForm();
             closeModal();
             toast.success('Universidade criada');
           }else{
-            console.log("erro criar instituição");
-            console.log(response);
             toast.error('Ocorreu um erro');
           }
         }).catch(error =>{
@@ -368,19 +329,15 @@ function Universidades({setisLogged}){
       }else{//Editing
 
         if(video){//Video Changed
-          console.log("Entro no video changed");
 
           updateInstitutionVideo(token,formData).then(response=>{
             if(response.ok){
-              console.log("responsta bem sucedida");
-              console.log(response);
               universidades[indexEditing] = response.data;
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
               toast.success('Universidade editada');
             }else{
-              console.log("responsta mal sucedida");
               toast.error('Ocorreu um erro');
             }
           }).catch(error=>{
@@ -400,20 +357,14 @@ function Universidades({setisLogged}){
             "isActive":isActive,
           }
 
-          console.log("Entro no que não tem o video mudado");
           updateInstitutionWithoutVideo(token, body).then(response =>{
-            console.log(response);
             if(response.ok){
-              console.log("update com sucesso");
-              console.log("responsta bem sucedida");
-              console.log(response);
               universidades[indexEditing] = response.data;
               setUniversidades([...universidades]);
               resetForm();
               closeModal();
               toast.success('Universidade editada');
             }else{
-              console.log("update sem sucesso");
               toast.error('Ocorreu um erro');
             }
           }).catch(error => {
@@ -429,7 +380,6 @@ function Universidades({setisLogged}){
 
 
   const handleSelectChange = (e,inputName) => {
-    console.log(isActive);
     switch(inputName){
       case 'isActive':
         if(e !== null){
@@ -437,8 +387,6 @@ function Universidades({setisLogged}){
           setIsActive(e.value);
         }else
           setIsActive(null);
-        console.log(e.value);
-        console.log(isActive);
         break;
       case 'candidatureState':
         if(e !== null){
@@ -447,7 +395,6 @@ function Universidades({setisLogged}){
         }else
           setCandidatureState(null);
         
-        console.log(candidatureState);
         break;
     }
   } 
@@ -503,8 +450,6 @@ function Universidades({setisLogged}){
   }
 
   const handlerFiltersChanges = (e, inputName) =>{
-  //  console.log(e.target.checked);
-    console.log(e);
 
     switch(inputName) {
       case 'openCandidatures': 
@@ -551,21 +496,16 @@ function Universidades({setisLogged}){
     });
 
     let parsed = QueryString.parse(stringFilters,{parseBooleans: true, parseNumbers: true});
-    console.log(parsed);
-    console.log(stringFilters);
 
     getAllUniversities(token, stringFilters).then(response =>{
-      console.log(response);
       if(response.ok){
         if(stringFilters){
           history.push({
             // pathname: '/dresses',
             search: stringFilters
            });
-        };
+        }
         
-
-        console.log(response.data);
         setUniversidades([...response.data]);
         setBackendURL(response.backendURL);
         let arrAux = new Array(response.data.length);
@@ -574,7 +514,7 @@ function Universidades({setisLogged}){
         setIndexDelete(null);
 
       }else{
-        console.log("não ok");
+        console.log("Error");
         
       }
       setLoading(false);
@@ -789,8 +729,6 @@ function Universidades({setisLogged}){
               onAfterOpen={afterOpenModalWarning}
               onRequestClose={closeModalWarning}
               style={{ overlay: { background: 'rgba(0,0,0,0.8)' } }}
-            //  style={customStyles}
-              //className="modalUniversitys"
               contentLabel="Aviso"
               className="ModalUniv"
               overlayClassName="ModalOverlay"
