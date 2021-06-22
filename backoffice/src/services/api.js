@@ -67,9 +67,9 @@ export function getAllUniversities(token, querystring = '') {
       
 
 /* Retrieve all candidatures */
-export function getAllCandidatures(token) {
+export function getAllCandidatures(token, querystring = '') {
 
-    return fetch(BASE_URL + "/candidatures", {
+    return fetch(BASE_URL + `/candidatures?${querystring}`, {
 
         method: 'GET',
 

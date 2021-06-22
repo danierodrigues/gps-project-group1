@@ -5,19 +5,11 @@ module.exports = {
     async index(req,res,next){
         try{
 
-            console.log(req.query);
             let filters = req.query;
-            console.log(filters);
             let filtersQuery = {};
-            console.log(!filters.openCand);
-            console.log(!filters.openCand && filters.closCand);
-
-
             //Filters
-            
-
             if((filters.opActFaqs == 'false' && filters.clActFaqs == 'true') || (filters.opActFaqs == 'true' && filters.clActFaqs == 'false') ){
-                console.log("entrou dentro do if");
+                ("entrou dentro do if");
                 filtersQuery.isActive = filters.opActFaqs == 'true' ? true : false;
             }
 
@@ -27,8 +19,6 @@ module.exports = {
                     {answer: { $regex: '.*' + filters.search + '.*' }},
                 ]
             }
-
-
 
             const all = await Faqsmodel.find(filtersQuery);
             return res.status(200).json({ok:true,data:all});

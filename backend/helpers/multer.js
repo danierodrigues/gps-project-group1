@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const VideoFilter = function(req, file, cb) {
     if (file.mimetype == "video/mp4") {
-        console.log("nice");
         cb(null, true);
     } else {
         console.log("error");

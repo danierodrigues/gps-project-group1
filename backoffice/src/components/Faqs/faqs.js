@@ -45,30 +45,17 @@ function Faqs({setisLogged}){
 
   useEffect(() => {
     let token = getToken();
-    
-    console.log("testar");
-
-
-    
 
     if(!token){
-        console.log("entrou denrtro da verificação - 1");
-        //props.history.push('/login');
         return;
     }
     
     verifyToken(token).then(response => {
         if(response.ok){
             setUserSession(token);
-            //setIsLogged(true);
-            //setisLogged(false);
-            //history.push('/login');
             
         }else{
             removeUserSession();
-            //setIsLogged(false);
-            console.log("redirect to login - faq");
-            //setAuthLoading(false);
             setisLogged(false);
             history.push('/login');
             
@@ -88,18 +75,14 @@ function Faqs({setisLogged}){
 
     setselectedOptionsIsActive({value:true,label:'Ativa'});
 
-    console.log(location.search);
     let filters = location.search.substring(1);
-    console.log(filters);
     getFaqs(token,filters).then(response =>{
-      console.log(response);
       if(response.ok){
-        console.log(response.data);
         setFaqs([...response.data]);
 
 
       }else{
-        console.log("não ok");
+        console.log("Error");
         
       }
       setLoading(false);
@@ -125,7 +108,6 @@ function Faqs({setisLogged}){
 
 
   const deleteAction = () =>{
-    console.log(1)
     let token = getToken();
     if(!token)return;
     
@@ -134,13 +116,10 @@ function Faqs({setisLogged}){
 
 
     deleteAFaq(token, faqs[index]._id).then(response =>{
-      console.log(response);
       closeModalWarning();
       if(response.ok){
         let arrAuxUni = faqs;
-        console.log(arrAuxUni);
         arrAuxUni.splice(index,1);
-        console.log(arrAuxUni);
         setFaqs([...arrAuxUni]);
 
         toast.success('Pregunta eliminada');
@@ -185,8 +164,6 @@ function Faqs({setisLogged}){
     let token = getToken();
     if(!token)return;
 
-    console.log("dentro do submit");
-
     let verificationFailed = false;
     let errorMessage = "";
 
@@ -196,7 +173,6 @@ function Faqs({setisLogged}){
 
     //Veification name
     if(question.trim() === ''){
-      //toast.error("Nome obrigatório.");
       errorMessage += " Pregunta obrigatória.";
       verificationFailed = true;
     }
@@ -204,14 +180,12 @@ function Faqs({setisLogged}){
 
     //Veification email
     if(answer.trim() === ''){
-      //toast.error("Email obrigatório.");
       errorMessage += " Resposta obrigatória.";
       verificationFailed = true;
     }
 
     //Veification isActive
     if(isActive === null){
-      //toast.error("Campo estado da instituição obrigatório.");
       errorMessage += "Campo de ativo obrigatório.";
       verificationFailed = true;
     }
@@ -232,41 +206,29 @@ function Faqs({setisLogged}){
         
         
       if(creating){
-        console.log("criando");
         createFaq(token, body).then(response => {
           if(response.ok){
-            console.log("sucesso criar faq");
-            console.log(response.data);
             faqs.push(response.data);
             setFaqs([...faqs]);
             resetForm();
             closeModal();
             toast.success('Pregunta criada');
           }else{
-            console.log("erro criar faq");
-            console.log(response);
             toast.error('Ocorreu um erro');
           }
         }).catch(error =>{
-          console.log("erro criar instituição: ",error);
+          console.log("erro criar faq: ",error);
         });
       }else{//Editing
 
-        console.log("editando");
-        console.log("Entro no que não tem o video mudado");
         updateFaq(token, body).then(response =>{
-        console.log(response);
         if(response.ok){
-            console.log("update com sucesso");
-            console.log("responsta bem sucedida");
-            console.log(response);
             faqs[indexEditing] = response.data;
             setFaqs([...faqs]);
             resetForm();
             closeModal();
             toast.success('Pregunta editada');
         }else{
-            console.log("update sem sucesso");
             toast.error('Ocorreu um erro');
         }
         }).catch(error => {
@@ -282,7 +244,6 @@ function Faqs({setisLogged}){
 
 
   const handleSelectChange = (e,inputName) => {
-    console.log(isActive);
     switch(inputName){
       case 'isActive':
         if(e !== null){
@@ -290,15 +251,11 @@ function Faqs({setisLogged}){
           setIsActive(e.value);
         }else
           setIsActive(null);
-        console.log(e.value);
-        console.log(isActive);
         break;
     }
   } 
 
   const handleInputChange = (e, inputName) => {
-    console.log(e.target.value);
-    console.log(inputName);
     switch(inputName) {
          case 'questions': 
               setQuestion(e.target.value);
@@ -333,8 +290,6 @@ function Faqs({setisLogged}){
   }
 
   const handlerFiltersChanges = (e, inputName) =>{
-  //  console.log(e.target.checked);
-    console.log(e);
 
     switch(inputName) {
       case 'openFaqs': 
@@ -374,7 +329,6 @@ function Faqs({setisLogged}){
 
 
     getFaqs(token, stringFilters).then(response =>{
-      console.log(response);
       if(response.ok){
         if(stringFilters){
           history.push({
@@ -383,14 +337,11 @@ function Faqs({setisLogged}){
            });
         };
         
-
-        console.log(response.data);
         setFaqs([...response.data]);
         setIndexEditing(null);
         setIndexDelete(null);
 
       }else{
-        console.log("não ok");
         toast.error("Erro");
       }
       setLoading(false);

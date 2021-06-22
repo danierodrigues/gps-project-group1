@@ -10,49 +10,22 @@ function Locations() {
   const [universities, setUniversities] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState({});
 
-  const verifyVideos = () => {
-
-    var video = document.getElementById('institution-video');
-    /*var videoError = document.getElementById('institution-video-error');*/
-    var videoWrapper = document.getElementById('video-wrapper');
-    var universityInfo = document.getElementById('university-info');
-
-    if(video) {
-      if(isNaN(video.duration)) {
-        /*video.style = 'display: none';
-        videoError.style = 'display: block';
-        videoError.style = 'display: flex; flex-direction: column; justify-content: center; width: 100%';*/
-        videoWrapper.style = 'display: none';
-        universityInfo.style = 'text-align: center';
-
-      }
-      else {
-        /*video.style = 'display: block';
-        videoError.style = 'display: none';*/
-        videoWrapper.style = 'display: block';
-        universityInfo.style = 'text-align: left';
-      }
-    }
-  }
-
   useEffect(() => {
     getUniversities().then(result => { // Fetch only once, on render
       setBackendURL(result.backendURL);
       setUniversities([...result.data]);
       setSelectedUniversity({...result.data[0]});
-      verifyVideos();
+
     })
   }, [])
 
-  useLayoutEffect(() => {
-      verifyVideos();
-  }, [selectedUniversity])
+
 
 
   /* Handle the university change */
   const changeUniversity = (university) => {
     setSelectedUniversity(university);
-    verifyVideos();
+
     ;
   }
 

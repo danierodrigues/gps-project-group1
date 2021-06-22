@@ -10,8 +10,9 @@ import { FiSave, FiTrash } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import {sortTextTables} from '../../Utils/Sort';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import loadingGif from '../images/loading.gif';
+import * as QueryString from 'query-string';
 
 function Candidatures({setisLogged}) {
 
@@ -26,6 +27,9 @@ function Candidatures({setisLogged}) {
 
     const history = useHistory();
     const [loading, setLoading] = useState(true);
+    //Filters variables
+    const [searchBarFilter, setSearchBarFilter] = useState('');
+    const location = useLocation();
     
     useEffect(() => {
       let token = getToken();
@@ -34,16 +38,10 @@ function Candidatures({setisLogged}) {
       verifyToken(token).then(response => {
         if(response.ok){
             setUserSession(token);
-            //setIsLogged(true);
-            //setisLogged(false);
-            //history.push('/login');
             
         }
         else{
             removeUserSession();
-            //setIsLogged(false);
-            console.log("redirect to login - faq");
-            //setAuthLoading(false);
             setisLogged(false);
             history.push('/login');  
         }
@@ -62,7 +60,9 @@ function Candidatures({setisLogged}) {
       ]
       setOptionsCandidatureState([...optionsAux]);
       
-      getAllCandidatures(getToken()).then(result => { // Fetch only once, on render
+      let filters = location.search.substring(1);
+
+      getAllCandidatures(token, filters).then(result => { // Fetch only once, on render
         if(result.ok) {
           setCandidatures([...result.data]);
 
@@ -83,7 +83,6 @@ function Candidatures({setisLogged}) {
     , [])
 
     const deleteThisCandidature = (id, index) => {
-      console.log(id, index)
       deleteACandidature(getToken(), id).then(result => { // Fetch only once, on render
         closeModalWarning();
         if(result.ok) {
@@ -120,19 +119,112 @@ function Candidatures({setisLogged}) {
           }else
           setselectedCandidatureState(null);
           
-          //console.log(candidatureState);
           break;
       }
     } 
 
+
+    const searchFilters = () =>{
+      const token = getToken();
+  
+      if(!token)
+        return;
+  
+      setLoading(true);
+      
+  
+      let stringFilters = QueryString.stringify({
+        "search":searchBarFilter,
+      },{
+        skipNull: true,
+        skipEmptyString:true,
+        arrayFormat: 'separator',
+        arrayFormatSeparator: '|'
+      });
+
+
+
+      getAllCandidatures(token, stringFilters).then(result => { // Fetch only once, on render
+        if(result.ok) {
+          if(stringFilters){
+            history.push({
+              search: stringFilters
+             });
+          }else{
+            history.push({
+              search: ""
+             });
+          }
+
+          setCandidatures([...result.data]);
+
+          let array = [];
+          let arrayEdited = [];
+
+          /* For each candidature, specify the state */
+          result.data.forEach((element, index) => {
+            array.push(optionsCandidatureState.filter(option => option.value === element.state));
+            arrayEdited.push(false);
+          });
+          setAllStates([...array]);
+          setAllEditedStates([...arrayEdited]);
+        }else{
+          toast.error("Erro");
+        }
+        setLoading(false);
+      }).catch(error =>{
+        setLoading(false);
+      })
+
+
+  
+    }
+  
+    const cleanSearchFilters = () =>{
+      setSearchBarFilter('');
+      return;
+    }
+
+
+    const handlerFiltersChanges = (e, inputName) =>{
+    
+        switch(inputName) {
+          case 'search': 
+               setSearchBarFilter(e.target.value);
+               break;
+               
+          default:
+               break;
+        }
+      }
+
+
+
+
     return ( 
         <div class = 'divUniversidades'>
 
-<div>
+          <div>
             <div className='width-90 margin-auto margin-bottom-m margin-top-xl'>
               <h1 className=' font-semi-bold'>Candidaturas</h1>
             </div>
           </div>
+
+          <div className="containerFiltersPrincipalUniv">
+            <div className="containerFiltersUniv">
+              
+              <div className="SearchBarFilterContainerUniv">
+                <input className="inputModalUniv inputAuth inputSearch" maxLength={35} value={searchBarFilter} onChange={(e) => handlerFiltersChanges(e, 'search')} placeholder='Procurar' />
+              </div>
+
+              <div className="containerMiddleFilterUniv">
+                <button onClick={() => searchFilters()}>Procurar</button>
+                <a className='action-link' onClick={() => cleanSearchFilters() }>Limpar</a>
+              </div>
+            </div>
+
+          </div>
+
                 <table class = 'tabelaUniversidades'>
                   <thead>
                     <tr class = 'rowUniversidades'>
@@ -206,7 +298,6 @@ function Candidatures({setisLogged}) {
     );
 
     function openModalWarning(id, index){
-      console.log(id, index)
       setIndexDelete(index);
       setIdDelete(id);
       setIsOpenWarning(true);
